@@ -93,9 +93,43 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+/* LOGIN */
 
+#modal-login .modal-header {
+	color: white;
+	background-color: #006DCC;
+    background-image: linear-gradient(to bottom, #0088CC, #0044CC);
+    border-radius: 6px 6px 0 0;
+}
 
+.modal-body #logo-login, .modal-body #form-login {
+	width: 62%;
+	float: left;
+}
 
+.modal-body #logo-login {
+	width: 36%;
+}
+
+#form-login input {
+	width: 98% !important;
+}
+
+/* BARRA SUPERIOR */
+
+.logo {
+	position: absolute;
+	z-index: 1000;
+	display: block;
+	top: 1%;
+	left: 2%;
+	width: 100px;
+	min-width: 40px;
+}
+
+#user-pic {
+	width: 40px;
+}
 
 
 
