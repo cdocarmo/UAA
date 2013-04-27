@@ -131,6 +131,16 @@ textarea {
 	width: 40px;
 }
 
+/* CUERPO */
+
+.row-fluid {
+	margin-top: 10%
+}
+
+.panel-h3 {
+	text-align: center;
+}
+
 
 
 
