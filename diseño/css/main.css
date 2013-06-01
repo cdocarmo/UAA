@@ -134,11 +134,28 @@ textarea {
 /* CUERPO */
 
 .row-fluid {
-	margin-top: 10%
+	margin-top: 6%;
 }
 
 .panel-h3 {
 	text-align: center;
+}
+
+/* FORMULARIOS */
+
+.cont-pedido-muestreo h2 {
+	border-bottom: 1px solid #999999;
+}
+
+#pedido-muestreo, #analitos .row-fluid {
+	margin-top: 2%; important!
+}
+
+#botones-formulario {
+	/*clear: both;*/
+	margin-top: 4%;
+	padding: 1% 0;
+	border-top: 1px solid #999999;
 }
 
 
