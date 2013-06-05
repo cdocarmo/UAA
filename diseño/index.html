@@ -49,13 +49,13 @@
                 <div class="tabbable tabs-left">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#">Vista 1</a>
+                            <a href="#">Nuevo Muestreo</a>
                         </li>
                         <li>
-                            <a href="#">Vista 2</a>
+                            <a href="#">Muetreos Anteriores</a>
                         </li>
                         <li>
-                            <a href="#">Vista 3</a>
+                            <a href="#">Propuestas de Muestreos</a>
                         </li>
                             <!--<li class="dropdown-submenu">
                                 <a tabindex="-1" href="#">Vista 4</a>
@@ -67,7 +67,7 @@
                      </ul>
                      <div class="tab-content">
                         <!--PEDIDO DE MUESTREO: CLIENTE, DATA-ENTRY-->
-                        <div class="cont-pedido-muestreo">
+                        <div class="cont-pedido-muestreo tab-pane">
                         	<h2>Nuevo pedido de muestreo</h2>
                             <form id="pedido-muestreo">
                             	<div class="row-fluid formulario">
@@ -138,10 +138,106 @@
 	                            </div>
 	                            <div id="botones-formulario" class="row-fluid">
 	                            	<div class="span6"> </div>
-	                            	<button type="submit" class="btn span3">Finalizar</button>
-	                            	<button type="reset" class="btn span3">Limpiar campos</button>
+	                            	<button type="submit" class="btn span3" id="finalizar">Finalizar</button>
+	                            	<button type="reset" class="btn span3" id="limpiar">Limpiar campos</button>
 	                            </div>
                             </form>
+                        </div>
+                        <!--LISTA DE MUESTREOS ANTERIORES: CLIENTE, DATA-ENTRY-->
+                        <div class="cont-muestreos-anteriores tab-pane">
+                        	<h2>Lista de muestreos anteriores</h2>
+                        	<table class="table table-striped">
+                        		<thead>
+                        			<tr>
+                        				<th>Id.</th>
+	                        			<th>N&uacute;mero de referencia</th>
+	                        			<th>Fecha de ingreso</th>
+	                        			<th>Estado</th>
+	                        			<th>Fecha de finalizaci&oacute;n</th>
+                        			</tr>
+                        		</thead>
+                        		<tbody>
+                        			<tr>
+                        				<td>0002</td>
+                        				<td>FFD02</td>
+                        				<td>04/06/2013</td>
+                        				<td><span class="label label-info">En curso</span></td>
+                        				<td>------</td>
+                        				<td><button class="btn btn-primary">Ver</button></td>
+                        			</tr>
+                        			<tr>
+                        				<td>0003</td>
+                        				<td>FFD03</td>
+                        				<td>02/04/2013</td>
+                        				<td><span class="label label-success">Finalizado</span></td>
+                        				<td>03/06/2013</td>
+                        				<td><button class="btn btn-primary">Ver</button></td>
+                        			</tr>
+                        			<tr>
+                        				<td>0004</td>
+                        				<td>FED11</td>
+                        				<td>22/05/2013</td>
+                        				<td><span class="label label-info">En curso</span></td>
+                        				<td>------</td>
+                        				<td><button class="btn btn-primary">Ver</button></td>
+                        			</tr>
+                        			<tr>
+                        				<td>0006</td>
+                        				<td>FFD02</td>
+                        				<td>06/03/2013</td>
+                        				<td><span class="label label-warning">Suspendido</span></td>
+                        				<td>------</td>
+                        				<td><button class="btn btn-primary">Ver</button></td>
+                        			</tr>
+                        		</tbody>
+                        	</table>
+                        </div>
+                        <div class="cont-muestreos-anteriores tab-pane active">
+                        	<h2>Propuestas de Muestreos</h2>
+                        	<table class="table table-striped">
+                        		<thead>
+                        			<tr>
+                        				<th>Id.</th>
+	                        			<th>N&uacute;mero de referencia</th>
+	                        			<th>Cliente</th>
+	                        			<th>Fecha de ingreso</th>
+                        			</tr>
+                        		</thead>
+                        		<tbody>
+                        			<tr>
+                        				<td>0002</td>
+                        				<td>FFD02</td>
+                        				<td>Fulano de Tal</td>
+                        				<td>04/06/2013</td>
+                        				<td><button class="btn btn-success"><i class=" icon-chevron-down icon-white"> </i>Ver Todos Los Datos</button></td>
+                        				<td><button class="btn btn-primary">Imprimir Planilla de Muestreo</button></td>
+                        			</tr>
+                        			<tr>
+                        				<td>0003</td>
+                        				<td>FFD03</td>
+                        				<td>Menganito Fulano</td>
+                        				<td>08/05/2013</td>
+                        				<td><button class="btn btn-success"><i class=" icon-chevron-down icon-white"> </i>Ver Todos Los Datos</button></td>
+                        				<td><button class="btn btn-primary">Imprimir Planilla de Muestreo</button></td>
+                        			</tr>
+                        			<tr>
+                        				<td>0004</td>
+                        				<td>FED11</td>
+                        				<td>Perengano Dos Santos</td>
+                        				<td>22/05/2013</td>
+                        				<td><button class="btn btn-success"><i class=" icon-chevron-down icon-white"> </i>Ver Todos Los Datos</button></td>
+                        				<td><button class="btn btn-primary">Imprimir Planilla de Muestreo</button></td>
+                        			</tr>
+                        			<tr>
+                        				<td>0006</td>
+                        				<td>FFD02</td>
+                        				<td>No Se Me Ocurre Nada</td>
+                        				<td>15/05/2013</td>
+                        				<td><button class="btn btn-success"><i class=" icon-chevron-down icon-white"> </i>Ver Todos Los Datos</button></td>
+                        				<td><button class="btn btn-primary">Imprimir Planilla de Muestreo</button></td>
+                        			</tr>
+                        		</tbody>
+                        	</table>
                         </div>
                     </div>
                 </div>
