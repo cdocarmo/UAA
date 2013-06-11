@@ -147,7 +147,7 @@ textarea {
 	border-bottom: 1px solid #999999;
 }
 
-#pedido-muestreo, #analitos .row-fluid {
+.formularios-dos-columnas, #analitos .row-fluid {
 	margin-top: 2%; important!
 }
 
