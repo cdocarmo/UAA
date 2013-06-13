@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
-    <body>
+    <body class="registro-cliente">
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
@@ -33,28 +33,25 @@
             </div>
         </div>-->
         <div class="container-fluid">
-            <div class="modal" id="modal-login">
-                <div class="modal-header">
-                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-                    <h3>Acceso</h3>
-                </div>
-                <div class="modal-body">
-                    <div id="logo-login">
-                        <img src="img/uaa-logo.jpg" />
-                    </div>
-                    <form id="form-login">
-                        <label>Usuario</label>
-                        <input type="text" placeholder="Nombre de usuario…">
-                        <label>Contrase&ntilde;a</label>
-                        <input type="password">
-                    </form>
-                    <a href="registro-cliente.html" id="nuevo-cliente" class="pull-right">Registrate como cliente!</a>
-                </div>
-                <div class="modal-footer">
-                    <!--<a href="#" class="btn"></a>-->
-                    <a href="#" class="btn btn-primary">Acceder</a>
-                </div>
-            </div>
+            <form class="form-registro-cliente">
+            	<fieldset id="ingreso-datos-usuarios" class="span4">
+		            <legend>Nuevo Cliente</legend>
+		            <label for="nombre-usuario">Nombres</label>
+		            <input class="input-xxlarge" name="nombre-usuario" id="nombre-usuario" type="text" />
+		            <label for="apellidos">Apellidos</label>
+		            <input class="input-xxlarge" name="apellidos" id="apellidos" type="text" />
+		            <label for="email">E-Mail</label>
+		            <input class="input-xxlarge" name="email" id="email" type="text" />
+		            <label for="domicilio">Domicilio</label>
+		            <input class="input-xxlarge" name="domicilio" id="domicilio" type="text" />
+		            <label for="telefono">Tel&eacute;fono</label>
+		            <input class="input-xxlarge" name="telefono" id="telefono" type="text" />
+		            <label for="nombre-usuario">Celular</label>
+		            <input class="input-xxlarge" name="celular" id="celular" type="text" />
+		            <button type="submit" class="btn btn-primary" id="guardar-usuario">Guardar</button>
+	            	<button type="reset" class="btn pull-right" id="limpiar-usuario">Limpiar campos</button>
+	            </fieldset>
+           </form>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -72,3 +69,4 @@
         </script>
     </body>
 </html>
+ 
