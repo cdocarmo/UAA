@@ -142,6 +142,10 @@ textarea {
 
 /* CUERPO */
 
+.container-fluid {
+	margin-bottom: 6%;
+}
+
 .row-fluid {
 	margin-top: 6%;
 }
@@ -157,6 +161,15 @@ textarea {
 	margin: 4% 0 4% 56%;
 }
 
+.form-registro-cliente legend {
+	color: white;
+	width: 95.5%;
+	padding: 4px 12px;
+	background-color: #0088CC;
+	border:1px solid white;
+	/*border-radius: 4px; */
+}
+
 .form-registro-cliente input {
 	/*width: 100%;*/
 }
@@ -169,7 +182,7 @@ textarea {
 	margin-top: 2%; important!
 }
 
-#botones-formulario {
+.botones-formulario {
 	/*clear: both;*/
 	margin-top: 4%;
 	padding: 1% 0;

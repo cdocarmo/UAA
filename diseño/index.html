@@ -49,13 +49,13 @@
                 <div class="tabbable tabs-left">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#">Nuevo Muestreo</a>
+                            <a href="#pedido-muestreo" data-toggle="tab">Nuevo Muestreo</a>
                         </li>
                         <li>
-                            <a href="#">Muetreos Anteriores</a>
+                            <a href="#muestreos-anteriores" data-toggle="tab">Muetreos Anteriores</a>
                         </li>
                         <li>
-                            <a href="#">Propuestas de Muestreos</a>
+                            <a href="#propuestas-muestreos" data-toggle="tab">Propuestas de Muestreos</a>
                         </li>
                             <!--<li class="dropdown-submenu">
                                 <a tabindex="-1" href="#">Vista 4</a>
@@ -67,7 +67,7 @@
                      </ul>
                      <div class="tab-content">
                         <!--PEDIDO DE MUESTREO: CLIENTE, DATA-ENTRY-->
-                        <div class="cont-pedido-muestreo tab-pane active">
+                        <div class="cont-pedido-muestreo tab-pane active" id="pedido-muestreo">
                         	<h2>Nuevo pedido de muestreo</h2>
                             <form id="pedido-muestreo">
                             	<div class="row-fluid formulario">
@@ -138,13 +138,13 @@
 	                            </div>
 	                            <div id="botones-formulario" class="row-fluid">
 	                            	<div class="span6"> </div>
-	                            	<button type="submit" class="btn span3" id="finalizar">Finalizar</button>
 	                            	<button type="reset" class="btn span3" id="limpiar">Limpiar campos</button>
+	                            	<button type="submit" class="btn btn-primary span3" id="finalizar">Finalizar</button>
 	                            </div>
                             </form>
                         </div>
                         <!--LISTA DE MUESTREOS ANTERIORES: CLIENTE, DATA-ENTRY-->
-                        <div class="cont-muestreos-anteriores tab-pane">
+                        <div class="cont-muestreos-anteriores tab-pane" id="muestreos-anteriores">
                         	<h2>Lista de muestreos anteriores</h2>
                         	<table class="table table-striped">
                         		<thead>
@@ -192,7 +192,7 @@
                         		</tbody>
                         	</table>
                         </div>
-                        <div class="cont-muestreos-anteriores tab-pane">
+                        <div class="cont-muestreos-anteriores tab-pane" id="propuestas-muestreos">
                         	<h2>Propuestas de Muestreos</h2>
                         	<table class="table table-striped">
                         		<thead>
@@ -247,6 +247,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
+        <script src="js/plugin-tabs.js"></script>
         <script src="js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

@@ -49,16 +49,16 @@
                 <div class="tabbable tabs-left">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#">Configurar Analitos</a>
+                            <a href="#tab-analitos" data-toggle="tab">Configurar Analitos</a>
                         </li>
                         <li>
-                            <a href="#">Configurar Localidades</a>
+                            <a href="#tab-localidades" data-toggle="tab">Configurar Localidades</a>
                         </li>
                         <li>
-                            <a href="#">Configurar Usuarios</a>
+                            <a href="#tab-usuarios" data-toggle="tab">Configurar Usuarios</a>
                         </li>
                         <li>
-                            <a href="#">Configurar Clientes</a>
+                            <a href="#tab-clientes" data-toggle="tab">Configurar Clientes</a>
                         </li>
                             <!--<li class="dropdown-submenu">
                                 <a tabindex="-1" href="#">Vista 4</a>
@@ -70,7 +70,7 @@
                      </ul>
                      <div class="tab-content">
                         <!--PEDIDO DE MUESTREO: CLIENTE, DATA-ENTRY-->
-                        <div class="cont-pedido-muestreo tab-pane">
+                        <div class="cont-pedido-muestreo tab-pane" id="tab-analitos">
                         	<h2>Analitos</h2>
                             <form class="formularios-dos-columnas">
                             	<div class="row-fluid formulario">
@@ -151,7 +151,7 @@
                             </form>
                         </div>
                         <!--LISTA DE MUESTREOS ANTERIORES: CLIENTE, DATA-ENTRY-->
-                        <div class="cont-localidades tab-pane">
+                        <div class="cont-localidades tab-pane" id="tab-localidades">
                         	<h2>Localidades</h2>
                         	<form class="formularios-dos-columnas">
                             	<div class="row-fluid formulario">
@@ -218,14 +218,14 @@
 	                            </div>
 	                            <div class="botones-formulario" class="row-fluid">
 	                            	<div class="span4"> </div>
-	                            	<button type="submit" class="btn span2" id="guardar">Guardar</button>
-	                            	<button type="reset" class="btn span2" id="limpiar">Limpiar campos</button>
-	                            	<button type="submit" class="btn span2" id="eliminar">Eliminar</button>
+	                            	<button type="submit" class="btn btn-success span2" id="guardar-localidades">Guardar</button>
+	                            	<button type="reset" class="btn span2" id="limpiar-localidades">Limpiar campos</button>
+	                            	<button type="submit" class="btn span2" id="eliminar-localidades">Eliminar</button>
 	                            	<button class="btn btn-primary span2">Imprimir</button>
 	                            </div>
                             </form>
                         </div>
-                        <div class="cont-usuarios tab-pane active">
+                        <div class="cont-usuarios tab-pane active" id="tab-usuarios">
                         	<h2>Usuarios</h2>
                         	<form class="formularios-dos-columnas">
                             	<div class="row-fluid formulario">
@@ -241,18 +241,22 @@
 	                            		<input name="telefono" id="telefono" type="text" />
 	                            		<label for="nombre-usuario">Celular</label>
 	                            		<input name="celular" id="celular" type="text" />
-	                            		<label for="tipo">Tipo</label>
+	                            		<!--<label for="tipo">Tipo</label>
 	                            		<select id="tipo">
 	                            			<option>System User</option>
 	                            			<option>Cliente</option>
-	                            		</select>
+	                            		</select>-->
 	                            		<label for="tipo">Rol</label>
-	                            			<div id="roles" class="row-fluid">
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="director" />Director</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="analista" />Jefe de Area</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="analista" />Analista</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="analista" />Asistente de Calidad</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="muestreo" />Muestreo</label>
+	                            		<div class="roles row-fluid">
+	                            			<label class="checkbox inline span5"><input type="checkbox" value="director" />Director</label>
+	                            			<label class="checkbox inline span5"><input type="checkbox" value="jefe-area" />Jefe Area</label>
+	                            		</div>
+	                            		<div class="roles row-fluid">
+	                            			<label class="checkbox inline span5"><input type="checkbox" value="analista" />Analista</label>
+	                            			<label class="checkbox inline span5"><input type="checkbox" value="asistente-calidad" />Asist. de Calidad</label>
+	                            		</div>
+	                            		<div class="roles row-fluid">
+	                            			<label class="checkbox inline span6"><input type="checkbox" value="muestreo" />Muestreo</label>
 	                            		</div>
 	                            	</fieldset>
 	                            	<fieldset class="span8" id="usuarios">
@@ -307,16 +311,98 @@
 	                            </div>
 	                            <div class="botones-formulario" class="row-fluid">
 	                            	<div class="span4"> </div>
-	                            	<button type="submit" class="btn span2" id="guardar-usuario">Guardar</button>
+	                            	<button type="submit" class="btn btn-success span2" id="guardar-usuario">Guardar</button>
 	                            	<button type="reset" class="btn span2" id="limpiar-usuario">Limpiar campos</button>
 	                            	<button type="submit" class="btn span2" id="eliminar-usuario">Eliminar</button>
 	                            	<button class="btn btn-primary span2">Imprimir</button>
 	                            </div>
                             </form>
                         </div>
-                        <div class="cont-clientes tab-pane">
+                        <div class="cont-clientes tab-pane" id="tab-clientes">
                         	<h2>Clientes</h2>
-                        	
+                        	<form class="formularios-dos-columnas">
+                            	<div class="row-fluid formulario">
+	                            	<fieldset id="ingreso-datos-clientes" class="span4">
+	                            		<legend>Datos</legend>
+	                            		<label for="nombre-usuario">Nombres</label>
+	                            		<input name="nombre-cliente" id="nombre-cliente" type="text" />
+	                            		<label for="apellidos">Apellidos</label>
+	                            		<input name="apellidos-cliente" id="apellidos-cliente" type="text" />
+	                            		<label for="domicilio">Domicilio</label>
+	                            		<input name="domicilio" id="domicilio-cliente" type="text" />
+	                            		<label for="localidad">Localidad</label>
+	                            		<input name="localidad" id="localidad-cliente" type="text" />
+	                            		<label for="domicilio">Domicilio</label>
+	                            		<select id="clientes-departamento">
+	                            			<option>Artigas</option>
+	                            			<option>Salto</option>
+	                            			<option>Rivera</option>
+	                            			<option>Paysand&uacute;</option>
+	                            		</select>
+	                            		<label for="telefono">Tel&eacute;fono</label>
+	                            		<input name="telefono-cliente" id="telefono-cliente" type="text" />
+	                            		<label for="nombre-usuario">Celular</label>
+	                            		<input name="celular-cliente" id="celular-cliente" type="text" /><br />
+	                            		<input type="checkbox">Habilitado</input>
+	                            	</fieldset>
+	                            	<fieldset class="span8" id="clientes">
+	                            		<legend>Listado de Usuarios (para actualizar o eliminar selecciona uno)</legend>
+	                            		<table class="table table-striped">
+			                        		<thead>
+			                        			<tr>
+			                        				<th>Id.</th>
+			                        				<th>Nombres</th>
+				                        			<th>Apellidos</th>
+				                        			<th>Domicilio</th>
+				                        			<th>Tel&eacute;fono</th>
+				                        			<th>Celular</th>
+			                        			</tr>
+			                        		</thead>
+			                        		<tbody>
+			                        			<tr>
+			                        				<td>0023</td>
+			                        				<td>Fulano de Tal</td>
+			                        				<td>Menganaso</td>
+			                        				<td>Paseo del Puerto 21</td>
+			                        				<td>4 732 56 78</td>
+			                        				<td>099 52 46 85</td>
+			                        			</tr>
+			                        			<tr>
+			                        				<td>0045</td>
+			                        				<td>Poroto</td>
+			                        				<td>Silva</td>
+			                        				<td>Nostromo 2122</td>
+			                        				<td>4 735 55 96</td>
+			                        				<td>099 22 66 45</td>
+			                        			</tr>
+			                        			<tr>
+			                        				<td>0013</td>
+			                        				<td>Margarito</td>
+			                        				<td>Leivas</td>
+			                        				<td>Jubilar 2231</td>
+			                        				<td>4 730 21 78</td>
+			                        				<td>094 75 22 15</td>
+			                        			</tr>
+			                        			<tr>
+			                        				<td>0088</td>
+			                        				<td>Gurmanol</td>
+			                        				<td>Paraperesazo</td>
+			                        				<td>Kalitron 456</td>
+			                        				<td>4 738 24 55</td>
+			                        				<td>098 55 77 66</td>
+			                        			</tr>
+			                        		</tbody>
+                        				</table>
+	                            	</fieldset>
+	                            </div>
+	                            <div class="botones-formulario" class="row-fluid">
+	                            	<div class="span4"> </div>
+	                            	<button type="submit" class="btn btn-success span2" id="guardar-cliente">Guardar</button>
+	                            	<button type="reset" class="btn span2" id="limpiar-cliente">Limpiar campos</button>
+	                            	<button type="submit" class="btn span2" id="eliminar-cliente">Eliminar</button>
+	                            	<button class="btn btn-primary span2">Imprimir</button>
+	                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -326,6 +412,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
+        <script src="js/plugin-tabs.js"></script>
         <script src="js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
