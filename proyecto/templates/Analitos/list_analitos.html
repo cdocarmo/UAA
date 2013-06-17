@@ -1,0 +1,30 @@
+
+{% if analitos|length %}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id.</th>
+				<th>Nombre</th>
+    			<th>Categor&iacute;a</th>
+    			<th>VmP</th>
+    			<th>VMP</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for analito in analitos %}
+				<tr>
+					<td>{{ analito.id }}</td>
+					<td>{{ analito.nombre }}</td>
+					<td>{{ analito.categoria }}</td>
+					<td>{{ analito.valor_minimo }}</td>
+					<td>{{ analito.valor_maximo }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% else %}
+	<div class="note">
+		Por el Momento no Analitos.
+	</div>			
+{% endif %}	

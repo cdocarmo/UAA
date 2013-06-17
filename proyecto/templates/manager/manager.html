@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row-fluid" id="fila-contenedora">
+            <div class="tabbable tabs-left">
+                <ul class="nav nav-tabs" id="clai" >
+                    <li class="active" >
+                        <a href="#tab-analitos" data-toggle="tab">Configurar Analitos</a>
+                    </li>
+                    <li>
+                        <a href="#tab-localidades" data-toggle="tab">Configurar Localidades</a>
+                    </li>
+                    <li>
+                        <a href="#tab-usuarios" data-toggle="tab">Configurar Usuarios</a>
+                    </li>
+                    <li>
+                        <a href="#tab-clientes" data-toggle="tab">Configurar Clientes</a>
+                    </li>
+                        <!--<li class="dropdown-submenu">
+                            <a tabindex="-1" href="#">Vista 4</a>
+                            <ul class="dropdown-menu">
+                                <li>Submen&uacute; 1</li>
+                                <li>Submen&uacute; 2</li>
+                            </ul>
+                        </li>-->
+                 </ul>
+                 <div class="tab-content">
+                    <!--PEDIDO DE MUESTREO: CLIENTE, DATA-ENTRY-->
+                    <div class="cont-pedido-muestreo tab-pane active"  id="tab-analitos">
+						<h2>Analitos</h2>
+						<form class="formularios-dos-columnas" method='post' action=''>{% csrf_token %}
+							<div class="row-fluid formulario">
+						    	<fieldset id="ingreso-datos-analitos" class="span4">
+						    		<legend>Datos</legend>
+						    		<label for="nombre">Nombre</label>
+						    		{{ formAnalito.nombre }}
+						    		<label for="categorias">Categor&iacute;a</label>
+						    		{{ formAnalito.categorias }}
+						    		<label for="vminp">V.m.P.</label>
+						    		{{ formAnalito.vminp }}
+						    		<label for="vmaxp">V.M.P.</label>    		
+						    		{{ formAnalito.vmaxp }}
+						    		<label for="metodo-unit">M&eacute;todo utilizado (UNIT)</label>    		
+						    		{{ formAnalito.metodo_unit }}
+						    		<label for="metodo">M&eacute;todo utilizado</label>    		
+						    		{{ formAnalito.metodo }}
+						    		<label for="observaciones">Observaciones</label>
+						    		{{ formAnalito.detalle }}
+						    	</fieldset>
+						    	<fieldset class="span8" id="analitos">
+						    		<legend>Listado de Analitos (para actualizar o eliminar selecciona uno)</legend>
+						    		<div id="ListaAnalitos"></div>
+
+						    	</fieldset>
+						    </div>
+                            <div class="botones-formulario" class="row-fluid">
+                            	<div class="span4"> </div>
+                            	<button type="submit" class="btn btn-success span2" id="guardar-analito" name="guardar-analito">Guardar</button>
+                            	<button type="reset" class="btn span2" id="limpiar">Limpiar campos</button>
+                            	<button type="submit" class="btn span2" id="eliminar">Eliminar</button>
+                            	<button class="btn btn-primary span2">Imprimir</button>
+                            </div>
+
+
+						</form>
+
+
+                    </div>
+                    <!--LISTA DE MUESTREOS ANTERIORES: CLIENTE, DATA-ENTRY-->
+                    <div class="cont-localidades tab-pane" id="tab-localidades">
+                    	<h2>Localidades</h2>
+                    	<form class="formularios-dos-columnas">
+                        	<div class="row-fluid formulario">
+                            	<fieldset id="ingreso-datos-localidades" class="span4">
+                            		<legend>Datos</legend>
+                            		<label for="nombre-localidad">Nombre</label>
+                            		<input name="nombre-localidad" id="nombre-localidad" type="text" />
+                            		<label for="departamentos">Departamento</label>
+                            		<select id="departamento">
+                            			<option>Artigas</option>
+                            			<option>Salto</option>
+                            			<option>Rivera</option>
+                            			<option>Paysand&uacute;</option>
+                            		</select>
+                            		<label for="coordenadas-geograficas">Coordenadas Geogr&aacute;ficas</label>
+                            		<input name="coordenadas-geograficas" id="coordenadas-geograficas" type="text" />
+                            		<label for="distancia">Distancia desde Montevideo (en KMs)</label>
+                            		<input name="distancia" id="distancia" type="text" />
+                            	</fieldset>
+                            	<fieldset class="span8" id="Localidades">
+                            		<legend>Listado de Localidades (para actualizar o eliminar selecciona uno)</legend>
+                            		<table class="table table-striped">
+		                        		<thead>
+		                        			<tr>
+		                        				<th>Nro. de Referencia</th>
+		                        				<th>Nombre</th>
+			                        			<th>Departamento</th>
+			                        			<th>Coordenadas Geogr&aacute;ficas</th>
+			                        			<th>Distancia desde Montevideo (en KMs)</th>
+		                        			</tr>
+		                        		</thead>
+		                        		<tbody>
+		                        			<tr>
+		                        				<td>FF02</td>
+		                        				<td>Constituci&oacute;n</td>
+		                        				<td>Salto</td>
+		                        				<td>12 44' 33'' 12 44' 33''</td>
+		                        				<td>540</td>
+		                        			</tr>
+		                        			<tr>
+		                        				<td>FF02</td>
+		                        				<td>Bel&eacute;n</td>
+		                        				<td>Salto</td>
+		                        				<td>12 44' 33'' 12 44' 33''</td>
+		                        				<td>590</td>
+		                        			</tr>
+		                        			<tr>
+		                        				<td>FF04</td>
+		                        				<td>Bella Uni&oacute;</td>
+		                        				<td>Salto</td>
+		                        				<td>12 44' 33'' 12 44' 33''</td>
+		                        				<td>620</td>
+		                        			</tr>
+		                        			<tr>
+		                        				<td>FF52</td>
+		                        				<td>Quebracho</td>
+		                        				<td>Paysand&uacute;</td>
+		                        				<td>12 44' 33'' 12 46' 13''</td>
+		                        				<td>470</td>
+		                        			</tr>
+		                        		</tbody>
+                    				</table>
+                            	</fieldset>
+                            </div>
+                            <div class="botones-formulario" class="row-fluid">
+                            	<div class="span4"> </div>
+                            	<button type="submit" class="btn btn-success span2" id="guardar-localidades">Guardar</button>
+                            	<button type="reset" class="btn span2" id="limpiar-localidades">Limpiar campos</button>
+                            	<button type="submit" class="btn span2" id="eliminar-localidades">Eliminar</button>
+                            	<button class="btn btn-primary span2">Imprimir</button>
+                            </div>
+                        </form>
+                    	
+                    </div>
+                    <div class="cont-usuarios tab-pane" id="tab-usuarios">
+                    	<h2>Usuarios</h2>
+
+                    </div>
+                    <div class="cont-clientes tab-pane" id="tab-clientes">
+                    	<h2>Clientes</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
