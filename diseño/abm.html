@@ -32,10 +32,13 @@
                         <img id="user-pic" src="img/user_male.png" />
                     </li>
                     <li>
-                        <a href="#">Nombre del usuario</a>
-                    </li>
-                    <li>
-                        <a href="#">Salir</a>
+                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Nombre del usuario</a>
+                    	<ul class="dropdown-menu" role="menu">
+							<li><a tabindex="1" href="abm.html">Configuraciones</a></li>
+							<!--<li><a tabindex="-1" href="#"></a></li>
+							<li class="divider"></li>-->
+							<li><a tabindex="2" href="#">Salir</a></li>
+						</ul>
                     </li>
                     <!--Aqui se podria manejar un combo-->
                     <!--<li>
@@ -418,6 +421,7 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/plugin-tabs.js"></script>
+        <script src="js/plugin-dropdowns.js"></script>
         <script src="js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

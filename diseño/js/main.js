@@ -1,6 +1,8 @@
 //EVENTOS
 
 $(document).ready(function(){
+	//Dropdown de usuario
+	//$('.dropdown-toggle').dropdown();
 	//Cambiar cursor sobre filas
 	$('tr[class*=fila]').hover(function(){
 		$(this).css("cursor", "pointer");
