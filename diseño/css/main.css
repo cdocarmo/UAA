@@ -107,7 +107,7 @@ textarea {
 }
 
 .modal-body #logo-login, .modal-body #form-login {
-	width: 62%;
+	width: 52%;
 	float: left;
 }
 
@@ -117,6 +117,10 @@ textarea {
 
 #form-login input {
 	width: 98% !important;
+}
+
+#logo-login {
+	margin-right: 6%;
 }
 
 #nuevo-cliente {
