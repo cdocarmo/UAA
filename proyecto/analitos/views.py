@@ -11,7 +11,6 @@ from analitos.models import Analito
 from forms import *
 
 def home(request):
-    print request.method
     if request.method=='POST':
         formulario = AnalitoForm(request.POST)
         if formulario.is_valid():
@@ -28,14 +27,14 @@ def home(request):
             return HttpResponseRedirect('/')
     else:
         formulario = AnalitoForm()
-    return render_to_response('Analitos/mant_analitos.html',
+    return render_to_response('analitos/mant_analitos.html',
     	{'formulario':formulario}, 
     	context_instance=RequestContext(request))# Create your views here.
 
 
 def cargo_analitos(request):
-    analitos = Analito.objects.all()
+    analitos = Analito.objects.all().order_by("nombre")
 
-    return render_to_response('Analitos/list_analitos.html',
+    return render_to_response('analitos/list_analitos.html',
                             {'analitos':analitos}, 
                             context_instance=RequestContext(request))

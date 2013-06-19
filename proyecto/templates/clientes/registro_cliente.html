@@ -1,0 +1,44 @@
+{% extends 'base_sbar.html' %}
+{% block content %}
+<div class="registro-cliente">
+    <div class="container-fluid">
+        <form class="form-registro-cliente" method='post' action=''>{% csrf_token %}
+        	<fieldset id="ingreso-datos-usuarios" class="span4">
+	            <legend>Nuevo Cliente</legend>
+	            <label for="nombre-usuario">Nombres</label>
+                {{formulario.firstname}}
+                <div class="lert alert-error">
+                    {{ formulario.firstname.errors|join:"; " }}
+                </div>                    
+	            <label for="apellidos">Apellidos</label>
+                {{formulario.lastname}}
+                <div class="lert alert-error">
+                    {{ formulario.lastname.errors|join:"; " }}
+                </div>                    
+	            <label for="email">E-Mail</label>
+	            {{formulario.email}}
+                <div class="lert alert-error">
+                    {{ formulario.email.errors|join:"; " }}
+                </div>                
+	            <label for="domicilio">Domicilio</label>
+	            {{formulario.domicilio}}
+                <div class="lert alert-error">
+                    {{ formulario.emdomicilioail.errors|join:"; " }}
+                </div>                    
+	            <label for="telefono">Tel&eacute;fono</label>
+	            {{formulario.telefono}}
+                <div class="lert alert-error">
+                    {{ formulario.telefono.errors|join:"; " }}
+                </div>                    
+	            <label for="celular">Celular</label>
+	            {{formulario.celular}}
+                <div class="lert alert-error">
+                    {{ formulario.celular.errors|join:"; " }}
+                </div>                    
+	            <button type="submit" class="btn btn-primary" id="guardar-usuario">Guardar</button>
+            	<button type="reset" class="btn pull-right" id="limpiar-usuario">Limpiar campos</button>
+            </fieldset>
+       </form>
+    </div>
+    </div>
+{% endblock %}

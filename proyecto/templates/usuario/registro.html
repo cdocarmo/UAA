@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Nuevo usuario{% endblock %}
+
+
+{% block content %}
+<section class="box">
+	<h1>Registro nuevo Usuario</h1>
+	<form class="form-horizontal" method='post' action=''>{% csrf_token %}
+		{% if formulario.firstname.errors %}
+	    	<div class="lert alert-error">
+	    		{{ formulario.firstname.errors|join:"; " }}
+	    	</div>
+		{% endif %}	
+		<div class="control-group">
+			<label class="control-label" >{{ formulario.firstname.label_tag }}</label>
+			<div class="controls">
+				{{ formulario.firstname }}
+
+			</div>
+		</div>
+
+		{% if formulario.lastname.errors %}
+	    	<div class="lert alert-error">
+	    		{{ formulario.lastname.errors|join:"; " }}
+	    	</div>
+		{% endif %}	
+		<div class="control-group">
+			<label class="control-label" >{{ formulario.lastname.label_tag }}</label>
+			<div class="controls">
+				{{ formulario.lastname }}
+			</div>
+		</div>
+		{% if formulario.username.errors %}
+	    	<div class="lert alert-error">
+	    		{{ formulario.username.errors|join:"; " }}
+	    	</div>
+		{% endif %}	
+		<div class="control-group">
+			<label class="control-label" >{{ formulario.username.label_tag }}</label>
+			<div class="controls">
+				{{ formulario.username }}
+			</div>   
+		</div>
+		{% if formulario.email.errors %}
+	    	<div class="lert alert-error">
+	    		{{ formulario.email.errors|join:"; " }}
+	    	</div>
+		{% endif %}	
+		<div class="control-group">
+			<label class="control-label" >{{ formulario.email.label_tag }}</label>
+			<div class="controls">
+				{{ formulario.email }}
+			</div>    
+		</div>	
+		{% if formulario.password1.errors %}
+	    	<div class="lert alert-error">
+	    		{{ formulario.password1.errors|join:"; " }}
+	    	</div>
+		{% endif %}	
+		<div class="control-group">
+			<label class="control-label" >{{ formulario.password1.label_tag }}</label>
+			<div class="controls">
+				{{ formulario.password1 }}
+			</div>    
+		</div>	
+		{% if formulario.password2.errors %}
+	    	<div class="lert alert-error">
+	    		{{ formulario.password2.errors|join:"; " }}
+	    	</div>
+		{% endif %}				  
+		<div class="control-group">
+			<label class="control-label" >{{ formulario.password2.label_tag }}</label>
+			<div class="controls">
+				{{ formulario.password2 }}
+			</div>   
+		</div>	  
+
+		<p><input type='submit' value='Registrar'/></p>
+	</form>
+</section>
+
+{% endblock %}

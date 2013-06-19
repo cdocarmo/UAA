@@ -25,48 +25,7 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div class="navbar">
-            <div class="navbar-inner">
-                <a class="brand" href="#">
-                    <img class="logo" src="{{ STATIC_URL }}img/logo_UAA.jpg">
-                </a>
 
-                <ul class="nav pull-right">
-                    <li>
-                        <img id="user-pic" src="{{ STATIC_URL }}img/user_male.png" />
-                    </li>
-                    <li>
-                        {% if user.is_authenticated %}
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }}</a>
-                        {% endif %}
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a tabindex="1" href="/manager">Configuraciones</a></li>
-                            <!--<li><a tabindex="-1" href="#"></a></li>
-                            <li class="divider"></li>-->
-                            <li><a tabindex="2" href="/logout">Salir</a></li>
-                        </ul>
-                    </li>
-                    <!--Aqui se podria manejar un combo-->
-                    <!--<li>
-                        <a href="#">Otra opcion</a>
-                    </li>-->
-                </ul>
-
-
-
-
-                    <!--
-                    </li>
-                    <li>
-                        <a href="/logout">Salir</a>
-                    </li>
-                    Aqui se podria manejar un combo-->
-                    <!--<li>
-                        <a href="#">Otra opcion</a>
-                    </li>-->
-               
-            </div>
-        </div>
         <div class="container-fluid">
         {% block ayudas %}
         {% endblock %}      
@@ -78,8 +37,7 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
         <script src="{{ STATIC_URL }}js/plugins.js"></script>
         <script src="{{ STATIC_URL }}js/main.js"></script>
-        <script src="{{ STATIC_URL }}js/plugin-tabs.js"></script>        
-        <script src="{{ STATIC_URL }}js/plugin-dropdowns.js"></script>
+        <script src="{{ STATIC_URL }}js/plugin-tabs.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

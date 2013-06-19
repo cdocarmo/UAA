@@ -12,14 +12,14 @@
 		</thead>
 		<tbody>
 			{% for analito in analitos %}
-				<tr>
+				<tr class="fila-analitos">
 					<td>{{ analito.id }}</td>
 					<td>{{ analito.nombre }}</td>
 					<td>{{ analito.categoria }}</td>
 					<td>{{ analito.valor_minimo }}</td>
 					<td>{{ analito.valor_maximo }}</td>
 				</tr>
-			{% endfor %}
+			{% endfor %}			
 		</tbody>
 	</table>
 

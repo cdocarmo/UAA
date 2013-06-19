@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Nuevo usuario{% endblock %}
+
+{% block content %}
+    <div class="box">
+      <h1>Acceder a la Aplicacion</h1>
+        <div id="errores">
+            {% if error %}                
+               {{ error }} 
+            {% endif %}
+        </div>
+    	<form class="form-horizontal" method='post' action=''>{% csrf_token %}
+            <div class="control-group">
+                <label class="control-label" >{{ formulario.username.label_tag }}</label>
+                <div class="controls">
+        		  <p>{{formulario.username}}</p>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" >{{ formulario.password1.label_tag }}</label>
+                <div class="controls">
+                    <p>{{formulario.password1}}</p>
+                </div>
+            </div>
+    		<p><input type='submit' value='Acceder'/></p>
+    	</form>
+    </div>
+
+{% endblock %}
+

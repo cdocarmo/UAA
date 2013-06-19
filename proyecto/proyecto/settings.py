@@ -96,6 +96,7 @@ INSTALLED_APPS = (
     'usuarios',
     'clientes',
     'analitos',
+    'localidades',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

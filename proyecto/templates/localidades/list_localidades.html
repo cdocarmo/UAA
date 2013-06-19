@@ -1,0 +1,30 @@
+
+{% if localidades|length %}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Nro. de Referencia</th>
+				<th>Nombre</th>
+    			<th>Departamento</th>
+    			<th>Coordenadas Geogr&aacute;ficas</th>
+    			<th>Distancia desde Montevideo (en KMs)</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for localidad in localidades %}
+				<tr class="fila-localidades">
+					<td>{{ localidad.id }}</td>
+					<td>{{ localidad.nombre }}</td>
+					<td>{{ localidad.departamento }}</td>
+					<td>{{ localidad.coordenadas }}</td>
+					<td>{{ localidad.dist_mdeo }}</td>
+				</tr>
+			{% endfor %}			
+		</tbody>
+	</table>
+
+{% else %}
+	<div class="note">
+		Por el Momento no hay Localidades.
+	</div>			
+{% endif %}	

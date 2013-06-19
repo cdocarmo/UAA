@@ -1,0 +1,36 @@
+{% extends 'base_sbar.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="modal" id="modal-login">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+                <h3>Acceso</h3>
+            </div>
+            <div class="modal-body">
+                <div id="logo-login">
+                    <img src="{{ STATIC_URL }}img/logo_UAA.jpg" />
+                </div>
+                <div id="errores">
+                    {% if error %}                
+                       {{ error }} 
+                    {% endif %}
+                </div>                
+                <form id="form-login" method='post' action=''>{% csrf_token %}
+                    <label>Usuario</label>
+                    {{formulario.username}}
+                    <label>Contrase&ntilde;a</label>
+                    {{formulario.password1}}
+                    <p><input class="btn btn-primary" type='submit' value='Acceder'/></p>
+                </form>
+                <a href="{% url "registro-cliente" %}" id="nuevo-cliente" class="pull-right">Registrate como cliente!</a>
+            </div>
+            <div class="modal-footer">
+                <!--<a href="#" class="btn"></a>-->
+                
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -12,10 +12,10 @@ class Departamento(models.Model):
 
 class Localidad(models.Model):
 	nombre = models.CharField(max_length=100, verbose_name=u'Nombre')
-	departamento = models.CharField(max_length=30, blank=True, null=True, verbose_name=u'Departamento')
+	departamento = models.ForeignKey(Departamento)
 	coordenadas = models.CharField(max_length=255, blank=True, null=True, verbose_name=u'Coordenadas')
 	dist_mdeo = models.CharField(max_length=255, blank=True, 
 				null=True, verbose_name=u'Distacia desde Montevideo')
 
 	def __unicode__(self):
-		return _("%s %s") % (self.user.first_name, self.user.last_name)
+		return _("%s,  %s") % (self.nombre, self.departamento)

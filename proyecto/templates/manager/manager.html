@@ -69,72 +69,28 @@
                     <!--LISTA DE MUESTREOS ANTERIORES: CLIENTE, DATA-ENTRY-->
                     <div class="cont-localidades tab-pane" id="tab-localidades">
                     	<h2>Localidades</h2>
-                    	<form class="formularios-dos-columnas">
+                    	<form class="formularios-dos-columnas" method='post' action=''>{% csrf_token %}
                         	<div class="row-fluid formulario">
                             	<fieldset id="ingreso-datos-localidades" class="span4">
-                            		<legend>Datos</legend>
-                            		<label for="nombre-localidad">Nombre</label>
-                            		<input name="nombre-localidad" id="nombre-localidad" type="text" />
-                            		<label for="departamentos">Departamento</label>
-                            		<select id="departamento">
-                            			<option>Artigas</option>
-                            			<option>Salto</option>
-                            			<option>Rivera</option>
-                            			<option>Paysand&uacute;</option>
-                            		</select>
-                            		<label for="coordenadas-geograficas">Coordenadas Geogr&aacute;ficas</label>
-                            		<input name="coordenadas-geograficas" id="coordenadas-geograficas" type="text" />
-                            		<label for="distancia">Distancia desde Montevideo (en KMs)</label>
-                            		<input name="distancia" id="distancia" type="text" />
+                            		
+                                    <legend>Datos</legend>
+                                    <label for="nombre">Nombre</label>
+                                    {{ formLocalidad.nombre }}
+                                    <label for="departamento">Departamento</label>
+                                    {{ formLocalidad.departamento }}
+                                    <label for="coordenadas">Coordenadas Geográficas</label>
+                                    {{ formLocalidad.coordenadas }}
+                                    <label for="dist_mdeo">Distancia desde Montevideo (en KMs)</label>           
+                                    {{ formLocalidad.dist_mdeo }}
                             	</fieldset>
                             	<fieldset class="span8" id="Localidades">
                             		<legend>Listado de Localidades (para actualizar o eliminar selecciona uno)</legend>
-                            		<table class="table table-striped">
-		                        		<thead>
-		                        			<tr>
-		                        				<th>Nro. de Referencia</th>
-		                        				<th>Nombre</th>
-			                        			<th>Departamento</th>
-			                        			<th>Coordenadas Geogr&aacute;ficas</th>
-			                        			<th>Distancia desde Montevideo (en KMs)</th>
-		                        			</tr>
-		                        		</thead>
-		                        		<tbody>
-		                        			<tr>
-		                        				<td>FF02</td>
-		                        				<td>Constituci&oacute;n</td>
-		                        				<td>Salto</td>
-		                        				<td>12 44' 33'' 12 44' 33''</td>
-		                        				<td>540</td>
-		                        			</tr>
-		                        			<tr>
-		                        				<td>FF02</td>
-		                        				<td>Bel&eacute;n</td>
-		                        				<td>Salto</td>
-		                        				<td>12 44' 33'' 12 44' 33''</td>
-		                        				<td>590</td>
-		                        			</tr>
-		                        			<tr>
-		                        				<td>FF04</td>
-		                        				<td>Bella Uni&oacute;</td>
-		                        				<td>Salto</td>
-		                        				<td>12 44' 33'' 12 44' 33''</td>
-		                        				<td>620</td>
-		                        			</tr>
-		                        			<tr>
-		                        				<td>FF52</td>
-		                        				<td>Quebracho</td>
-		                        				<td>Paysand&uacute;</td>
-		                        				<td>12 44' 33'' 12 46' 13''</td>
-		                        				<td>470</td>
-		                        			</tr>
-		                        		</tbody>
-                    				</table>
+                                    <div id="ListaLocalidades"></div> 
                             	</fieldset>
                             </div>
                             <div class="botones-formulario" class="row-fluid">
                             	<div class="span4"> </div>
-                            	<button type="submit" class="btn btn-success span2" id="guardar-localidades">Guardar</button>
+                            	<button type="submit" class="btn btn-success span2" name="guardar-localidades" id="guardar-localidades">Guardar</button>
                             	<button type="reset" class="btn span2" id="limpiar-localidades">Limpiar campos</button>
                             	<button type="submit" class="btn span2" id="eliminar-localidades">Eliminar</button>
                             	<button class="btn btn-primary span2">Imprimir</button>

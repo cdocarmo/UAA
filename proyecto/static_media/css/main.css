@@ -93,69 +93,104 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+.registro-cliente {
+    background: url("../img/bg_registro_uaa.jpg") no-repeat;
+}
+
 /* LOGIN */
 
 #modal-login .modal-header {
-	color: white;
-	background-color: #006DCC;
+    color: white;
+    background-color: #006DCC;
     background-image: linear-gradient(to bottom, #0088CC, #0044CC);
     border-radius: 6px 6px 0 0;
 }
 
 .modal-body #logo-login, .modal-body #form-login {
-	width: 62%;
-	float: left;
+    width: 52%;
+    float: left;
 }
 
 .modal-body #logo-login {
-	width: 36%;
+    width: 36%;
 }
 
 #form-login input {
-	width: 98% !important;
+    width: 98% !important;
+}
+
+#logo-login {
+    margin-right: 6%;
+}
+
+#nuevo-cliente {
+    margin-top: 4%;
+    font-size: 0.8em;
 }
 
 /* BARRA SUPERIOR */
 
 .logo {
-	position: absolute;
-	z-index: 1000;
-	display: block;
-	top: 1%;
-	left: 2%;
-	width: 100px;
-	min-width: 40px;
+    position: absolute;
+    z-index: 1000;
+    display: block;
+    top: 1%;
+    left: 2%;
+    width: 100px;
+    min-width: 40px;
 }
 
 #user-pic {
-	width: 40px;
+    width: 40px;
 }
 
 /* CUERPO */
 
+.container-fluid {
+    margin-bottom: 6%;
+}
+
 .row-fluid {
-	margin-top: 6%;
+    margin-top: 6%;
 }
 
 .panel-h3 {
-	text-align: center;
+    text-align: center;
 }
 
 /* FORMULARIOS */
 
+.form-registro-cliente {
+    width: 30%;
+    margin: 4% 0 4% 56%;
+}
+
+.form-registro-cliente legend {
+    color: white;
+    width: 95.5%;
+    padding: 4px 12px;
+    background-color: #0088CC;
+    border:1px solid white;
+    /*border-radius: 4px; */
+}
+
+.form-registro-cliente input {
+    /*width: 100%;*/
+}
+
 .tab-content h2 {
-	border-bottom: 1px solid #999999;
+    border-bottom: 1px solid #999999;
 }
 
 .formularios-dos-columnas, #analitos .row-fluid {
-	margin-top: 2%; important!
+    margin-top: 2%; important!
 }
 
-#botones-formulario {
-	/*clear: both;*/
-	margin-top: 4%;
-	padding: 1% 0;
-	border-top: 1px solid #999999;
+.botones-formulario {
+    /*clear: both;*/
+    margin-top: 4%;
+    padding: 1% 0;
+    border-top: 1px solid #999999;
 }
 
 
