@@ -103,6 +103,14 @@ $(document).ready(function(){
 			backdrop: 'static'
 		});
 	});
+	
+	//Borro fila
+	$('.habilitar').click(function(){
+		$('#modal-habilitado').modal('show');
+		setTimeout("$('#modal-habilitado').modal('hide')", 1500);
+		
+		$(this).parent().parent().remove();
+	});
 });
 
 function limpiarCampos() {

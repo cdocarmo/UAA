@@ -322,99 +322,161 @@
                             </form>
                         </div>
                         <div class="cont-clientes tab-pane" id="tab-clientes">
-                        	<h2>Clientes</h2>
-                        	<form class="formularios-dos-columnas">
-                            	<div class="row-fluid formulario">
-	                            	<fieldset id="ingreso-datos-clientes" class="span4">
-	                            		<legend>Datos</legend>
-	                            		<label for="nombres-usuario">Nombres</label>
-	                            		<input name="nombres-cliente" id="nombres-cliente" type="text" />
-	                            		<label for="apellidos">Apellidos</label>
-	                            		<input name="apellidos-cliente" id="apellidos-cliente" type="text" />
-	                            		<label for="domicilio">Domicilio</label>
-	                            		<input name="domicilio" id="domicilio-cliente" type="text" />
-	                            		<label for="localidad">Localidad</label>
-	                            		<input name="localidad" id="localidad-cliente" type="text" />
-	                            		<label for="domicilio">Domicilio</label>
-	                            		<select id="clientes-departamento">
-	                            			<option>Artigas</option>
-	                            			<option>Salto</option>
-	                            			<option>Rivera</option>
-	                            			<option>Paysand&uacute;</option>
-	                            		</select>
-	                            		<label for="telefono">Tel&eacute;fono</label>
-	                            		<input name="telefono-cliente" id="telefono-cliente" type="text" />
-	                            		<label for="nombre-usuario">Celular</label>
-	                            		<input name="celular-cliente" id="celular-cliente" type="text" /><br />
-	                            		<input type="checkbox" id="habilitado-cliente">Habilitado</input>
-	                            	</fieldset>
-	                            	<fieldset class="span8" id="clientes">
-	                            		<legend>Listado de Usuarios (para actualizar o eliminar selecciona uno)</legend>
-	                            		<table class="table table-striped">
-			                        		<thead>
-			                        			<tr>
-			                        				<th>Id.</th>
-			                        				<th>Nombres</th>
-				                        			<th>Apellidos</th>
-				                        			<th>Domicilio</th>
-				                        			<th>Tel&eacute;fono</th>
-				                        			<th>Celular</th>
-				                        			<th>Habilitado</th>
-			                        			</tr>
-			                        		</thead>
-			                        		<tbody>
-			                        			<tr class="fila-clientes">
-			                        				<td class="id">0023</td>
-			                        				<td class="nombres">Fulano de Tal</td>
-			                        				<td class="apellidos">Menganaso</td>
-			                        				<td class="domicilio">Paseo del Puerto 21</td>
-			                        				<td class="telefono">4 732 56 78</td>
-			                        				<td class="celular">099 52 46 85</td>
-			                        				<td class="habilitado">S&iacute;</td>
-			                        			</tr>
-			                        			<tr class="fila-clientes">
-			                        				<td class="id">0045</td>
-			                        				<td class="nombres">Poroto</td>
-			                        				<td class="apellidos">Silva</td>
-			                        				<td class="domicilio">Nostromo 2122</td>
-			                        				<td class="telefono">4 735 55 96</td>
-			                        				<td class="celular">099 22 66 45</td>
-			                        				<td class="habilitado">No</td>
-			                        			</tr>
-			                        			<tr class="fila-clientes">
-			                        				<td class="id">0013</td>
-			                        				<td class="nombres">Margarito</td>
-			                        				<td class="apellidos">Leivas</td>
-			                        				<td class="domicilio">Jubilar 2231</td>
-			                        				<td class="telefono">4 730 21 78</td>
-			                        				<td class="celular">094 75 22 15</td>
-			                        				<td class="habilitado">S&iacute;</td>
-			                        			</tr>
-			                        			<tr class="fila-clientes">
-			                        				<td class="id">0088</td>
-			                        				<td class="nombres">Gurmanol</td>
-			                        				<td class="apellidos">Paraperesazo</td>
-			                        				<td class="domicilio">Kalitron 456</td>
-			                        				<td class="telefono">4 738 24 55</td>
-			                        				<td class="celular">098 55 77 66</td>
-			                        				<td class="habilitado">No</td>
-			                        			</tr>
-			                        		</tbody>
-                        				</table>
-	                            	</fieldset>
-	                            </div>
-	                            <div class="botones-formulario" class="row-fluid">
-	                            	<div class="span4"> </div>
-	                            	<button type="submit" class="btn btn-success span2" id="guardar-cliente">Guardar</button>
-	                            	<button type="reset" class="btn span2" id="limpiar-cliente">Limpiar campos</button>
-	                            	<a class="btn span2" id="eliminar-cliente">Eliminar</a>
-	                            	<button class="btn btn-primary span2">Imprimir</button>
-	                            </div>
-                            </form>
+                        	<ul class="nav nav-tabs" id="tab-interno-clientes">
+                        		<li class="pull-left"><h2 id="titulo-clientes">Clientes</h2></li>
+                        		<li class="pull-right"><a href="#habilitar-clientes" data-toggle="tab">Habilitar Clientes</a></li>
+								<li class="active pull-right"><a href="#amb-clientes" data-toggle="tab">Clientes</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="amb-clientes">
+		                        	<form class="formularios-dos-columnas">
+		                            	<div class="row-fluid formulario">
+			                            	<fieldset id="ingreso-datos-clientes" class="span4">
+			                            		<legend>Datos</legend>
+			                            		<label for="nombres-usuario">Nombres</label>
+			                            		<input name="nombres-cliente" id="nombres-cliente" type="text" />
+			                            		<label for="apellidos">Apellidos</label>
+			                            		<input name="apellidos-cliente" id="apellidos-cliente" type="text" />
+			                            		<label for="domicilio">Domicilio</label>
+			                            		<input name="domicilio" id="domicilio-cliente" type="text" />
+			                            		<label for="localidad">Localidad</label>
+			                            		<input name="localidad" id="localidad-cliente" type="text" />
+			                            		<label for="domicilio">Domicilio</label>
+			                            		<select id="clientes-departamento">
+			                            			<option>Artigas</option>
+			                            			<option>Salto</option>
+			                            			<option>Rivera</option>
+			                            			<option>Paysand&uacute;</option>
+			                            		</select>
+			                            		<label for="telefono">Tel&eacute;fono</label>
+			                            		<input name="telefono-cliente" id="telefono-cliente" type="text" />
+			                            		<label for="nombre-usuario">Celular</label>
+			                            		<input name="celular-cliente" id="celular-cliente" type="text" /><br />
+			                            		<input type="checkbox" id="habilitado-cliente">Habilitado</input>
+			                            	</fieldset>
+			                            	<fieldset class="span8" id="clientes">
+			                            		<legend>Listado de Usuarios (para actualizar o eliminar selecciona uno)</legend>
+			                            		<table class="table table-striped">
+					                        		<thead>
+					                        			<tr>
+					                        				<th>Id.</th>
+					                        				<th>Nombres</th>
+						                        			<th>Apellidos</th>
+						                        			<th>Domicilio</th>
+						                        			<th>Tel&eacute;fono</th>
+						                        			<th>Celular</th>
+						                        			<th>Habilitado</th>
+					                        			</tr>
+					                        		</thead>
+					                        		<tbody>
+					                        			<tr class="fila-clientes">
+					                        				<td class="id">0023</td>
+					                        				<td class="nombres">Fulano de Tal</td>
+					                        				<td class="apellidos">Menganaso</td>
+					                        				<td class="domicilio">Paseo del Puerto 21</td>
+					                        				<td class="telefono">4 732 56 78</td>
+					                        				<td class="celular">099 52 46 85</td>
+					                        				<td class="habilitado">S&iacute;</td>
+					                        			</tr>
+					                        			<tr class="fila-clientes">
+					                        				<td class="id">0045</td>
+					                        				<td class="nombres">Poroto</td>
+					                        				<td class="apellidos">Silva</td>
+					                        				<td class="domicilio">Nostromo 2122</td>
+					                        				<td class="telefono">4 735 55 96</td>
+					                        				<td class="celular">099 22 66 45</td>
+					                        				<td class="habilitado">No</td>
+					                        			</tr>
+					                        			<tr class="fila-clientes">
+					                        				<td class="id">0013</td>
+					                        				<td class="nombres">Margarito</td>
+					                        				<td class="apellidos">Leivas</td>
+					                        				<td class="domicilio">Jubilar 2231</td>
+					                        				<td class="telefono">4 730 21 78</td>
+					                        				<td class="celular">094 75 22 15</td>
+					                        				<td class="habilitado">S&iacute;</td>
+					                        			</tr>
+					                        			<tr class="fila-clientes">
+					                        				<td class="id">0088</td>
+					                        				<td class="nombres">Gurmanol</td>
+					                        				<td class="apellidos">Paraperesazo</td>
+					                        				<td class="domicilio">Kalitron 456</td>
+					                        				<td class="telefono">4 738 24 55</td>
+					                        				<td class="celular">098 55 77 66</td>
+					                        				<td class="habilitado">No</td>
+					                        			</tr>
+					                        		</tbody>
+		                        				</table>
+			                            	</fieldset>
+			                            </div>
+			                            <div class="botones-formulario" class="row-fluid">
+			                            	<div class="span4"> </div>
+			                            	<button type="submit" class="btn btn-success span2" id="guardar-cliente">Guardar</button>
+			                            	<button type="reset" class="btn span2" id="limpiar-cliente">Limpiar campos</button>
+			                            	<a class="btn span2" id="eliminar-cliente">Eliminar</a>
+			                            	<button class="btn btn-primary span2">Imprimir</button>
+			                            </div>
+		                            </form>
+								</div>
+								<div class="tab-pane" id="habilitar-clientes">
+									<table class="table table-striped">
+		                        		<thead>
+		                        			<tr>
+			                        			<th>Id.</th>
+			                        			<th>Nombres</th>
+				                        		<th>Apellidos</th>
+				                        		<th>Domicilio</th>
+				                        		<th>Tel&eacute;fono</th>
+				                        		<th>Celular</th>
+				                        		<th>Habilitar</th>
+			                        		</tr>
+		                        		</thead>
+		                        		<tbody>
+		                        			<tr>
+		                        				<td class="id">0088</td>
+			                        			<td class="nombres">Gurmanol</td>
+			                        			<td class="apellidos">Paraperesazo</td>
+			                        			<td class="domicilio">Kalitron 456</td>
+			                        			<td class="telefono">4 738 24 55</td>
+			                        			<td class="celular">098 55 77 66</td>
+		                        				<td><button class="btn btn-success habilitar"><i class=" icon-fire icon-white"> </i>Habilitar</button></td>
+		                        			</tr>
+		                        			<tr>
+		                        				<td class="id">0099</td>
+			                        			<td class="nombres">Gurmanol</td>
+			                        			<td class="apellidos">Paraperesazo</td>
+			                        			<td class="domicilio">Kalitron 456</td>
+			                        			<td class="telefono">4 738 24 55</td>
+			                        			<td class="celular">098 55 77 66</td>
+		                        				<td><button class="btn btn-success habilitar"><i class=" icon-fire icon-white"> </i>Habilitar</button></td>
+		                        			</tr>
+		                        			<tr>
+		                        				<td class="id">0077</td>
+			                        			<td class="nombres">Gurmanol</td>
+			                        			<td class="apellidos">Paraperesazo</td>
+			                        			<td class="domicilio">Kalitron 456</td>
+			                        			<td class="telefono">4 738 24 55</td>
+			                        			<td class="celular">098 55 77 66</td>
+		                        				<td><button class="btn btn-success habilitar"><i class=" icon-fire icon-white"> </i>Habilitar</button></td>
+		                        			</tr>
+		                        			<tr>
+		                        				<td class="id">0066</td>
+			                        			<td class="nombres">Gurmanol</td>
+			                        			<td class="apellidos">Paraperesazo</td>
+			                        			<td class="domicilio">Kalitron 456</td>
+			                        			<td class="telefono">4 738 24 55</td>
+			                        			<td class="celular">098 55 77 66</td>
+		                        				<td><button class="btn btn-success habilitar"><i class=" icon-fire icon-white"> </i>Habilitar</button></td>
+		                        			</tr>
+		                        		</tbody>
+	                        		</table>
+								</div>
+							</div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- VENTANAS MODALES -->
             <div id="modal-eliminar" class="modal hide fade">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -428,6 +490,19 @@
 					<a href="#" class="btn btn-primary" id="eliminar-btn-eliminar">Eliminar</a>
 				</div>
     		</div>
+    		<div id="modal-habilitado" class="modal hide fade">
+				<!--<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3></h3>
+				</div>-->
+				<div class="modal-body">
+				    <p>Cliente habilitado!</p>
+				</div>
+				<!--<div class="modal-footer">
+					<a href="#" class="btn">Cerrar</a>
+					<a href="#" class="btn btn-primary" id="eliminar-btn-eliminar">Eliminar</a>
+				</div>-->    		
+			</div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>

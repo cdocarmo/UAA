@@ -158,6 +158,12 @@ textarea {
 	text-align: center;
 }
 
+#titulo-clientes {
+	margin: -1px;
+	border: none;
+	padding: 0;
+}
+
 /* FORMULARIOS */
 
 .form-registro-cliente {
