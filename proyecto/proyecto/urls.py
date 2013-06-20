@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^analitos/home/$', 'analitos.views.home', name='home-analitos'),
     url(r'^manager/$', 'manager.views.manager', name='manager'),
     url(r'^cliente/registro/$', 'clientes.views.registro_cliente', name='registro-cliente'),
+    url(r'^cliente/clientes-pendientes/$', 'clientes.views.cargo_clientes_pendientes', name='clientes-pendientes'),
 
     url(r'^login/$','manager.views.ingresar', name='ingresar'),
     url(r'^logout/$', 'manager.views.cerrar', name='cerrar'),    

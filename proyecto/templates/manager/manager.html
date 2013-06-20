@@ -16,6 +16,9 @@
                     <li>
                         <a href="#tab-clientes" data-toggle="tab">Configurar Clientes</a>
                     </li>
+                    <li>
+                        <a href="#tab-clientes-pendientes" data-toggle="tab">Clientes Pendientes</a>
+                    </li>                    
                         <!--<li class="dropdown-submenu">
                             <a tabindex="-1" href="#">Vista 4</a>
                             <ul class="dropdown-menu">
@@ -105,6 +108,21 @@
                     <div class="cont-clientes tab-pane" id="tab-clientes">
                     	<h2>Clientes</h2>
                     </div>
+                    <div class="cont-clientes-pendientes tab-pane" id="tab-clientes-pendientes">
+                        <h2>Clientes Pendintes</h2>
+                        <div class="botones-formulario" class="row-fluid">
+                            <div class="span4"> </div>
+                            <button type="submit" class="btn btn-success span2" name="guardar-localidades" id="guardar-localidades">Guardar</button>
+                            <button type="reset" class="btn span2" id="limpiar-localidades">Limpiar campos</button>
+                            <button type="submit" class="btn span2" id="eliminar-localidades">Eliminar</button>
+                            <button class="btn btn-primary span2">Imprimir</button>
+                        </div>
+                        <fieldset class="span8" id="analitos">
+                            <legend>Listado de Clientes pendientes</legend>
+                            <div id="ListaClientesPend"></div>
+
+                        </fieldset>                        
+                    </div>                    
                 </div>
             </div>
         </div>

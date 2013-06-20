@@ -1,30 +1,38 @@
 $(document).on("ready", inicio);
 function inicio ()
 {
+
 	cargo_analitos();
 	cargo_localidades();
 	ingreso_analitos();
+	cargo_clientes_pendientes();
 	$("#clai").on("click", cargo_listas);
-	$('tr[class*=fila]').on("click", cargo_datos);
-	$('tr[class*=fila]').on("hover", cambio_cursor);
-	console.log("W");
+	//$('tr[class*=fila]').on("click", cargo_datos);
+	$('#fila-analitos').on("hover", cambio_cursor);
 	//$('#preguntas button').on('click', enviar_pregunta);
 }
 
 function cargo_analitos(datos) 
 {
-	$('#ListaAnalitos').html('&nbsp;').load('/analitos/cargo-analitos/');
+	$('#ListaAnalitos').load('/analitos/cargo-analitos/');
+
+}
+
+function cargo_clientes_pendientes(datos) 
+{
+	$('#ListaClientesPend').load('/cliente/clientes-pendientes/');
+
 }
 
 function cargo_localidades(datos) 
 {
-	$('#ListaLocalidades').html('&nbsp;').load('/localidades/cargo-localidades/');
+	$('#ListaLocalidades').load('/localidades/cargo-localidades/');
 }
 
 
 function ingreso_analitos(datos) 
 {
-	$('#IngresoAnalitos').html('&nbsp;').load('/analitos/home/');
+	$('#IngresoAnalitos').load('/analitos/home/');
 }
 
 
@@ -32,11 +40,12 @@ function cargo_listas(datos)
 {
 	cargo_analitos();
 	cargo_localidades();
+	cargo_clientes_pendientes();
 }
 
 function cambio_cursor(datos)
 {
-	console.log("W");
+	console.log("a");
 	$(this).css("cursor", "pointer");
 }
 	

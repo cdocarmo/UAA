@@ -1,0 +1,33 @@
+{% if clientes|length %}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Apellido</th>
+    			<th>E-Mail</th>
+    			<th>Telefono</th>
+    			<th>Celular</th>
+				<th>Domicilio</th>
+    			<th>Fecha</th>    			
+			</tr>
+		</thead>
+		<tbody>
+			{% for cliente in clientes %}
+				<tr class="fila-clientes">
+					<td>{{ cliente.first_name }}</td>
+					<td>{{ cliente.last_name }}</td>
+					<td>{{ cliente.email }}</td>
+					<td>{{ cliente.get_profile.telefono }}</td>
+					<td>{{ cliente.get_profile.celular }}</td>
+					<td>{{ cliente.get_profile.domicilio }}</td>
+					<td>{{ cliente.get_profile.fecha_creacion|date:"j F Y" }}</td>
+				</tr>
+			{% endfor %}			
+		</tbody>
+	</table>
+
+{% else %}
+	<div class="note">
+		Por el Momento no Clientes pendientes.
+	</div>			
+{% endif %}	
