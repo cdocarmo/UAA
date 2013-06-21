@@ -7,12 +7,13 @@ var USUARIO = "usuario";
 var CLIENTE = "cliente";
 var LOCALIDAD = "localidad";
 
+$(document).ready(function(){
+	reBind();
+});
+
 //EVENTOS
 
-$(document).ready(function(){
-	//Dropdown de usuario
-	//$('.dropdown-toggle').dropdown();
-	//Cambiar cursor sobre filas
+function reBind() {
 	limpiarCampos();
 	$('tr[class*=fila]').hover(function(){
 		$(this).css("cursor", "pointer");
@@ -111,7 +112,7 @@ $(document).ready(function(){
 		
 		$(this).parent().parent().remove();
 	});
-});
+}
 
 function limpiarCampos() {
 	//remuevo la clase para que no exista fila seleccionada
