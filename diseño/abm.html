@@ -82,7 +82,7 @@
 	                            	<fieldset id="ingreso-datos-analitos" class="span4">
 	                            		<legend>Datos</legend>
 	                            		<label for="nombre">Nombre</label>
-	                            		<input name="nombre" id="nombre" type="text" />
+	                            		<input name="nombre" id="nombre" type="text" class="focusable" maxlength="50" />
 	                            		<label for="categorias">Categor&iacute;a</label>
 	                            		<select id="categorias">
 	                            			<option value="Microbiolog&iacute;a">Microbiolog&iacute;a</option>
@@ -91,13 +91,13 @@
 	                            			<option value="Org&aacute;nica">Org&aacute;nica</option>
 	                            		</select>
 	                            		<label for="vminp">V.m.P.</label>
-	                            		<input name="vminp" id="vminp" type="text" />
+	                            		<input name="vminp" id="vminp" type="text" class="focusable" maxlength="5"/>
 	                            		<label for="vmaxp">V.M.P.</label>
-	                            		<input name="vmaxp" id="vmaxp" type="text" />
+	                            		<input name="vmaxp" id="vmaxp" type="text" class="focusable" maxlength="5" />
 	                            		<label for="metodo-unit">M&eacute;todo utilizado (UNIT)</label>
-	                            		<input name="metodo-unit" id="metodo-unit" type="text" />
+	                            		<input name="metodo-unit" id="metodo-unit" type="text" class="focusable" maxlength="55" />
 	                            		<label for="metodo">M&eacute;todo utilizado</label>
-	                            		<input name="metodo" id="metodo" type="text" />
+	                            		<input name="metodo" id="metodo" type="text" class="focusable" maxlength="55" />
 	                            		<label for="observaciones">Observaciones</label>
 	                            		<textarea name="observaciones" id="observaciones"> </textarea>
 	                            	</fieldset>
@@ -163,7 +163,7 @@
 	                            	<fieldset id="ingreso-datos-localidades" class="span4">
 	                            		<legend>Datos</legend>
 	                            		<label for="nombre-localidad">Nombre</label>
-	                            		<input name="nombre-localidad" id="nombre-localidad" type="text" />
+	                            		<input name="nombre-localidad" id="nombre-localidad" type="text" class="focusable" />
 	                            		<label for="departamentos">Departamento</label>
 	                            		<select id="departamentos">
 	                            			<option>Artigas</option>
@@ -172,9 +172,9 @@
 	                            			<option>Paysand&uacute;</option>
 	                            		</select>
 	                            		<label for="coordenadas-geograficas">Coordenadas Geogr&aacute;ficas</label>
-	                            		<input name="coordenadas-geograficas" id="coordenadas-geograficas" type="text" />
+	                            		<input name="coordenadas-geograficas" id="coordenadas-geograficas" type="text" class="focusable" />
 	                            		<label for="distancia">Distancia desde Montevideo (en KMs)</label>
-	                            		<input name="distancia" id="distancia" type="text" />
+	                            		<input name="distancia" id="distancia" type="text" class="focusable" />
 	                            	</fieldset>
 	                            	<fieldset class="span8" id="Localidades">
 	                            		<legend>Listado de Localidades (para actualizar o eliminar selecciona uno)</legend>
@@ -237,15 +237,15 @@
 	                            	<fieldset id="ingreso-datos-usuarios" class="span4">
 	                            		<legend>Datos</legend>
 	                            		<label for="nombres-usuario">Nombres</label>
-	                            		<input name="nombres-usuario" id="nombres-usuario" type="text" />
+	                            		<input name="nombres-usuario" id="nombres-usuario" type="text" class="focusable" />
 	                            		<label for="apellidos">Apellidos</label>
-	                            		<input name="apellidos" id="apellidos-usuario" type="text" />
+	                            		<input name="apellidos" id="apellidos-usuario" type="text" class="focusable" />
 	                            		<label for="domicilio">Domicilio</label>
-	                            		<input name="domicilio" id="domicilio-usuario" type="text" />
+	                            		<input name="domicilio" id="domicilio-usuario" type="text" class="focusable" />
 	                            		<label for="telefono">Tel&eacute;fono</label>
-	                            		<input name="telefono" id="telefono-usuario" type="text" />
+	                            		<input name="telefono" id="telefono-usuario" type="text" class="focusable" />
 	                            		<label for="nombre-usuario">Celular</label>
-	                            		<input name="celular" id="celular-usuario" type="text" />
+	                            		<input name="celular" id="celular-usuario" type="text" class="focusable" />
 	                            		<!--<label for="tipo">Tipo</label>
 	                            		<select id="tipo">
 	                            			<option>System User</option>
@@ -336,13 +336,13 @@
 			                            	<fieldset id="ingreso-datos-clientes" class="span4">
 			                            		<legend>Datos</legend>
 			                            		<label for="nombres-usuario">Nombres</label>
-			                            		<input name="nombres-cliente" id="nombres-cliente" type="text" />
+			                            		<input name="nombres-cliente" id="nombres-cliente" type="text" class="focusable" />
 			                            		<label for="apellidos">Apellidos</label>
-			                            		<input name="apellidos-cliente" id="apellidos-cliente" type="text" />
+			                            		<input name="apellidos-cliente" id="apellidos-cliente" type="text" class="focusable" />
 			                            		<label for="domicilio">Domicilio</label>
-			                            		<input name="domicilio" id="domicilio-cliente" type="text" />
+			                            		<input name="domicilio" id="domicilio-cliente" type="text" class="focusable" />
 			                            		<label for="localidad">Localidad</label>
-			                            		<input name="localidad" id="localidad-cliente" type="text" />
+			                            		<input name="localidad" id="localidad-cliente" type="text" class="focusable" />
 			                            		<label for="domicilio">Domicilio</label>
 			                            		<select id="clientes-departamento">
 			                            			<option>Artigas</option>
@@ -351,9 +351,9 @@
 			                            			<option>Paysand&uacute;</option>
 			                            		</select>
 			                            		<label for="telefono">Tel&eacute;fono</label>
-			                            		<input name="telefono-cliente" id="telefono-cliente" type="text" />
+			                            		<input name="telefono-cliente" id="telefono-cliente" type="text" class="focusable" />
 			                            		<label for="nombre-usuario">Celular</label>
-			                            		<input name="celular-cliente" id="celular-cliente" type="text" /><br />
+			                            		<input name="celular-cliente" id="celular-cliente" type="text" class="focusable" /><br />
 			                            		<input type="checkbox" id="habilitado-cliente">Habilitado</input>
 			                            	</fieldset>
 			                            	<fieldset class="span8" id="clientes">
@@ -509,6 +509,7 @@
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+        <script src="js/jquery.maskedinput.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/plugin-tabs.js"></script>
         <script src="js/plugin-dropdowns.js"></script>
