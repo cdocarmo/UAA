@@ -4,7 +4,7 @@ var msg_no_hay_seleccion = "No ha seleccionado ";
 var msg_a_punto_de_eliminar = "Está a punto de eliminar un ";
 var msg_input_vacio = "Campo obligatorio";
 var msg_solo_numeros = "Error: solo admite numeros";
-var focus_flag = false;
+var focus_flag = true;
 var ANALITO = "analito";
 var USUARIO = "usuario";
 var CLIENTE = "cliente";
@@ -122,12 +122,14 @@ function reBind() {
 	
 	//Validaciones
 	$(window).focusin(function(e){
-		if (!($(e.target).hasClass('focusable'))){
+		if (e.target.nodeName != 'INPUT'){
 			if (focus_flag == true) {
 				focus_flag = false;
 			}else{
 				focus_flag = true;
 			}
+		}else {
+			focus_flag = false;
 		}
 	});
 	$('input').focusout(function() {
@@ -137,7 +139,7 @@ function reBind() {
 			}else{
 				$('#msg-vacio-' + $(this).attr("id")).remove();
 			}
-			//focus_flag = false;
+			//focus_flag = true;
 		}
 	});
 }
