@@ -77,9 +77,10 @@ function reBind() {
 	$('a[class*=tab]').click(function(){
 		tab_actual = $(this).attr('class');
 		limpiarCampos();
+		quitarMensajes();
 	});
 	
-	//Muestra ventana modal
+	//Muestra ventana modal, boton eliminar
 	$('a[id^=eliminar]').click(function(){
 		if ($('#' + tab_actual).find('.seleccionada')) {
 			//si hay fila seleccionada.
@@ -106,10 +107,34 @@ function reBind() {
 			}
 			$('#eliminar-btn-eliminar').css('visibility', 'visible');
 		}
-		$('#modal-eliminar').modal({
-			show: true,
-			backdrop: 'static'
+		mostrarModal();
+	});
+	
+	//Boton guardar
+	$('a[id^=guardar]').click(function(){
+		var guardar = true;
+		$('#' + tab_actual + ' input').each(function() {
+			var completos = revisarInputs(this);
+			if (completos == false) {
+				guardar = completos;
+			}
 		});
+		if (!guardar) {
+			focus_flag = false;
+			$('#mensaje-modal').html("Llena los campos vacíos");	
+		}else{
+			//guarda segun el tab actual (usando ajax?)
+			if (tab_actual == 'tab-analitos') {
+				$('#mensaje-modal').html("Llamar guardar de analitos");
+			}else if (tab_actual == 'tab-usuarios') {
+				$('#mensaje-modal').html("Llamar guardar de analitos");
+			}else if (tab_actual == 'tab-localidades') {
+				$('#mensaje-modal').html("Llamar guardar de analitos");
+			}else if (tab_actual == 'tab-clientes') {
+				$('#mensaje-modal').html("Llamar guardar de analitos");
+			}
+		}
+		mostrarModal();
 	});
 	
 	//Borro fila
@@ -132,15 +157,19 @@ function reBind() {
 			focus_flag = false;
 		}
 	});
+	
 	$('input').focusout(function() {
-		if (focus_flag == false) {
-			if (($(this).val().length < 1) || ($(this).val() == "__.___")) {
-				$(crearMsgValidacion(msg_input_vacio, $(this).attr("id"))).appendTo($(this).prev());
-			}else{
-				$('#msg-vacio-' + $(this).attr("id")).remove();
-			}
-			//focus_flag = true;
-		}
+		revisarInputs(this);
+	});
+}
+
+function quitarMsg(obj) {
+	$('#msg-vacio-' + $(obj).attr("id")).remove();
+}
+
+function quitarMensajes() {
+	$('span[id^=msg-vacio]').each(function() {
+		$(this).remove();
 	});
 }
 
@@ -158,4 +187,28 @@ function limpiarCampos() {
 function crearMsgValidacion(msg, id) {
 	var nodo_msg = $('<span id="msg-vacio-' + id + '" style="color:red; margin-left:5%">' + msg + '</span>');
 	return nodo_msg;
+}
+
+function revisarInputs(obj) {
+	var completos = false;
+	if (focus_flag == false) {
+		if (($(obj).val().length < 1) || ($(obj).val() == "__.___")) {
+			//quitarMsg(this) deberia estar en un condicional quizas...
+			quitarMsg(obj);
+			$(crearMsgValidacion(msg_input_vacio, $(obj).attr("id"))).appendTo($(obj).prev());
+		}else{
+			completos = true;
+			quitarMsg(obj);
+		}
+	}else{
+		completos = true;
+	}
+	return completos;
+}
+
+function mostrarModal() {
+	$('#modal-eliminar').modal({
+			show: true,
+			backdrop: 'static'
+	});
 }
