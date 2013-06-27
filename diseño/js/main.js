@@ -65,6 +65,9 @@ function reBind() {
 			$('#categorias> option[value=' + '"' +$(this).find('.categoria').html() + '"' + ']').attr('selected', 'selected');
 			$('#vminp').val($(this).find('.vminp').html());
 			$('#vmaxp').val($(this).find('.vmaxp').html());
+			$('#metodo-unit').val($(this).find('.metodo-unit').html());
+			$('#metodo').val($(this).find('.metodo').html());
+			$('#observaciones').val($(this).find('.observaciones').html());
 		} else if ($(this).hasClass('fila-localidades')) {
 			$('#nombre-localidad').val($(this).find('.ciudad').html());
 			$('#departamentos> option[value=' + '"' +$(this).find('.departamento').html() + '"' + ']').attr('selected', 'selected');
