@@ -203,7 +203,25 @@ textarea {
 	display: none;
 }
 
+/*MUESTREOS*/
 
+#btn-agregar-muestreo {
+	margin-top: 18%;
+}
+
+#lista-muestreos {
+	list-style-type: none;
+}
+
+#lista-muestreos li a{
+	padding: 0.4%;
+	display: block;
+}
+
+#lista-muestreos li a:hover {
+	text-decoration: none;
+	background-color: #eee;
+}
 
 
 

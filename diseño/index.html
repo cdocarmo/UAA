@@ -54,14 +54,14 @@
                 <div class="tabbable tabs-left">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#pedido-muestreo" data-toggle="tab">Nuevo Muestreo</a>
+                            <a href="#pedido-muestreo" data-toggle="tab" class="tab-nuevo-pedido">Nuevo Pedido</a>
                         </li>
                         <li>
-                            <a href="#muestreos-anteriores" data-toggle="tab">Muetreos Anteriores</a>
+                            <a href="#muestreos-anteriores" data-toggle="tab" class="tab-muestreos-anteriores">Muetreos Anteriores</a>
                         </li>
-                        <li>
-                            <a href="#propuestas-muestreos" data-toggle="tab">Propuestas de Muestreos</a>
-                        </li>
+                        <!--<li>
+                            <a href="#propuestas-muestreos" data-toggle="tab" class="tab-propuestas">Propuestas de Muestreos</a>
+                        </li>-->
                             <!--<li class="dropdown-submenu">
                                 <a tabindex="-1" href="#">Vista 4</a>
                                 <ul class="dropdown-menu">
@@ -73,7 +73,12 @@
                      <div class="tab-content">
                         <!--PEDIDO DE MUESTREO: CLIENTE, DATA-ENTRY-->
                         <div class="cont-pedido-muestreo tab-pane active" id="pedido-muestreo">
-                        	<h2>Nuevo pedido de muestreo</h2>
+                        	<h2>Nuevo pedido (<span id="numero-de-muestreos">1</span> muestreos)</h2>
+                        	<ul id="lista-muestreos">
+                        		<li>
+                        			<a href="#"><i class="icon-edit"></i>&nbsp&nbsp&nbspMuestreo numero <span class="nro-de-muestreo">1</span> - C&oacute;digo de referencia <span class="codigo-referencia">PO45</span><i class="icon-remove pull-right"></i></a>
+                        		</li>
+                        	</ul>
                             <form id="pedido-muestreo">
                             	<div class="row-fluid formulario">
 	                            	<fieldset id="locacion" class="span4">
@@ -96,6 +101,7 @@
 	                            		<input name="direccion" id="direccion" type="text" />
 	                            		<label for="numero-referencia">N&uacute;mero de Referencia</label>
 	                            		<input name="numero-referencia" id="numero-referencia" type="text" readonly="" />
+	                            		<a href="#" id="btn-agregar-muestreo" class="btn btn-success">Agregar este muestreo al pedido</a>
 	                            	</fieldset>
 	                            	<fieldset class="span8" id="analitos">
 	                            		<legend>Selecci&oacute;n de Analitos</legend>
