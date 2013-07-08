@@ -54,10 +54,10 @@
                 <div class="tabbable tabs-left">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#pedido-muestreo" data-toggle="tab" class="tab-nuevo-pedido">Nuevo Pedido</a>
+                            <a href="#tab-pedido" data-toggle="tab" class="tab-nuevo-pedido">Nuevo Pedido</a>
                         </li>
                         <li>
-                            <a href="#muestreos-anteriores" data-toggle="tab" class="tab-muestreos-anteriores">Muetreos Anteriores</a>
+                            <a href="#tab-muestreos-anteriores" data-toggle="tab" class="tab-muestreos-anteriores">Muetreos Anteriores</a>
                         </li>
                         <!--<li>
                             <a href="#propuestas-muestreos" data-toggle="tab" class="tab-propuestas">Propuestas de Muestreos</a>
@@ -72,12 +72,10 @@
                      </ul>
                      <div class="tab-content">
                         <!--PEDIDO DE MUESTREO: CLIENTE, DATA-ENTRY-->
-                        <div class="cont-pedido-muestreo tab-pane active" id="pedido-muestreo">
-                        	<h2>Nuevo pedido (<span id="numero-de-muestreos">1</span> muestreos)</h2>
+                        <div class="cont-pedido-muestreo tab-pane active" id="tab-pedido">
+                        	<h2>Nuevo pedido (<span id="numero-de-muestreos">0</span> muestreos)</h2>
+                        	<p class="ningun-muestreo">No hay ning&uacute;n muestreo adjunto a este pedido.</p>
                         	<ul id="lista-muestreos">
-                        		<li>
-                        			<a href="#"><i class="icon-edit"></i>&nbsp&nbsp&nbspMuestreo numero <span class="nro-de-muestreo">1</span> - C&oacute;digo de referencia <span class="codigo-referencia">PO45</span><i class="icon-remove pull-right"></i></a>
-                        		</li>
                         	</ul>
                             <form id="pedido-muestreo">
                             	<div class="row-fluid formulario">
@@ -85,17 +83,17 @@
 	                            		<legend>Datos Geogr&aacute;ficos</legend>
 	                            		<label for="departamentos">Departamento</label>
 	                            		<select id="departamentos">
-	                            			<option>Artigas</option>
-	                            			<option>Salto</option>
-	                            			<option>Paysand&uacute;</option>
-	                            			<option>R&iacute;o Negro</option>
-	                            			<option>Tacuaremb&oacute;</option>
+	                            			<option value="Artigas">Artigas</option>
+	                            			<option value="Salto">Salto</option>
+	                            			<option value="Paysandu">Paysand&uacute;</option>
+	                            			<option value="Rio Negro">R&iacute;o Negro</option>
+	                            			<option value="Tacuarembo">Tacuaremb&oacute;</option>
 	                            		</select>
 	                            		<label for="ciudades">Ciudad</label>
 	                            		<select id="ciudades">
-	                            			<option>Salto</option>
-	                            			<option>Constituci&oacute;n</option>
-	                            			<option>Bel&eacute;n</option>
+	                            			<option value="Salto">Salto</option>
+	                            			<option value="Constitucion">Constituci&oacute;n</option>
+	                            			<option value="Belen">Bel&eacute;n</option>
 	                            		</select>
 	                            		<label for="direccion">Direcci&oacute;n</label>
 	                            		<input name="direccion" id="direccion" type="text" />
@@ -106,39 +104,39 @@
 	                            	<fieldset class="span8" id="analitos">
 	                            		<legend>Selecci&oacute;n de Analitos</legend>
 	                            		<div id="lista-analitos-1" class="row-fluid">
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="microbiologicas" />Microbiol&oacute;gicas</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="microcistinas" />Microcistinas</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="arsenico" />Ars&eacute;nico</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="cadmio" />Cadmio</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="cloruro" />Cloruro</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="cobre" />Cobre</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="microbiologicas" />Microbiol&oacute;gicas</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="microcistinas" />Microcistinas</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="arsenico" />Ars&eacute;nico</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="cadmio" />Cadmio</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="cloruro" />Cloruro</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="cobre" />Cobre</label>
 	                            		</div>
 	                            		<div id="lista-analitos-2" class="row-fluid">
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="cromo" />Cromo</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="fluoruro" />Fluoruro</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="hierro" />Hierro</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="nitrato" />Nitrato</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="nitrito" />Nitrito</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="mercurio" />Mercurio</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="cromo" />Cromo</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="fluoruro" />Fluoruro</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="hierro" />Hierro</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="nitrato" />Nitrato</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="nitrito" />Nitrito</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="mercurio" />Mercurio</label>
 	                            		</div>
 	                            		<div id="lista-analitos-3" class="row-fluid">
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="plomo" />Plomo</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="selenio" />Selenio</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="zinc" />Zinc</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="ph" />P.H.</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="dureza" />Dureza</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="turbiedad" />Turbiedad</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="plomo" />Plomo</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="selenio" />Selenio</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="zinc" />Zinc</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="ph" />P.H.</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="dureza" />Dureza</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="turbiedad" />Turbiedad</label>
 	                            		</div>
 	                            		<div id="lista-analitos-4" class="row-fluid">
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="color" />Color</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="pesticidas" />Pesticidas</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="ac-organicos" />&Aacute;c. Org&aacute;nicos</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="cloroformo" />Cloroformo</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="aluminio" />Aluminio</label>
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="sulfato" />Sulfato</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="color" />Color</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="pesticidas" />Pesticidas</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="ac-organicos" />&Aacute;c. Org&aacute;nicos</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="cloroformo" />Cloroformo</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="aluminio" />Aluminio</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="sulfato" />Sulfato</label>
 	                            		</div>
 	                            		<div id="lista-analitos-6" class="row-fluid">
-	                            			<label class="checkbox inline span2"><input type="checkbox" value="cloro" />Cloro</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="cloro" />Cloro</label>
 	                            			<label class="checkbox inline span2 hidden"><input type="checkbox" value="vacio" /> </label>
 	                            			<label class="checkbox inline span2 hidden"><input type="checkbox" value="vacio" /> </label>
 	                            			<label class="checkbox inline span2 hidden"><input type="checkbox" value="vacio" /> </label>
@@ -149,13 +147,13 @@
 	                            </div>
 	                            <div id="botones-formulario" class="row-fluid">
 	                            	<div class="span6"> </div>
-	                            	<button type="reset" class="btn span3" id="limpiar">Limpiar campos</button>
+	                            	<button type="reset" class="btn span3" id="limpiar">Limpiar Todo</button>
 	                            	<button type="submit" class="btn btn-primary span3" id="finalizar">Finalizar</button>
 	                            </div>
                             </form>
                         </div>
                         <!--LISTA DE MUESTREOS ANTERIORES: CLIENTE, DATA-ENTRY-->
-                        <div class="cont-muestreos-anteriores tab-pane" id="muestreos-anteriores">
+                        <div class="cont-muestreos-anteriores tab-pane" id="tab-muestreos-anteriores">
                         	<h2>Lista de muestreos anteriores</h2>
                         	<table class="table table-striped">
                         		<thead>
@@ -260,7 +258,8 @@
         <script src="js/plugins.js"></script>
         <script src="js/plugin-tabs.js"></script>
         <script src="js/plugin-dropdowns.js"></script>
-        <script src="js/main.js"></script>
+        <!--<script src="js/main.js"></script>-->
+        <script src="js/muestreos.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

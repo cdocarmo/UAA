@@ -211,6 +211,7 @@ textarea {
 
 #lista-muestreos {
 	list-style-type: none;
+	/*display: none;*/
 }
 
 #lista-muestreos li a{
