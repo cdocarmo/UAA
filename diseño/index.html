@@ -99,44 +99,45 @@
 	                            		<input name="direccion" id="direccion" type="text" />
 	                            		<label for="numero-referencia">N&uacute;mero de Referencia</label>
 	                            		<input name="numero-referencia" id="numero-referencia" type="text" readonly="" />
+	                            		<a href="#" id="limpiar" class="btn">Limpiar formulario</a>
 	                            		<a href="#" id="btn-agregar-muestreo" class="btn btn-success">Agregar este muestreo al pedido</a>
 	                            	</fieldset>
 	                            	<fieldset class="span8" id="analitos">
 	                            		<legend>Selecci&oacute;n de Analitos</legend>
 	                            		<div id="lista-analitos-1" class="row-fluid">
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="microbiologicas" />Microbiol&oacute;gicas</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="microcistinas" />Microcistinas</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="arsenico" />Ars&eacute;nico</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="cadmio" />Cadmio</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="cloruro" />Cloruro</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="cobre" />Cobre</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="microbiologicas" value="microbiologicas" />Microbiol&oacute;gicas</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="microcistinas" value="microcistinas" />Microcistinas</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="arsenico" value="arsenico" />Ars&eacute;nico</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="cadmio" value="cadmio" />Cadmio</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="cloruro" value="cloruro" />Cloruro</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="cobre" value="cobre" />Cobre</label>
 	                            		</div>
 	                            		<div id="lista-analitos-2" class="row-fluid">
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="cromo" />Cromo</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="fluoruro" />Fluoruro</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="hierro" />Hierro</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="nitrato" />Nitrato</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="nitrito" />Nitrito</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="mercurio" />Mercurio</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="cromo" value="cromo" />Cromo</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="fluoruro" value="fluoruro" />Fluoruro</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="hierro" value="hierro" />Hierro</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="nitrato" value="nitrato" />Nitrato</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="nitrito" value="nitrito" />Nitrito</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="mercurio" value="mercurio" />Mercurio</label>
 	                            		</div>
 	                            		<div id="lista-analitos-3" class="row-fluid">
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="plomo" />Plomo</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="selenio" />Selenio</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="zinc" />Zinc</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="ph" />P.H.</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="dureza" />Dureza</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="turbiedad" />Turbiedad</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="plomo" value="plomo" />Plomo</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="selenio" value="selenio" />Selenio</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="zinc" value="zinc" />Zinc</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="ph" value="ph" />P.H.</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="dureza" value="dureza" />Dureza</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="turbiedad" value="turbiedad" />Turbiedad</label>
 	                            		</div>
 	                            		<div id="lista-analitos-4" class="row-fluid">
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="color" />Color</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="pesticidas" />Pesticidas</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="ac-organicos" />&Aacute;c. Org&aacute;nicos</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="cloroformo" />Cloroformo</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="aluminio" />Aluminio</label>
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="sulfato" />Sulfato</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="color" value="color" />Color</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="pesticidas" value="pesticidas" />Pesticidas</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="ac-organicos" value="ac-organicos" />&Aacute;c. Org&aacute;nicos</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="cloroformo" value="cloroformo" />Cloroformo</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="aluminio" value="aluminio" />Aluminio</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="sulfato" value="sulfato" />Sulfato</label>
 	                            		</div>
 	                            		<div id="lista-analitos-6" class="row-fluid">
-	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" value="cloro" />Cloro</label>
+	                            			<label class="checkbox inline span2"><input class="analito" type="checkbox" id="cloro" value="cloro" />Cloro</label>
 	                            			<label class="checkbox inline span2 hidden"><input type="checkbox" value="vacio" /> </label>
 	                            			<label class="checkbox inline span2 hidden"><input type="checkbox" value="vacio" /> </label>
 	                            			<label class="checkbox inline span2 hidden"><input type="checkbox" value="vacio" /> </label>
@@ -147,7 +148,7 @@
 	                            </div>
 	                            <div id="botones-formulario" class="row-fluid">
 	                            	<div class="span6"> </div>
-	                            	<button type="reset" class="btn span3" id="limpiar">Limpiar Todo</button>
+	                            	<button type="reset" class="btn span3" id="limpiar-todo">Limpiar Todo</button>
 	                            	<button type="submit" class="btn btn-primary span3" id="finalizar">Finalizar</button>
 	                            </div>
                             </form>

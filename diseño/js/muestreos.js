@@ -2,6 +2,7 @@
 var tab_actual = 'tab-pedido';  //tab-muestreos-anteriores
 var PEDIDO = "pedido";
 var MUESTREOS_ANTERIORES = "muestreos-anteriores";
+var MODO = "nuevo";  //puede ser nuevo o modificar
 var col_muestreos = new Array();
 var prox_numero_muestreo = 0;
 var agregar_muestreo = true;
@@ -10,14 +11,13 @@ var analitos_marcados = 0;
 //TODO: debo capturar el enter para que no me guarde sin advertencia previa.
 
 $(document).ready(function(){
+	limpiar(true);
 	reBind();
 });
 
 //EVENTOS
 
 function reBind() {
-	//limpiarCampos();
-	//Agregar un muestreo
 	$('#btn-agregar-muestreo').on('click', function(){
 		var msg_alert = "";
 		//recoger todos los datos en un objeto
@@ -56,45 +56,68 @@ function reBind() {
 		if (agregar_muestreo) {
 			obj['nro_muestreo'] = prox_numero_muestreo;
 			crearLineaNuevoMuestreo(obj);
-			++prox_numero_muestreo;
+			col_muestreos.push(obj);
+			prox_numero_muestreo++;
 			$('.ningun-muestreo').css('display', 'none');
 			modificarTitulo();
-			limpiar();
+			limpiar(false);
 		}else{
 			agregar_muestreo = true;
 		}
-		//Reseteo analitos marcados
 		analitos_marcados = 0;
 	});
 	
 	$('#lista-muestreos').on('click', function(e) {
 		if (e.target.nodeName == 'I'){
-			//alert('click en <i>');
-			var nro_id;
-			nro_id = $(this).parent().parent().attr('id');
-			var count = 0;
 			for (item in col_muestreos) {
-				if (col_muestreos[item].nro_muestreo == $(this).attr('id').substring(4)) {
-					delete col_muestreos[count];
+				if (col_muestreos[item].nro_muestreo == $(e.target).parent().parent().attr('id').substring(4)) {
+					//alert('entra a eliminar');
+					var temp = col_muestreos.splice(item);
 				}
-				++count;
 			}
 			$(e.target).parent().parent().remove();
+			//alert(col_muestreos.length);
 			if (col_muestreos.length == 0) {
-				//TODO: no lo muestra, parece que col_muestreos no queda vacio
 				$('.ningun-muestreo').css('display', 'block');
 			}
+			limpiar(false);
 			modificarTitulo();
 		}else if (e.target.nodeName == 'A'){
+			MODO = "modificar";
+			//alert(MODO);
+			limpiar(false);
+			//TODO: llamar un metodo que deje todos los fondos blancos
+			blanquearFondos();
+			$(e.target).parent().css('background-color', '#dee');
 			for (item in col_muestreos) {
 				var temp = $(e.target).parent().attr('id').substring(4);
 				if (item == temp) {
-				//if (item.nro_muestreo == temp) {
 					rellenarFormulario(col_muestreos[item]);
+					$('#btn-agregar-muestreo').html("Modificar este muestreo");
 					return;
 				}
 			}
 		}
+	});
+	// LIMPIAR FORMULARIO
+	$('#limpiar').on('click', function(){
+		MODO == "nuevo";
+		$('#btn-agregar-muestreo').html("Agregar este muestreo al pedido");
+		limpiar(false);
+		//alert(MODO);
+	});
+	// LIMPIAR TODITO
+	$('#limpiar-todo').on('click', function(){
+		MODO == "nuevo";
+		$('#btn-agregar-muestreo').html("Agregar este muestreo al pedido");
+		limpiar(true);
+		//alert(MODO);
+	});
+}
+
+function blanquearFondos() {
+	$('li[id^=nro-]').each(function(){
+		$(this).css('background-color', 'white');
 	});
 }
 
@@ -104,38 +127,26 @@ function rellenarFormulario(obj) {
 	var nombre;
 	for (item in analitos) {
 		nombre = analitos[item];
-		
-		selector = 'input[value="' + nombre + '"]';
-		$(selector).attr('checked', true);
-		$('input[value="plomo"]').attr('checked', true);
+		selector = '#' + nombre;
+		$(selector).get(0).checked = true;
 	}
-	//$('.analito').each(function(){
-	//	$(this).attr('checked', true);
-	//});
 	var departamento = obj['departamento'];
 	var ciudad  = obj['ciudad'];
-	$('#departamentos option[value="' + departamento + '"]').attr('selected', 'selected');
-	$('#ciudades option[value="' + ciudad + '"]').attr('selected', 'selected');
-	//$('#departamentos').attr('selectedValue', departamento);
-	//$('#ciudades').attr('selectedValue', ciudad);
+	$('#departamentos option[value="' + departamento + '"]').get(0).selected = true;
+	$('#ciudades option[value="' + ciudad + '"]').get(0).selected = true;
 	$('#direccion').val(obj['direccion']);
 	$('#numero-referencia').val('');
 }
 
-function cambiarFondoMuestreos(obj) {
-	
-}
-
 function crearLineaNuevoMuestreo(obj) {
+	//alert(obj.nro_muestreo);
 	var nuevo_nodo = $('<li id="nro-' + obj.nro_muestreo + '"><a href="#"><i class="icon-edit"></i>&nbsp&nbsp&nbspMuestreo numero <span class="nro-de-muestreo">' + col_muestreos.length 
 	+ '</span> - C&oacute;digo de referencia <span class="codigo-referencia">' + obj.referencia + '</span><i class="icon-remove pull-right"></i></a></li>');
 	$('#lista-muestreos').prepend(nuevo_nodo);
-	//en otro metodo deberia ir esto
-	col_muestreos.push(obj);
 }
 
 function modificarTitulo() {
-	$('#numero-de-muestreos').val(String(col_muestreos.length));
+	$('#numero-de-muestreos').html(String(col_muestreos.length));
 }
 
 function crearMsgValidacion(msg, id) {
@@ -155,7 +166,7 @@ function quitarMensajes() {
 	});
 }
 
-function limpiar() {
+function limpiar(total) {
 	$('.analito').each(function(){
 		$(this).attr('checked', false);
 	});
@@ -163,4 +174,10 @@ function limpiar() {
 	$('#ciudades').prop('selectedIndex', 0);
 	$('#direccion').val('');
 	$('#numero-referencia').val('');
+	if (total) {
+		$('li[id^=nro-]').each(function(){
+			$(this).remove();
+			$('.ningun-muestreo').css('display', 'block');
+		});
+	}
 }
