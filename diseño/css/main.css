@@ -224,6 +224,12 @@ textarea {
 	background-color: #eee;
 }
 
+/*Fila invisible*/
+
+.muestreo {
+	display: none;
+}
+
 
 
 

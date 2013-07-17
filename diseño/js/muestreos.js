@@ -18,6 +18,7 @@ $(document).ready(function(){
 //EVENTOS
 
 function reBind() {
+	//PESTAÑA "NUEVO PEDIDO"
 	$('#btn-agregar-muestreo').on('click', function(){
 		var msg_alert = "";
 		//recoger todos los datos en un objeto
@@ -113,6 +114,18 @@ function reBind() {
 		limpiar(true);
 		//alert(MODO);
 	});
+	
+	//PESTAÑA "MUESTREOS ANTERIORES"
+	
+	$('.ver').on('click', function(){
+		var id_muestreo = $(this).parent().parent().find('.numero-muestreo').html();
+		var fila = crearFilaConInfoDeMuestreos(id_muestreo);
+		var fila_anterior = $(this).parent().parent();
+		//Aca se deben obtener los datos via AJAX
+		$(fila).html('<ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>');
+		$(fila_anterior).after(fila);
+		$(fila).show('slow');
+	});
 }
 
 function blanquearFondos() {
@@ -143,6 +156,11 @@ function crearLineaNuevoMuestreo(obj) {
 	var nuevo_nodo = $('<li id="nro-' + obj.nro_muestreo + '"><a href="#"><i class="icon-edit"></i>&nbsp&nbsp&nbspMuestreo numero <span class="nro-de-muestreo">' + col_muestreos.length 
 	+ '</span> - C&oacute;digo de referencia <span class="codigo-referencia">' + obj.referencia + '</span><i class="icon-remove pull-right"></i></a></li>');
 	$('#lista-muestreos').prepend(nuevo_nodo);
+}
+
+function crearFilaConInfoDeMuestreos(numero_muestreo) {
+	var nodo_fila = $('<tr id="id' + numero_muestreo + '">Un contenido X</tr>').hide();
+	return nodo_fila;
 }
 
 function modificarTitulo() {
