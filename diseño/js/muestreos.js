@@ -7,6 +7,7 @@ var col_muestreos = new Array();
 var prox_numero_muestreo = 0;
 var agregar_muestreo = true;
 var analitos_marcados = 0;
+var ultimo_muestreo = null;
 
 //TODO: debo capturar el enter para que no me guarde sin advertencia previa.
 
@@ -118,13 +119,32 @@ function reBind() {
 	//PESTAÑA "MUESTREOS ANTERIORES"
 	
 	$('.ver').on('click', function(){
+		if (ultimo_muestreo != null) {
+			$(ultimo_muestreo).remove();
+		}
 		var id_muestreo = $(this).parent().parent().find('.numero-muestreo').html();
 		var fila = crearFilaConInfoDeMuestreos(id_muestreo);
 		var fila_anterior = $(this).parent().parent();
-		//Aca se deben obtener los datos via AJAX
-		$(fila).html('<ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>');
+		//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
+		var html_cod = '<td colspan="3" class="datos-muestreo">' +
+		'\t<ul>' +
+		'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <b>Salto</b></li>' +
+		'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <b>Salto</b></li>' +
+		'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <b>Oficial 1º 2016</b></li>' +
+		'\t</ul>' +
+		'</td>' +
+		'<td colspan="3" class="datos-muestreo">' +
+		'\t<ul>' +
+		'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
+		'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
+		'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
+		'\t</ul>' +
+		'</td>' +
+		'<td> </td>';
+		$(fila).html(html_cod);
 		$(fila_anterior).after(fila);
 		$(fila).show('slow');
+		ultimo_muestreo = fila;
 	});
 }
 
@@ -159,7 +179,7 @@ function crearLineaNuevoMuestreo(obj) {
 }
 
 function crearFilaConInfoDeMuestreos(numero_muestreo) {
-	var nodo_fila = $('<tr id="id' + numero_muestreo + '">Un contenido X</tr>').hide();
+	var nodo_fila = $('<tr id="id' + numero_muestreo + '" class="fila-muestreo"> </tr>').hide();
 	return nodo_fila;
 }
 
