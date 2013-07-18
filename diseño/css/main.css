@@ -250,14 +250,25 @@ textarea {
 	background: -ms-linear-gradient(top,  rgba(135,224,253,0.4) 0%,rgba(164,222,240,0.4) 50%,rgba(165,222,239,0.4) 52%,rgba(109,193,219,0.4) 100%) !important; /* IE10+ */
 	background: linear-gradient(to bottom,  rgba(135,224,253,0.4) 0%,rgba(164,222,240,0.4) 50%,rgba(165,222,239,0.4) 52%,rgba(109,193,219,0.4) 100%) !important; /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6687e0fd', endColorstr='#666dc1db',GradientType=0 ) !important; /* IE6-8 */
-
-
-
 }
 
+/*INGRESO DE DATOS MUESTREO*/
 
+#form-ingreso-datos {
+	width: 70%;
+}
 
+#form-ingreso-datos input {
+	margin: 0 !important;
+}
 
+#lbl-ing-datos {
+	margin-top: 4%;
+}
+
+#msg-no-muestreos {
+	display:none;
+}
 
 
 

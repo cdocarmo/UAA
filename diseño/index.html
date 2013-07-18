@@ -59,9 +59,9 @@
                         <li>
                             <a href="#tab-muestreos-anteriores" data-toggle="tab" class="tab-muestreos-anteriores">Muetreos Anteriores</a>
                         </li>
-                        <!--<li>
-                            <a href="#propuestas-muestreos" data-toggle="tab" class="tab-propuestas">Propuestas de Muestreos</a>
-                        </li>-->
+                        <li>
+                            <a href="#ingresar-resultados-muestreos" data-toggle="tab" class="tab-resultados-muestreos">Ingresar Resultados de Muestreos</a>
+                        </li>
                             <!--<li class="dropdown-submenu">
                                 <a tabindex="-1" href="#">Vista 4</a>
                                 <ul class="dropdown-menu">
@@ -253,6 +253,48 @@
                         			</tr>
                         		</tbody>
                         	</table>
+                        </div>
+                        <!--INGRESAR RESULTADOS DE MUESTREOS-->
+                        <div class="cont-ingreso-muestreos tab-pane" id="ingresar-resultados-muestreos">
+                        	<h2>Ingresar Datos de Muestreos</h2>
+                        	<form id="form-ingreso-datos">
+                        		<label>Analitos</label>
+	                        	<select>
+	                        		<option>Plomo sin purga</option>
+	                        		<option>Color</option>
+	                        		<option>Cromo</option>
+	                        		<option>Fluoruro</option>
+	                        	</select>
+	                        	<label id="lbl-ing-datos">Ingresar Datos</label>
+	                        	<div class="well" id="msg-no-muestreos">No hay muestreos para este analito, prueba otro.</div>
+	                        	<table class="table table-striped">
+	                        		<tr>
+	                        			<th>Muestras</th>
+	                        			<th>ug/L</th>
+	                        		</tr>
+	                        		<tr>
+	                        			<td>M 854</td>
+	                        			<td><input type="text" name="dato-m854"/></td>
+	                        		</tr>
+	                        		<tr>
+	                        			<td>M 855</td>
+	                        			<td><input type="text" name="dato-m855"/></td>
+	                        		</tr>
+	                        		<tr>
+	                        			<td>M 857</td>
+	                        			<td><input type="text" name="dato-m857"/></td>
+	                        		</tr>
+	                        		<tr>
+	                        			<td>M 859</td>
+	                        			<td><input type="text" name="dato-m859"/></td>
+	                        		</tr>
+	                        	</table>
+                        	</form>
+                        	<div id="botones-formulario" class="row-fluid">
+	                            <div class="span6"> </div>
+	                            <button type="reset" class="btn span3" id="limpiar-datos-muestreo">Limpiar</button>
+	                            <button type="submit" class="btn btn-primary span3" id="guardar-datos-muestreos">Guardar</button>
+	                        </div>
                         </div>
                     </div>
                 </div>
