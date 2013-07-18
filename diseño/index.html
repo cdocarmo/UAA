@@ -60,7 +60,13 @@
                             <a href="#tab-muestreos-anteriores" data-toggle="tab" class="tab-muestreos-anteriores">Muetreos Anteriores</a>
                         </li>
                         <li>
-                            <a href="#ingresar-resultados-muestreos" data-toggle="tab" class="tab-resultados-muestreos">Ingresar Resultados de Muestreos</a>
+                            <a href="#tab-ingresar-resultados-muestreos" data-toggle="tab" class="tab-resultados-muestreos">Ingresar Resultados de Muestreos</a>
+                        </li>
+                        <li>
+                            <a href="#tab-obtener-informes" data-toggle="tab" class="tab-obtener-informes">Informes</a>
+                        </li>
+                        <li>
+                            <a href="#tab-calidad" data-toggle="tab" class="tab-calidad">Calidad</a>
                         </li>
                             <!--<li class="dropdown-submenu">
                                 <a tabindex="-1" href="#">Vista 4</a>
@@ -207,55 +213,8 @@
                         		</tbody>
                         	</table>
                         </div>
-                        <div class="cont-muestreos-anteriores tab-pane" id="propuestas-muestreos">
-                        	<h2>Propuestas de Muestreos</h2>
-                        	<table class="table table-striped">
-                        		<thead>
-                        			<tr>
-                        				<th>Id.</th>
-	                        			<th>N&uacute;mero de referencia</th>
-	                        			<th>Cliente</th>
-	                        			<th>Fecha de ingreso</th>
-                        			</tr>
-                        		</thead>
-                        		<tbody>
-                        			<tr>
-                        				<td>0002</td>
-                        				<td>FFD02</td>
-                        				<td>Fulano de Tal</td>
-                        				<td>04/06/2013</td>
-                        				<td><button class="btn btn-success"><i class=" icon-chevron-down icon-white"> </i>Ver Todos Los Datos</button></td>
-                        				<td><button class="btn btn-primary">Imprimir Planilla de Muestreo</button></td>
-                        			</tr>
-                        			<tr>
-                        				<td>0003</td>
-                        				<td>FFD03</td>
-                        				<td>Menganito Fulano</td>
-                        				<td>08/05/2013</td>
-                        				<td><button class="btn btn-success"><i class=" icon-chevron-down icon-white"> </i>Ver Todos Los Datos</button></td>
-                        				<td><button class="btn btn-primary">Imprimir Planilla de Muestreo</button></td>
-                        			</tr>
-                        			<tr>
-                        				<td>0004</td>
-                        				<td>FED11</td>
-                        				<td>Perengano Dos Santos</td>
-                        				<td>22/05/2013</td>
-                        				<td><button class="btn btn-success"><i class=" icon-chevron-down icon-white"> </i>Ver Todos Los Datos</button></td>
-                        				<td><button class="btn btn-primary">Imprimir Planilla de Muestreo</button></td>
-                        			</tr>
-                        			<tr>
-                        				<td>0006</td>
-                        				<td>FFD02</td>
-                        				<td>No Se Me Ocurre Nada</td>
-                        				<td>15/05/2013</td>
-                        				<td><button class="btn btn-success"><i class=" icon-chevron-down icon-white"> </i>Ver Todos Los Datos</button></td>
-                        				<td><button class="btn btn-primary">Imprimir Planilla de Muestreo</button></td>
-                        			</tr>
-                        		</tbody>
-                        	</table>
-                        </div>
                         <!--INGRESAR RESULTADOS DE MUESTREOS-->
-                        <div class="cont-ingreso-muestreos tab-pane" id="ingresar-resultados-muestreos">
+                        <div class="cont-ingreso-muestreos tab-pane" id="tab-ingresar-resultados-muestreos">
                         	<h2>Ingresar Datos de Muestreos</h2>
                         	<form id="form-ingreso-datos">
                         		<label>Analitos</label>
@@ -296,6 +255,50 @@
 	                            <button type="submit" class="btn btn-primary span3" id="guardar-datos-muestreos">Guardar</button>
 	                        </div>
                         </div>
+                    	<!--OBTENER DIFERENTES INFORMES-->
+                    	<div class="cont-obtener-informes tab-pane" id="tab-obtener-informes">
+                    		<h2>Informes</h2>
+                    		<div id="lista-informes">
+                    			<!--Selects se muestran segun rol de usuario, cuando se selecciona uno se llama mediante
+                    				ajax y se abre una ventan modal para operar-->
+                    			<h3>Por muestra</h3>
+                    			<select>
+                    				<option>Muestra 1</option>
+                    				<option>Muestra 2</option>
+                    				<option>Muestra 3</option>
+                    			</select>
+                    			<h3>Aprobados</h3>
+                    			<select>
+                    				<option>Aprobado 1</option>
+                    				<option>Aprobado 2</option>
+                    				<option>Aprobado 3</option>
+                    			</select>
+                    			<h3>Semestral</h3>
+                    			<select>
+                    				<option>Semestral 1</option>
+                    				<option>Semestral 2</option>
+                    				<option>Semestral 3</option>
+                    			</select>
+                    			<h3>Resultados</h3>
+                    			<select>
+                    				<option>Resultado 1</option>
+                    				<option>Resultado 2</option>
+                    				<option>Resultado 3</option>
+                    			</select>
+                    		</div>
+                    	</div>
+                    	<div class="cont-calidad tab-pane" id="tab-calidad">
+                    		<h2>Calidad</h2>
+                    		<div id="lista-links-calidad">
+                    			<h3>Materiales</h3>
+                    			<ul class="unstyled">
+                    				<li><a href="#">Link 1</a></li>
+                    				<li><a href="#">Link 2</a></li>
+                    				<li><a href="#">Link 3</a></li>
+                    				<li><a href="#">Link 4</a></li>
+                    			</ul>
+                    		</div>
+                    	</div>
                     </div>
                 </div>
             </div>
