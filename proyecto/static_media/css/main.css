@@ -158,6 +158,12 @@ textarea {
     text-align: center;
 }
 
+#titulo-clientes {
+    margin: -1px;
+    border: none;
+    padding: 0;
+}
+
 /* FORMULARIOS */
 
 .form-registro-cliente {
@@ -193,7 +199,29 @@ textarea {
     border-top: 1px solid #999999;
 }
 
+.invisible {
+    display: none;
+}
 
+/*MUESTREOS*/
+
+#btn-agregar-muestreo {
+    margin-top: 18%;
+}
+
+#lista-muestreos {
+    list-style-type: none;
+}
+
+#lista-muestreos li a{
+    padding: 0.4%;
+    display: block;
+}
+
+#lista-muestreos li a:hover {
+    text-decoration: none;
+    background-color: #eee;
+}
 
 
 

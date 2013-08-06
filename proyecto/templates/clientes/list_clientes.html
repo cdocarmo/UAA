@@ -2,25 +2,29 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
+				<th>Id.</th>
 				<th>Nombre</th>
 				<th>Apellido</th>
+				<th>Domicilio</th>
     			<th>E-Mail</th>
     			<th>Telefono</th>
     			<th>Celular</th>
-				<th>Domicilio</th>
-    			<th>Fecha</th>    			
+    			<th>Fecha</th> 
+    			<th>Habilitar</th>   			
 			</tr>
 		</thead>
 		<tbody>
 			{% for cliente in clientes %}
 				<tr class="fila-clientes">
-					<td>{{ cliente.first_name }}</td>
-					<td>{{ cliente.last_name }}</td>
-					<td>{{ cliente.email }}</td>
-					<td>{{ cliente.get_profile.telefono }}</td>
-					<td>{{ cliente.get_profile.celular }}</td>
-					<td>{{ cliente.get_profile.domicilio }}</td>
-					<td>{{ cliente.get_profile.fecha_creacion|date:"j F Y" }}</td>
+					<td class="id">{{ cliente.id }}</td>
+					<td class="nombres">{{ cliente.first_name }}</td>
+					<td class="apellidos">{{ cliente.last_name }}</td>
+					<td class="domicilio">{{ cliente.get_profile.domicilio }}</td>
+					<td class="email">{{ cliente.email }}</td>
+					<td class="telefono">{{ cliente.get_profile.telefono }}</td>
+					<td class="celular">{{ cliente.get_profile.celular }}</td>
+					<td class="fecha">{{ cliente.get_profile.fecha_creacion|date:"j F Y" }}</td>
+					<td><button class="btn btn-success habilitar"><i class=" icon-fire icon-white"> </i>Habilitar</button></td>					
 				</tr>
 			{% endfor %}			
 		</tbody>

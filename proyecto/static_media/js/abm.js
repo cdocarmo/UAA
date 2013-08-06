@@ -1,3 +1,4 @@
+//GLOBALES
 var tab_actual = 'tab-analitos';
 var msg_no_hay_seleccion = "No ha seleccionado ";
 var msg_a_punto_de_eliminar = "Está a punto de eliminar un ";
@@ -9,55 +10,9 @@ var USUARIO = "usuario";
 var CLIENTE = "cliente";
 var LOCALIDAD = "localidad";
 
-
-$(document).on("ready", inicio);
-function inicio ()
-{
+$(document).ready(function(){
 	reBind();
-	cargo_analitos();
-	cargo_localidades();
-	ingreso_analitos();
-	cargo_clientes_pendientes();
-	$("#clai").on("click", cargo_listas);
-	$("#tab-interno-clientes").on("click", cargo_clientes_pendientes);
-
-	//$('tr[class*=fila]').on("click", cargo_datos);
-	//$('#fila-analitos').on("hover", cambio_cursor);
-	//$('#preguntas button').on('click', enviar_pregunta);
-}
-
-function cargo_analitos(datos) 
-{
-	$('#ListaAnalitos').load('/analitos/cargo-analitos/', function(){
-		reBind();
-	});
-}
-
-function cargo_clientes_pendientes(datos) 
-{
-	$('#habilitar-clientes').load('/cliente/clientes-pendientes/');
-
-}
-
-function cargo_localidades(datos) 
-{
-	$('#ListaLocalidades').load('/localidades/cargo-localidades/');
-}
-
-
-function ingreso_analitos(datos) 
-{
-	$('#IngresoAnalitos').load('/analitos/home/');
-}
-
-
-function cargo_listas(datos) 
-{
-	cargo_analitos();
-	cargo_localidades();
-	cargo_clientes_pendientes();
-}
-
+});
 
 //EVENTOS
 
@@ -208,5 +163,56 @@ function reBind() {
 	
 	$('input').focusout(function() {
 		revisarInputs(this);
+	});
+}
+
+function quitarMsg(obj) {
+	$('#msg-vacio-' + $(obj).attr("id")).remove();
+}
+
+function quitarMensajes() {
+	$('span[id^=msg-vacio]').each(function() {
+		$(this).remove();
+	});
+}
+
+function limpiarCampos() {
+	//remuevo la clase para que no exista fila seleccionada
+	$('.seleccionada').removeClass('seleccionada');
+	//recorro los inputs para limpiarlos
+	// esto da error en csrf_token de django !($(this).is('input[type="submit"]') || 
+	$('input').each(function(){
+		if ($(this).is('input[type="reset"]') || $(this).is('input[type="button"]')){
+			$(this).val("");	
+		}
+	});
+}
+
+function crearMsgValidacion(msg, id) {
+	var nodo_msg = $('<span id="msg-vacio-' + id + '" style="color:red; margin-left:5%">' + msg + '</span>');
+	return nodo_msg;
+}
+
+function revisarInputs(obj) {
+	var completos = false;
+	if (focus_flag == false) {
+		if (($(obj).val().length < 1) || ($(obj).val() == "__.___")) {
+			//quitarMsg(this) deberia estar en un condicional quizas...
+			quitarMsg(obj);
+			$(crearMsgValidacion(msg_input_vacio, $(obj).attr("id"))).appendTo($(obj).prev());
+		}else{
+			completos = true;
+			quitarMsg(obj);
+		}
+	}else{
+		completos = true;
+	}
+	return completos;
+}
+
+function mostrarModal() {
+	$('#modal-eliminar').modal({
+			show: true,
+			backdrop: 'static'
 	});
 }

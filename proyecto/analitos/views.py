@@ -13,6 +13,7 @@ from forms import *
 def home(request):
     if request.method=='POST':
         formulario = AnalitoForm(request.POST)
+        print "W"
         if formulario.is_valid():
             analito = Analito(
             nombre = formulario.cleaned_data['nombre'],

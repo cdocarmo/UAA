@@ -46,8 +46,6 @@ def registro_cliente(request):
 
 def cargo_clientes_pendientes(request):
     clientes = User.objects.filter(is_active=0).order_by("last_name")
-    print clientes
-
     return render_to_response('clientes/list_clientes.html',
                             {'clientes':clientes}, 
                             context_instance=RequestContext(request))

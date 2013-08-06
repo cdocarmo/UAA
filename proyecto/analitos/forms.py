@@ -21,10 +21,6 @@ class AnalitoForm(forms.Form):
     categorias = forms.ModelChoiceField(queryset=Categoria.objects.none())
 
 
-    vminp = forms.CharField(label=_(u'vminp'), max_length=30, 
-                          widget=forms.TextInput(
-                          attrs={'class':'input-text', 'id':"vminp", 'name':"vminp"}),
-                          required=True)
     vmaxp = forms.CharField(label=_(u'vmaxp'), max_length=30,
                              widget=forms.TextInput(
                              attrs={'class':'input-text', 'id':"vmaxp", 'name':"vmaxp"}),
@@ -39,4 +35,12 @@ class AnalitoForm(forms.Form):
                            required=True)
     def __init__(self, *args, **kwargs):
         super(AnalitoForm, self).__init__(*args, **kwargs)
-        self.fields['categorias'].queryset = Categoria.objects.all()
+
+        queryset = Categoria.objects.all()
+        CHOICES =[]
+        CHOICES.append(('','---------'))
+        CHOICES.extend([(x.id, x.nombre) for x in queryset])
+        CHOICES.append(('new','--Nueva Categoria--'))      
+        self.fields['categorias'].choices = CHOICES
+
+

@@ -1,6 +1,5 @@
 # Create your views here.
 # coding=UTF-8
-
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -27,7 +26,7 @@ def manager(request):
 	            analito = Analito(
 	            nombre = formulario.cleaned_data['nombre'],
 	            categoria = formulario.cleaned_data['categorias'],
-	            valor_minimo = formulario.cleaned_data['vminp'],
+	            valor_minimo = 0,
 	            valor_maximo = formulario.cleaned_data['vmaxp'],
 	            metodo_unit = formulario.cleaned_data['metodo_unit'],
 	            metodo = formulario.cleaned_data['metodo'],
@@ -56,7 +55,6 @@ def manager(request):
 
 
 def ingresar(request):
-	print request.method
 	if request.method == 'POST':
 		formulario = LoginForm(request.POST)
 		if formulario.is_valid:

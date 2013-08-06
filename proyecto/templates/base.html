@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}css/normalize.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/style_iconos.css">
         <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.2.min.js"></script>
         {% block css %}
         {% endblock %}
@@ -32,6 +33,8 @@
                 </a>
 
                 <ul class="nav pull-right">
+                    <li><span class="badge badge-success">3</span><br />&nbsp;<i class="icon-envelope"></i></li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>                    
                     <li>
                         <img id="user-pic" src="{{ STATIC_URL }}img/user_male.png" />
                     </li>
@@ -40,10 +43,11 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }}</a>
                         {% endif %}
                         <ul class="dropdown-menu" role="menu">
-                            <li><a tabindex="1" href="/manager">Configuraciones</a></li>
+                            <li><a tabindex="1" href="/">Inicio</a></li>
+                            <li><a tabindex="2" href="/manager">Configuraciones</a></li>
                             <!--<li><a tabindex="-1" href="#"></a></li>
                             <li class="divider"></li>-->
-                            <li><a tabindex="2" href="/logout">Salir</a></li>
+                            <li><a tabindex="3" href="/logout">Salir</a></li>
                         </ul>
                     </li>
                     <!--Aqui se podria manejar un combo-->
@@ -80,7 +84,9 @@
         <script src="{{ STATIC_URL }}js/main.js"></script>
         <script src="{{ STATIC_URL }}js/plugin-tabs.js"></script>        
         <script src="{{ STATIC_URL }}js/plugin-dropdowns.js"></script>
-
+        <script src="{{ STATIC_URL }}js/jquery.maskedinput.js"></script>
+        <script src="{{ STATIC_URL }}js/muestreos.js"></script>
+        <script src="{{ STATIC_URL }}js/abm.js"></script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
