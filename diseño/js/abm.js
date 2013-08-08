@@ -140,11 +140,14 @@ function reBind() {
 		mostrarModal();
 	});
 	
-	//Borro fila
+	//habilito cliente
 	$('.habilitar').click(function(){
 		$('#modal-habilitado').modal('show');
 		setTimeout("$('#modal-habilitado').modal('hide')", 1500);
-		
+		var ident = $(this).parent().parent().find('.id').text();
+		habilitarCliente(ident);
+		var nodo = $(this).parent().parent();
+		$('#listado-todos-clientes').append($(nodo).clone());
 		$(this).parent().parent().remove();
 	});
 	
@@ -207,6 +210,12 @@ function revisarInputs(obj) {
 		completos = true;
 	}
 	return completos;
+}
+
+//para mandar via ajax
+function habilitarCliente(identidad) {
+	alert(identidad);
+	return null;
 }
 
 function mostrarModal() {
