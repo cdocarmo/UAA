@@ -143,7 +143,7 @@ function reBind() {
 	//habilito cliente
 	$('.habilitar').click(function(){
 		$('#modal-habilitado').modal('show');
-		setTimeout("$('#modal-habilitado').modal('hide')", 1500);
+		//setTimeout("$('#modal-habilitado').modal('hide')", 1500);
 		var ident = $(this).parent().parent().find('.id').text();
 		habilitarCliente(ident);
 		var nodo = $(this).parent().parent();
@@ -214,7 +214,7 @@ function revisarInputs(obj) {
 
 //para mandar via ajax
 function habilitarCliente(identidad) {
-	alert(identidad);
+	$('#modal-habilitado').modal('hide')
 	return null;
 }
 
