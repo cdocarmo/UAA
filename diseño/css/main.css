@@ -167,11 +167,19 @@ textarea {
 /* FORMULARIOS */
 
 .form-registro-cliente {
-	width: 30%;
-	margin: 4% 0 4% 56%;
+	width: 100%;
+	height: 80%;
+	overflow-x: hidden;
+	margin: 4% 0 4% 0;
 }
 
-.form-registro-cliente legend {
+.form-registro-cliente div {
+	float: left;
+	width: 40%;
+	margin-right: 5%;
+}
+
+.form-registro-cliente h2 {
 	color: white;
 	width: 95.5%;
 	padding: 4px 12px;

@@ -34,23 +34,34 @@
         </div>-->
         <div class="container-fluid">
             <form class="form-registro-cliente">
-            	<fieldset id="ingreso-datos-usuarios" class="span4">
-		            <legend>Nuevo Cliente</legend>
-		            <label for="nombre-usuario">Nombres</label>
-		            <input class="input-xxlarge" name="nombre-usuario" id="nombre-usuario" type="text" />
-		            <label for="apellidos">Apellidos</label>
-		            <input class="input-xxlarge" name="apellidos" id="apellidos" type="text" />
-		            <label for="email">E-Mail</label>
-		            <input class="input-xxlarge" name="email" id="email" type="text" />
-		            <label for="domicilio">Domicilio</label>
-		            <input class="input-xxlarge" name="domicilio" id="domicilio" type="text" />
-		            <label for="telefono">Tel&eacute;fono</label>
-		            <input class="input-xxlarge" name="telefono" id="telefono" type="text" />
-		            <label for="nombre-usuario">Celular</label>
-		            <input class="input-xxlarge" name="celular" id="celular" type="text" />
-		            <button type="submit" class="btn btn-primary" id="guardar-usuario">Guardar</button>
-	            	<button type="reset" class="btn pull-right" id="limpiar-usuario">Limpiar campos</button>
-	            </fieldset>
+            	<div>
+            		<fieldset id="ingreso-datos-cliente">
+	            		<h2>Nuevo Cliente</h2>
+	            		<label for="nombre-empresa">Nombre de Empresa</label>
+			            <input class="input-xxlarge" name="nombre-usuario" id="nombre-usuario" type="text" />
+			            <label for="domicilio">Domicilio</label>
+			            <input class="input-xxlarge" name="domicilio" id="domicilio" type="text" />
+			            <label for="telefono">Tel&eacute;fono</label>
+			            <input class="input-xxlarge" name="telefono" id="telefono" type="text" /><br />
+			            <button type="submit" class="btn btn-primary" id="siguiente-cliente">Siguiente&nbsp;&nbsp;<i class="icon-arrow-right icon-white"></i></button>
+		            	<button type="reset" class="btn pull-right" id="limpiar-cliente">Limpiar campos</button>
+            		</fieldset>
+            	</div>
+            	<div>
+            		<fieldset id="ingreso-datos-usuario">
+			            <h2>Usuario Responsable</h2>
+			            <label for="nombre-usuario">Nombres</label>
+			            <input class="input-xxlarge" name="nombre-usuario" id="nombre-usuario" type="text" />
+			            <label for="apellidos">Apellidos</label>
+			            <input class="input-xxlarge" name="apellidos" id="apellidos" type="text" />
+			            <label for="email">E-Mail</label>
+			            <input class="input-xxlarge" name="email" id="email" type="text" />
+			            <label for="nombre-usuario">Celular</label>
+			            <input class="input-xxlarge" name="celular" id="celular" type="text" />
+			            <button type="submit" class="btn btn-primary" id="guardar-usuario">Guardar&nbsp;&nbsp;<i class="icon-check icon-white"></i></button>
+		            	<button type="reset" class="btn pull-right" id="limpiar-usuario">Limpiar campos</button>
+	            	</fieldset>
+            	</div>
            </form>
         </div>
 
