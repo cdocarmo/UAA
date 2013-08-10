@@ -32,34 +32,37 @@
                 </ul>
             </div>
         </div>-->
-        <div class="container-fluid">
-            <form class="form-registro-cliente">
-            	<div>
+        <div id="col1">
+            <img src="img/bg_registro_uaa.jpg" alt="decoracion" />
+        </div>
+        <div id="col2">
+        	<form class="form-registro-cliente">
+            	<div id="fieldset1">
             		<fieldset id="ingreso-datos-cliente">
 	            		<h2>Nuevo Cliente</h2>
-	            		<label for="nombre-empresa">Nombre de Empresa</label>
-			            <input class="input-xxlarge" name="nombre-usuario" id="nombre-usuario" type="text" />
-			            <label for="domicilio">Domicilio</label>
-			            <input class="input-xxlarge" name="domicilio" id="domicilio" type="text" />
-			            <label for="telefono">Tel&eacute;fono</label>
-			            <input class="input-xxlarge" name="telefono" id="telefono" type="text" /><br />
+	            		<label for="nombre-empresa">Nombre de Empresa *&nbsp;&nbsp;&nbsp;<span class="campo-obligatorio">Obligatorio</span></label></label>
+			            <input class="input-xxlarge input-cliente" name="nombre-usuario" id="nombre-usuario" type="text" />
+			            <label for="domicilio">Domicilio *&nbsp;&nbsp;&nbsp;<span class="campo-obligatorio">Obligatorio</span></label></label>
+			            <input class="input-xxlarge input-cliente" name="domicilio" id="domicilio" type="text" />
+			            <label for="telefono">Tel&eacute;fono *&nbsp;&nbsp;&nbsp;<span class="campo-obligatorio">Obligatorio</span></label></label>
+			            <input class="input-xxlarge input-cliente" name="telefono" id="telefono" type="text" /><br />
 			            <button type="submit" class="btn btn-primary" id="siguiente-cliente">Siguiente&nbsp;&nbsp;<i class="icon-arrow-right icon-white"></i></button>
-		            	<button type="reset" class="btn pull-right" id="limpiar-cliente">Limpiar campos</button>
+		            	<button type="button" class="btn pull-right" id="limpiar-cliente">Limpiar campos</button>
             		</fieldset>
             	</div>
-            	<div>
+            	<div id="fieldset2">
             		<fieldset id="ingreso-datos-usuario">
 			            <h2>Usuario Responsable</h2>
-			            <label for="nombre-usuario">Nombres</label>
-			            <input class="input-xxlarge" name="nombre-usuario" id="nombre-usuario" type="text" />
-			            <label for="apellidos">Apellidos</label>
-			            <input class="input-xxlarge" name="apellidos" id="apellidos" type="text" />
-			            <label for="email">E-Mail</label>
-			            <input class="input-xxlarge" name="email" id="email" type="text" />
-			            <label for="nombre-usuario">Celular</label>
-			            <input class="input-xxlarge" name="celular" id="celular" type="text" />
-			            <button type="submit" class="btn btn-primary" id="guardar-usuario">Guardar&nbsp;&nbsp;<i class="icon-check icon-white"></i></button>
-		            	<button type="reset" class="btn pull-right" id="limpiar-usuario">Limpiar campos</button>
+			            <label for="nombre-usuario">Nombres *&nbsp;&nbsp;&nbsp;<span class="campo-obligatorio">Obligatorio</span></label>
+			            <input class="input-xxlarge input-usuario" name="nombre-usuario" id="nombre-usuario" type="text" />
+			            <label for="apellidos">Apellidos *&nbsp;&nbsp;&nbsp;<span class="campo-obligatorio">Obligatorio</span></label></label>
+			            <input class="input-xxlarge input-usuario" name="apellidos" id="apellidos" type="text" />
+			            <label for="email">E-Mail *&nbsp;&nbsp;&nbsp;<span class="campo-obligatorio">Obligatorio</span></label></label>
+			            <input class="input-xxlarge input-usuario" name="email" id="email" type="text" />
+			            <label for="nombre-usuario">Celular *&nbsp;&nbsp;&nbsp;<span class="campo-obligatorio">Obligatorio</span></label></label>
+			            <input class="input-xxlarge input-usuario" name="celular" id="celular" type="text" />
+			            <button type="submit" class="btn btn-primary" id="guardar-nuevo-registro-cliente">Guardar&nbsp;&nbsp;<i class="icon-check icon-white"></i></button>
+		            	<button type="button" class="btn pull-right" id="limpiar-usuario">Limpiar campos</button>
 	            	</fieldset>
             	</div>
            </form>
@@ -69,7 +72,7 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/registro-nuevo-cliente.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
