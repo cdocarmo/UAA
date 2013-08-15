@@ -8,6 +8,7 @@ var prox_numero_muestreo = 0;
 var agregar_muestreo = true;
 var analitos_marcados = 0;
 var ultimo_muestreo = null;
+var item_muestreo_anterior = null;
 
 //TODO: debo capturar el enter para que no me guarde sin advertencia previa.
 
@@ -126,25 +127,44 @@ function reBind() {
 		var fila = crearFilaConInfoDeMuestreos(id_muestreo);
 		var fila_anterior = $(this).parent().parent();
 		//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
-		var html_cod = '<td colspan="3" class="datos-muestreo">' +
+		var html_cod = $('<td colspan="4" class="datos-muestreo">' +
 		'\t<ul>' +
-		'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <b>Salto</b></li>' +
-		'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <b>Salto</b></li>' +
-		'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <b>Oficial 1º 2016</b></li>' +
+		'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <input value="Salto"></li>' +
+		'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <input value="Salto"></li>' +
+		'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <input value="Oficial 1º 2016"></li>' +
+		'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <input value="Oficial 1º 2016"></li>' +
 		'\t</ul>' +
 		'</td>' +
-		'<td colspan="3" class="datos-muestreo">' +
-		'\t<ul>' +
+		'<td colspan="2" class="datos-muestreo">' +
+		'\t<ul class="item-muestreo">' +
+		'\t\t<li>Agregar otro analito</li>' +
+		'\t\t<li><select><option>Analito 1</option><option>Analito 2</option><option>Analito 3</option></select></li>' +
 		'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
 		'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
 		'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
 		'\t</ul>' +
 		'</td>' +
-		'<td> </td>';
-		$(fila).html(html_cod);
+		'<td> </td>');
+		$(fila).append(html_cod);
 		$(fila_anterior).after(fila);
 		$(fila).show('slow');
 		ultimo_muestreo = fila;
+		reBind();
+	});
+	
+	$('.item-muestreo li').on('mouseover', function(){
+		item_muestreo_anterior = $(this);
+		$(this).find('i').removeClass('icon-tint');
+		$(this).find('i').addClass('icon-remove');
+	});
+	
+	$('.item-muestreo li').on('mouseout', function(){
+		if (item_muestreo_anterior != null) {
+			$(this).find('i').removeClass('icon-remove');
+			$(this).find('i').addClass('icon-tint');
+		}
+		
+		
 	});
 }
 

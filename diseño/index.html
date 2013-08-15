@@ -162,6 +162,15 @@
                         <!--LISTA DE MUESTREOS ANTERIORES: CLIENTE, DATA-ENTRY-->
                         <div class="cont-muestreos-anteriores tab-pane" id="tab-muestreos-anteriores">
                         	<h2>Lista de muestreos anteriores</h2>
+                        	<select id="filtro-fecha-muestreos-anteriores" class="pull-right">
+                        		<option>15 de Junio</option>
+                        		<option>18 de Junio</option>
+                        		<option>23 de Junio</option>
+                        		<option>28 de Junio</option>
+                        		<option>04 de Julio</option>
+                        		<option>15 de Julio</option>
+                        		<option>10 de Agosto</option>
+                        	</select>
                         	<table class="table table-striped">
                         		<thead>
                         			<tr>
@@ -303,6 +312,20 @@
                 </div>
             </div>
         </div>
+        <!--MODALES-->
+        <div id="modal-habilitado" class="modal hide fade">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3></h3>
+			</div>
+			<div class="modal-body">
+				   <p>Cliente habilitado!</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn">Cerrar</a>
+				<a href="#" class="btn btn-primary" id="eliminar-btn-eliminar">Eliminar</a>
+			</div>   		
+		</div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>

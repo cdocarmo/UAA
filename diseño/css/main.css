@@ -94,7 +94,7 @@ textarea {
    ========================================================================== */
 
 body {
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
 .registro-cliente {
@@ -315,8 +315,16 @@ body {
 }
 
 
+/*MUESTREOS ANTERIORES*/
 
+#tab-muestreos-anteriores table {
+	margin-top: 8%;
+}
 
+.item-muestreo li {
+	cursor: hand;
+	cursor: pointer;
+}
 
 
 
