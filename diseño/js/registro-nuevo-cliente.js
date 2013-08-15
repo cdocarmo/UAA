@@ -17,7 +17,10 @@ $(document).ready(function(){
 	$('#guardar-nuevo-registro-cliente').on('click', function(e) {
 		e.preventDefault();
 		if (validarCliente('usuario')) {
-			alert('Aca debe ir la llamada a la accion \nque procesa el formulario')
+			$('#modal-habilitado').modal('show');
+			limpiar('cliente');
+			limpiar('usuario');
+			alert('Aca debe ir la llamada a la accion \nque procesa el formulario');
 		} 
 	});
 	

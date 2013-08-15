@@ -93,6 +93,10 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+body {
+	overflow: hidden;
+}
+
 .registro-cliente {
 	/*background: url("../img/bg_registro_uaa.jpg") no-repeat;*/
 	position: relative;
@@ -221,7 +225,7 @@ textarea {
 }
 
 .form-registro-cliente input {
-	/*width: 100%;*/
+	width: 97%;
 }
 
 .tab-content h2 {
