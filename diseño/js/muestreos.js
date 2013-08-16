@@ -138,13 +138,14 @@ function reBind() {
 		'<td colspan="2" class="datos-muestreo">' +
 		'\t<ul class="item-muestreo">' +
 		'\t\t<li>Agregar otro analito</li>' +
-		'\t\t<li><select><option>Analito 1</option><option>Analito 2</option><option>Analito 3</option></select></li>' +
-		'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
-		'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
-		'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
+		'\t\t<li><select id="listado-analitos"><option value="1">Analito 1</option><option value="2">Analito 2</option><option value="3">Analito 3</option></select></li>' +
+		'\t\t<li class="item-analitos" value="5"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
+		'\t\t<li class="item-analitos" value="6"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
+		'\t\t<li class="item-analitos" value="7"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
 		'\t</ul>' +
 		'</td>' +
 		'<td> </td>');
+		//se debe prestar atencion a los values de los tags, ahi debe ir guardado el id del analito
 		$(fila).append(html_cod);
 		$(fila_anterior).after(fila);
 		$(fila).show('slow');
@@ -152,6 +153,7 @@ function reBind() {
 		reBind();
 	});
 	
+	//CAMBIAR ICONO DE ANALITO AL PASAR PUNTERO POR ENCIMA
 	$('.item-muestreo li').on('mouseover', function(){
 		item_muestreo_anterior = $(this);
 		$(this).find('i').removeClass('icon-tint');
@@ -163,9 +165,21 @@ function reBind() {
 			$(this).find('i').removeClass('icon-remove');
 			$(this).find('i').addClass('icon-tint');
 		}
-		
-		
 	});
+	
+	//agregar analito
+	$('#listado-analitos option').on('click', function() {
+		var identidad = $(this).attr('value');
+		var nombre = $(this).text();
+		var item = '<li class="item-analitos" value="' + identidad + '"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;' + nombre + '</li>';
+		//alert(item);
+		$('.item-muestreo').append(item);
+	});
+	
+	//remover analito
+	$('.item-analitos').on('click', function(){
+		$(this).remove();
+	});	
 }
 
 function blanquearFondos() {
