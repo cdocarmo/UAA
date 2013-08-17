@@ -321,6 +321,14 @@ body {
 	margin-top: 8%;
 }
 
+.fila-muestreo h4 {
+	margin: 4px auto !important;
+}
+
+.fila-muestreo select {
+	margin-bottom: 10%;
+}
+
 .item-analitos {
 	cursor: hand;
 	cursor: pointer;

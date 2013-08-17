@@ -9,6 +9,7 @@ var agregar_muestreo = true;
 var analitos_marcados = 0;
 var ultimo_muestreo = null;
 var item_muestreo_anterior = null;
+var col_analitos = new Array();
 
 //TODO: debo capturar el enter para que no me guarde sin advertencia previa.
 
@@ -127,24 +128,29 @@ function reBind() {
 		var fila = crearFilaConInfoDeMuestreos(id_muestreo);
 		var fila_anterior = $(this).parent().parent();
 		//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
+		//hardcodeado: este aray debe ser llenado con lo obtenido via ajax
+		col_analitos = [5,6,7];
 		var html_cod = $('<td colspan="4" class="datos-muestreo">' +
 		'\t<ul>' +
 		'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <input value="Salto"></li>' +
 		'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <input value="Salto"></li>' +
 		'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <input value="Oficial 1º 2016"></li>' +
-		'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <input value="Oficial 1º 2016"></li>' +
+		'\t\t<li><span class="item-muestreo-geo">Nro. de Referencia: </span> <input value="MN9338"></li>' +
 		'\t</ul>' +
+		'</td>' +
+		'<td colspan="1">' +
+		'\t\t<h4>Agregar otro analito</h4>' +
+		'\t\t<select id="listado-analitos"><option value="1">Analito 1</option><option value="2">Analito 2</option><option value="3">Analito 3</option></select>' +
+		'\t\t<a href="#" class="aplicar-cambios btn disabled">Aplicar Cambios</a>' +
 		'</td>' +
 		'<td colspan="2" class="datos-muestreo">' +
 		'\t<ul class="item-muestreo">' +
-		'\t\t<li>Agregar otro analito</li>' +
-		'\t\t<li><select id="listado-analitos"><option value="1">Analito 1</option><option value="2">Analito 2</option><option value="3">Analito 3</option></select></li>' +
+		
 		'\t\t<li class="item-analitos" value="5"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
 		'\t\t<li class="item-analitos" value="6"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
 		'\t\t<li class="item-analitos" value="7"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
 		'\t</ul>' +
-		'</td>' +
-		'<td> </td>');
+		'</td>');
 		//se debe prestar atencion a los values de los tags, ahi debe ir guardado el id del analito
 		$(fila).append(html_cod);
 		$(fila_anterior).after(fila);
@@ -170,16 +176,61 @@ function reBind() {
 	//agregar analito
 	$('#listado-analitos option').on('click', function() {
 		var identidad = $(this).attr('value');
-		var nombre = $(this).text();
-		var item = '<li class="item-analitos" value="' + identidad + '"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;' + nombre + '</li>';
-		//alert(item);
-		$('.item-muestreo').append(item);
+		if (col_analitos.indexOf(identidad) != -1) {
+			alert('Disculpa, ya has añadido este analito.'); //cambiar por un modal
+		}else{
+			btnHabilitarCambios($(this).parent().parent().parent().find('.aplicar-cambios'));
+			var nombre = $(this).text();
+			var item = '<li class="item-analitos" value="' + identidad + '"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;' + nombre + '</li>';
+			//alert(item);
+			$('.item-muestreo').append(item);
+			col_analitos.push(identidad);
+		}
 	});
 	
 	//remover analito
 	$('.item-analitos').on('click', function(){
-		$(this).remove();
-	});	
+		if ($(this).parent().children().length >= 2) {
+			btnHabilitarCambios($(this).parent().parent().parent().find('.aplicar-cambios'));
+			$(this).remove();
+		}else{
+			alert('Disculpa, no puedes dejar vacía esta lista de analitos.'); //cambiar por un modal
+		}
+		
+	});
+	
+	//habilitar boton 'aplicar cambios'
+	$('.datos-muestreo li').focusin(function() {
+		btnHabilitarCambios($(this).parent().parent().parent().find('.aplicar-cambios'));
+	});
+	
+	//finalizar edicion muestreo
+	$('.aplicar-cambios').on('click', function(){
+		if (validarCamposEdicionDelMuestreo()) {
+			//llamada ajax
+			alert('Edición finalizada.');
+		}
+	});
+}
+
+function validarCamposEdicionDelMuestreo() {
+	$('.item-muestreo-geo').parent().each(function(){
+		if (isEmpty($(this).find('input').val())) {
+			$(this).child().css('color', 'red');
+			return false;
+		}else{
+			return true;
+		}
+	});
+}
+
+function btnHabilitarCambios(boton) {
+	if ($(boton).hasClass('enabled')) {
+		return;
+	}else{
+		$(boton).removeClass('disabled');
+		$(boton).addClass('enabled');
+	}
 }
 
 function blanquearFondos() {
