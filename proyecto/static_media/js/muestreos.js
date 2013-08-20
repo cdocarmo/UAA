@@ -8,6 +8,8 @@ var prox_numero_muestreo = 0;
 var agregar_muestreo = true;
 var analitos_marcados = 0;
 var ultimo_muestreo = null;
+var item_muestreo_anterior = null;
+var col_analitos = new Array();
 
 //TODO: debo capturar el enter para que no me guarde sin advertencia previa.
 
@@ -22,7 +24,6 @@ function reBind2() {
 	//PESTAÑA "NUEVO PEDIDO"
 	$('#btn-agregar-muestreo').on('click', function(){
 		var msg_alert = "";
-		console.log("E");
 		//recoger todos los datos en un objeto
 		var obj = new Object();
 		obj['departamento'] = $('#departamentos').val();
@@ -127,26 +128,109 @@ function reBind2() {
 		var fila = crearFilaConInfoDeMuestreos(id_muestreo);
 		var fila_anterior = $(this).parent().parent();
 		//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
-		var html_cod = '<td colspan="3" class="datos-muestreo">' +
+		//hardcodeado: este aray debe ser llenado con lo obtenido via ajax
+		col_analitos = [5,6,7];
+		var html_cod = $('<td colspan="4" class="datos-muestreo">' +
 		'\t<ul>' +
-		'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <b>Salto</b></li>' +
-		'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <b>Salto</b></li>' +
-		'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <b>Oficial 1º 2016</b></li>' +
+		'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <input value="Salto"></li>' +
+		'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <input value="Salto"></li>' +
+		'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <input value="Oficial 1º 2016"></li>' +
+		'\t\t<li><span class="item-muestreo-geo">Nro. de Referencia: </span> <input value="MN9338"></li>' +
 		'\t</ul>' +
 		'</td>' +
-		'<td colspan="3" class="datos-muestreo">' +
-		'\t<ul>' +
-		'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
-		'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
-		'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
-		'\t</ul>' +
+		'<td colspan="1">' +
+		'\t\t<h4>Agregar otro analito</h4>' +
+		'\t\t<select id="listado-analitos"><option value="1">Analito 1</option><option value="2">Analito 2</option><option value="3">Analito 3</option></select>' +
+		'\t\t<a href="#" class="aplicar-cambios btn disabled">Aplicar Cambios</a>' +
 		'</td>' +
-		'<td> </td>';
-		$(fila).html(html_cod);
+		'<td colspan="2" class="datos-muestreo">' +
+		'\t<ul class="item-muestreo">' +
+		
+		'\t\t<li class="item-analitos" value="5"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
+		'\t\t<li class="item-analitos" value="6"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
+		'\t\t<li class="item-analitos" value="7"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
+		'\t</ul>' +
+		'</td>');
+		//se debe prestar atencion a los values de los tags, ahi debe ir guardado el id del analito
+		$(fila).append(html_cod);
 		$(fila_anterior).after(fila);
 		$(fila).show('slow');
 		ultimo_muestreo = fila;
+		reBind();
 	});
+	
+	//CAMBIAR ICONO DE ANALITO AL PASAR PUNTERO POR ENCIMA
+	$('.item-muestreo li').on('mouseover', function(){
+		item_muestreo_anterior = $(this);
+		$(this).find('i').removeClass('icon-tint');
+		$(this).find('i').addClass('icon-remove');
+	});
+	
+	$('.item-muestreo li').on('mouseout', function(){
+		if (item_muestreo_anterior != null) {
+			$(this).find('i').removeClass('icon-remove');
+			$(this).find('i').addClass('icon-tint');
+		}
+	});
+	
+	//agregar analito
+	$('#listado-analitos option').on('click', function() {
+		var identidad = $(this).attr('value');
+		if (col_analitos.indexOf(identidad) != -1) {
+			alert('Disculpa, ya has añadido este analito.'); //cambiar por un modal
+		}else{
+			btnHabilitarCambios($(this).parent().parent().parent().find('.aplicar-cambios'));
+			var nombre = $(this).text();
+			var item = '<li class="item-analitos" value="' + identidad + '"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;' + nombre + '</li>';
+			//alert(item);
+			$('.item-muestreo').append(item);
+			col_analitos.push(identidad);
+		}
+	});
+	
+	//remover analito
+	$('.item-analitos').on('click', function(){
+		if ($(this).parent().children().length >= 2) {
+			btnHabilitarCambios($(this).parent().parent().parent().find('.aplicar-cambios'));
+			$(this).remove();
+		}else{
+			alert('Disculpa, no puedes dejar vacía esta lista de analitos.'); //cambiar por un modal
+		}
+		
+	});
+	
+	//habilitar boton 'aplicar cambios'
+	$('.datos-muestreo li').focusin(function() {
+		btnHabilitarCambios($(this).parent().parent().parent().find('.aplicar-cambios'));
+	});
+	
+	//finalizar edicion muestreo
+	$('.aplicar-cambios').on('click', function(){
+		if (validarCamposEdicionDelMuestreo()) {
+			//llamada ajax
+			alert('Edición finalizada.');
+		}
+	});
+}
+
+function validarCamposEdicionDelMuestreo() {
+	$('.item-muestreo-geo').parent().each(function(){
+		if (isEmpty($(this).find('input').val())) {
+			$(this).child().css('color', 'red');
+			return false;
+		}else{
+			return true;
+		}
+	});
+}
+
+function btnHabilitarCambios(boton) {
+	if ($(boton).hasClass('enabled')) {
+		return;
+	}else{
+		$(boton).removeClass('disabled');
+		$(boton).addClass('enabled');
+	}
 }
 
 function blanquearFondos() {

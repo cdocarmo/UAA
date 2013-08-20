@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from analitos.models import Analito
 from forms import *
+from django.utils.html import escape
+
 
 def home(request):
     if request.method=='POST':
@@ -17,7 +19,7 @@ def home(request):
         if formulario.is_valid():
             analito = Analito(
             nombre = formulario.cleaned_data['nombre'],
-            categoria = formulario.cleaned_data['categorias'],
+            categoria = formulario.cleaned_data['categoria'],
             valor_minimo = formulario.cleaned_data['vminp'],
             valor_maximo = formulario.cleaned_data['vmaxp'],
             metodo_unit = formulario.cleaned_data['metodo_unit'],
@@ -39,3 +41,49 @@ def cargo_analitos(request):
     return render_to_response('analitos/list_analitos.html',
                             {'analitos':analitos}, 
                             context_instance=RequestContext(request))
+
+
+
+
+
+@login_required(login_url='/login')
+def add_categoria(request):
+    if request.method=='POST':
+        formulario = CategoriaForm(request.POST)
+        if formulario.is_valid():
+
+            try:
+                newObject = formulario.save()
+            except forms.ValidationError, error:
+                newObject = None            
+        if newObject:
+            print newObject._get_pk_val()
+            return HttpResponse('<!DOCTYPE html><html><head><title></title></head><body>'
+            '<script type="text/javascript">opener.dismissAddAnotherPopup(window, "%s", "%s");</script></body></html>' % \
+            # escape() calls force_unicode.
+            (escape(newObject._get_pk_val()), escape(newObject)))
+        else:
+            formulario = CategoriaForm()
+    else:
+        formulario = CategoriaForm()
+    return render_to_response('analitos/categoria.html',
+        {'formulario':formulario}, 
+        context_instance=RequestContext(request))# Create your views here.
+
+"""
+@login_required(login_url='/login')
+def add_categoria(request):
+    if request.method=='POST':
+        formulario = CategoriaForm(request.POST)
+        if formulario.is_valid():
+            catego = Categoria(
+            nombre = formulario.cleaned_data['nombre'])
+            catego.save()
+            return HttpResponseRedirect('/')
+    else:
+        formulario = CategoriaForm()
+    return render_to_response('analitos/categoria.html',
+        {'formulario':formulario}, 
+        context_instance=RequestContext(request))# Create your views here.
+
+"""

@@ -8,6 +8,8 @@ from django.forms.extras.widgets import SelectDateWidget
 import datetime
 from usuarios.models import UserProfile
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from popup.widgets import SelectWithPopUp
+from localidades.models import Localidad
 
 class RegisterForm(ModelForm):
     
@@ -42,47 +44,63 @@ class RegisterForm(ModelForm):
                                 'name':"telefono", 'id':"telefono", 'type':"text"}), help_text = ayudas['username'])
 
 
-    celular = forms.CharField(label=_(u'celular'), max_length=30, 
+    razon = forms.CharField(label=_(u'razon'), max_length=30, 
                                widget=forms.TextInput(attrs={'class':"input-xxlarge",
-                                'name':"celular", 'id':"celular", 'type':"text"}), help_text = ayudas['username'])
+                                'name':"razon", 'id':"razon", 'type':"text"}), help_text = ayudas['username'])
+    #step = forms.IntegerField(widget=forms.HiddenInput, initial=1)
+
 
     class Meta:
         model = Cliente
-        fields = ("firstname", "lastname", "email", "domicilio", "telefono", "celular")
+        fields = ("firstname", "lastname", "email", "domicilio", "telefono", "razon")
 
 
-"""
 
-class AnalitoForm(forms.Form):
+class ClienteForm(ModelForm):
+    ayudas = {
+              'username':u'Ingresa el nombre de tu empresa o el tuyo propio si ofreces un servicio particular.',
+              'email':u'Ingresa una direcci\xf3n, si corresponde.',
+              'password1':u'Escribe un buen password.',
+              'password2':u'Ahora repitelo, para verificar.'
+    }
+
+    firstname = forms.CharField(label=_(u'Nombre'), max_length=30, 
+                               widget=forms.TextInput(attrs={'class':"input-xxlarge",
+                                'name':"nombre-usuario", 'id':"nombre-usuario", 'type':"text"}), help_text = ayudas['username'])
+
+    lastname = forms.CharField(label=_(u'Apellido'), max_length=30, 
+                               widget=forms.TextInput(attrs={'class':"input-xxlarge",
+                                'name':"apellidos", 'id':"apellidos", 'type':"text"}), help_text = ayudas['username'])
 
 
-    nombre = forms.CharField(label=_(u'Nombre'), max_length=30, 
-            widget=forms.TextInput(
-            attrs={'class':'input-text', 'id':"nombre", 'name':"nombre"}),
-            required=True)
-    detalle = forms.CharField(label=u"Detalle", required=False,
-        widget=forms.Textarea(attrs ={'class':'txt-area', 'cols': '70', 'rows': '3'}))
-
-    categorias = forms.ModelChoiceField(queryset=Categoria.objects.none())
+    email = forms.CharField(label=_(u'email'), max_length=30, 
+                               widget=forms.TextInput(attrs={'class':"input-xxlarge",
+                                'name':"email", 'id':"email", 'type':"text"}), help_text = ayudas['username'])
 
 
-    vminp = forms.CharField(label=_(u'vminp'), max_length=30, 
-                          widget=forms.TextInput(
-                          attrs={'class':'input-text', 'id':"vminp", 'name':"vminp"}),
-                          required=True)
-    vmaxp = forms.CharField(label=_(u'vmaxp'), max_length=30,
-                             widget=forms.TextInput(
-                             attrs={'class':'input-text', 'id':"vmaxp", 'name':"vmaxp"}),
-                             required=True)
-    metodo_unit = forms.CharField(label=_(u'metodo_unit'), max_length=30,
-                           widget=forms.TextInput(
-                           attrs={'class':'input-text', 'id':"metodo_unit", 'name':"metodo_unit"}),
-                           required=True)
-    metodo = forms.CharField(label=_(u'metodo'), max_length=30,
-                           widget=forms.TextInput(
-                           attrs={'class':'input-text', 'id':"metodo", 'name':"metodo"}),
-                           required=True)
+    domicilio = forms.CharField(label=_(u'domicilio'), max_length=30, 
+                               widget=forms.TextInput(attrs={'class':"input-xxlarge",
+                                'name':"domicilio", 'id':"domicilio", 'type':"text"}), help_text = ayudas['username'])
+
+    ciudad = forms.ModelChoiceField(queryset=Localidad.objects.none(), widget=SelectWithPopUp)
+
+
+    telefono = forms.CharField(label=_(u'telefono'), max_length=30, 
+                               widget=forms.TextInput(attrs={'class':"input-xxlarge",
+                                'name':"telefono", 'id':"telefono", 'type':"text"}), help_text = ayudas['username'])
+
+
+    razon = forms.CharField(label=_(u'razon'), max_length=30, 
+                               widget=forms.TextInput(attrs={'class':"input-xxlarge",
+                                'name':"razon", 'id':"razon", 'type':"text"}), help_text = ayudas['username'])
+    #step = forms.IntegerField(widget=forms.HiddenInput, initial=1)
+
+
+    class Meta:
+        model = Cliente
+        fields = ("firstname", "lastname", "email", "domicilio", "telefono", "razon")
+
+
     def __init__(self, *args, **kwargs):
-        super(AnalitoForm, self).__init__(*args, **kwargs)
-        self.fields['categorias'].queryset = Categoria.objects.all()
-"""
+        super(ClienteForm, self).__init__(*args, **kwargs)
+        self.fields['categoria'].queryset = Categoria.objects.all()

@@ -1,0 +1,35 @@
+ol,ul{list-style:none}
+.boxMain{position:relative;margin:0 auto;padding:20px 20px 20px;width:80%;background:#fff;border-radius:3px;color:rgba(0,0,0,0.8);-webkit-box-shadow:0 0 200px rgba(255,255,255,0.5),0 1px 2px rgba(0,0,0,0.3);box-shadow:0 0 200px rgba(255,255,255,0.5),0 1px 2px rgba(0,0,0,0.3)}
+.box{position:relative;margin:0 auto;padding:20px 20px 20px;width:50%;background:#fff;border-radius:3px;color:rgba(0,0,0,0.8);-webkit-box-shadow:0 0 200px rgba(255,255,255,0.5),0 1px 2px rgba(0,0,0,0.3);box-shadow:0 0 200px rgba(255,255,255,0.5),0 1px 2px rgba(0,0,0,0.3)}
+.boxTarea{position:relative;margin:0 auto;padding:20px 20px 20px;width:80%;background:#fff;border-radius:3px;color:rgba(0,0,0,0.8);-webkit-box-shadow:0 0 200px rgba(255,255,255,0.5),0 1px 2px rgba(0,0,0,0.3);box-shadow:0 0 200px rgba(255,255,255,0.5),0 1px 2px rgba(0,0,0,0.3)}
+.box h1,.boxMain h1,.boxTarea h1{margin:-20px -20px 21px;line-height:40px;font-size:15px;font-weight:bold;color:#555;text-align:center;text-shadow:0 1px #fff;background:#cde5ef;border-bottom:1px solid #cfcfcf;border-radius:3px 3px 0 0;background-image:linear-gradient(to bottom,whiteffd,#eef2f5);-webkit-box-shadow:0 1px #f5f5f5;box-shadow:0 1px #f5f5f5}
+.box p{margin:20px 0 0}
+.box p:first-child{margin-top:0}
+.box input[type=text],.box input[type=password]{width:70%}
+.box p.submit{text-align:right}
+:-moz-placeholder{color:#c9c9c9 !important;font-size:13px}
+::-webkit-input-placeholder{color:#ccc;font-size:13px}
+input{font-family:'Open Sans',Tahoma,Verdana,sans-serif;font-size:14px}
+input[type=text],input[type=password]{margin:1px;padding:0 5px;height:28px;color:#404040;background:#fff;border:1px solid;border-color:#c4c4c4 #d1d1d1 #d4d4d4;border-radius:2px;float:left;-moz-outline-radius:3px;-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,0.12);box-shadow:inset 0 1px 3px rgba(0,0,0,0.12)}
+input[type=text]:focus,input[type=password]:focus{border-color:#7dc9e2;outline-color:#dceefc;outline-offset:0}
+input[type=submit]{padding:0 10px;height:29px;font-size:12px;font-weight:bold;color:#527881;text-shadow:0 1px #e3f1f1;background:#cde5ef;border:1px solid;border-color:#b4ccce #b3c0c8 #9eb9c2;border-radius:16px;outline:0;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;background-image:linear-gradient(to bottom,#edf5f8,#cde5ef);-webkit-box-shadow:inset 0 1px #fff,0 1px 2px rgba(0,0,0,0.15);box-shadow:inset 0 1px #fff,0 1px 2px rgba(0,0,0,0.15)}
+input[type=submit]:active{background:#cde5ef;border-color:#9eb9c2 #b3c0c8 #b4ccce;-webkit-box-shadow:inset 0 0 3px rgba(0,0,0,0.2);box-shadow:inset 0 0 3px rgba(0,0,0,0.2)}
+.lt-ie9 input[type=text],.lt-ie9 input[type=password]{line-height:34px}
+#comenta{margin:30px auto}
+body{background:url("../img/bg.png");color:#eee;font-family:"Open Sans",Arial;font-size:16px;text-align:center}
+#logo-user{width:80%;float:right}
+#errores{color:#fc0000}
+footer{margin:30px auto}
+footer ul{list-style:none;padding:0;margin:0}
+footer li{display:inline-block}
+.txt-area{float:left;width:290px}
+#id_aquien{float:left;width:290px}
+#id_fecha{float:left;width:90px}
+.iconito-eye{cursor:pointer;text-decoration:none}
+.iconito-eye:hover{color:#ed0}
+@font-face{font-family:'tarea';src:url("fonts/tarea.eot");src:url("fonts/tarea.eot?#iefix") format('embedded-opentype'),url("fonts/tarea.woff") format('woff'),url("fonts/tarea.ttf") format('truetype'),url("fonts/tarea.svg#tarea") format('svg');font-weight:normal;font-style:normal}
+[data-icon]:before{font-family:'tarea';content:attr(data-icon);speak:none;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased}
+.iconito-checkmark,.iconito-eye,.iconito-close{font-family:'tarea';speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased}
+.iconito-checkmark:before{content:"\e000"}
+.iconito-eye:before{content:"\e001"}
+.iconito-close:before{content:"\e002"}

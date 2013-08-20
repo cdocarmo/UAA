@@ -10,10 +10,94 @@ var USUARIO = "usuario";
 var CLIENTE = "cliente";
 var LOCALIDAD = "localidad";
 
-$(document).ready(function(){
-	reBind();
-});
 
+
+$(document).on("ready", inicio);
+function inicio ()
+{
+
+
+	$.ajaxSetup({
+		beforeSend: function(xhr, settings) {
+			if(settings.type == "POST"){
+				//console.log($('[name="csrfmiddlewaretoken"]').val());
+				xhr.setRequestHeader("X-CSRFToken", $('[name="csrfmiddlewaretoken"]').val());
+			}
+		}
+	});
+
+	reBind();
+	cargo_analitos();
+	cargo_localidades();
+	ingreso_analitos();
+	cargo_clientes_pendientes();
+	cargo_clientes();
+	//$("#aceptar").on("click", confirmar_datos);
+	$("#clai").on("click", cargo_listas);
+	$("#tab-interno-clientes").on("click", cargo_clientes_pendientes);
+	$("#id_categorias").on("change", categoria_click);
+
+	//$('tr[class*=fila]').on("click", cargo_datos);
+	//$('#fila-analitos').on("hover", cambio_cursor);
+	//$('#preguntas button').on('click', enviar_pregunta);
+}
+
+function confirmar_datos(datos) 
+{	
+	console.log("Alert Callback");
+    bootbox.alert("Hello world!", function() {
+        console.log("Alert Callback");
+    });
+}
+
+function cargo_analitos(datos) 
+{
+	$('#ListaAnalitos').load('/analitos/cargo-analitos/', function(){
+		reBind();
+	});
+}
+
+function cargo_clientes_pendientes(datos) 
+{
+	$('#habilitar-clientes').load('/cliente/clientes-pendientes/', function(){
+		reBind();
+	});
+
+}
+
+function cargo_clientes(datos) 
+{
+	$('#list-clientes').load('/cliente/clientes/', function(){
+		reBind();
+	});
+
+}
+
+function cargo_localidades(datos) 
+{
+	$('#ListaLocalidades').load('/localidades/cargo-localidades/');
+}
+
+
+function ingreso_analitos(datos) 
+{
+	$('#IngresoAnalitos').load('/analitos/home/');
+}
+
+
+function cargo_listas(datos) 
+{
+	cargo_analitos();
+	cargo_localidades();
+	cargo_clientes_pendientes();
+	cargo_clientes();
+}
+
+function cargar_clientes (argument) {
+	cargo_clientes_pendientes();
+	cargo_clientes();	
+	// body...
+}
 //EVENTOS
 
 function reBind() {
@@ -140,13 +224,27 @@ function reBind() {
 		mostrarModal();
 	});
 	
-	//Borro fila
+
+	$('.habilitar').click(function(){
+		$('#modal-habilitado').modal('show');
+		//
+		var ident = $(this).parent().parent().find('.id').text();
+		habilitarCliente(ident);
+		setTimeout("$('#modal-habilitado').modal('hide')", 2500);
+		var nodo = $(this).parent().parent();
+		$('#listado-todos-clientes').append($(nodo).clone());
+		$(this).parent().parent().remove();
+	});
+	
+
+		//Borro fila
 	$('.habilitar').click(function(){
 		$('#modal-habilitado').modal('show');
 		setTimeout("$('#modal-habilitado').modal('hide')", 1500);
 		
 		$(this).parent().parent().remove();
 	});
+
 	
 	//Validaciones
 	$(window).focusin(function(e){
@@ -215,4 +313,45 @@ function mostrarModal() {
 			show: true,
 			backdrop: 'static'
 	});
+}
+
+function categoria_click () {
+
+   	var model = $('#id_categorias').val();
+	
+	if (model=="new") {
+		/*
+		p = xpopup({
+		    url: "/analitos/categoria/",
+
+		    modal: true,
+		    width: 600,
+		    height: 300,
+		    modal: true, // Block UI and show PopUp
+		    name: 'testPopup',
+            close: function() {
+                console.log(p);
+            }		    
+		});
+		p.center();
+		if (p.closed()) {
+			console.log(p);
+		}
+		*/
+		
+		var strFeatures = "left=200,top=100,width=650,height=550,fullscreen=no" 
+		var Pagina = "Plan de control pop up.aspx"; 
+		objNewWindow = window.open("/add/categoria","newWin", strFeatures); 
+		objNewWindow.focus();
+		
+
+   }
+}
+
+
+//para mandar via ajax
+function habilitarCliente(identidad) {
+	$.post('acepto-cliente/', { cliente: identidad }, cargar_clientes);
+	
+	return null;
 }

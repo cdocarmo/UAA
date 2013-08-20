@@ -1,0 +1,27 @@
+{% extends 'base_sbar.html' %}
+{% block title %}Nueva Categoria{% endblock %}
+
+{% block content %}
+<section class="box">
+	<h1>Registro nueva Categoria</h1>
+	<form class="form-horizontal" method='post' action=''>{% csrf_token %}
+		{% if formulario.nombre.errors %}
+	    	<div class="lert alert-error">
+	    		{{ formulario.nombre.errors|join:"; " }}
+	    	</div>
+		{% endif %}	
+		<div class="control-group">
+			<label class="control-label" >{{ formulario.nombre.label_tag }}</label>
+			<div class="controls">
+				{{ formulario.nombre }}
+			</div>
+		</div>
+
+		<p><input type='submit' value='Guardar'/> | <a href="javascript:window.close()">Cancel</a></p>
+	</form>
+</section>
+
+{% endblock %}
+{% block js %}
+	<script src="{{ STATIC_URL }}admin/js/admin/RelatedObjectLookups.js"></script>
+{% endblock %} 

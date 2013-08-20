@@ -1,5 +1,6 @@
 {% if clientes|length %}
 	<table class="table table-striped">
+
 		<thead>
 			<tr>
 				<th>Id.</th>
@@ -9,11 +10,10 @@
     			<th>E-Mail</th>
     			<th>Telefono</th>
     			<th>Celular</th>
-    			<th>Fecha</th> 
-    			<th>Habilitar</th>   			
+    			<th>Fecha</th>			
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="listado-todos-clientes">
 			{% for cliente in clientes %}
 				<tr class="fila-clientes">
 					<td class="id">{{ cliente.id }}</td>
@@ -24,12 +24,24 @@
 					<td class="telefono">{{ cliente.get_profile.telefono }}</td>
 					<td class="celular">{{ cliente.get_profile.celular }}</td>
 					<td class="fecha">{{ cliente.get_profile.fecha_creacion|date:"j F Y" }}</td>
-					<td><button class="btn btn-success habilitar"><i class=" icon-fire icon-white"> </i>Habilitar</button></td>					
+
 				</tr>
 			{% endfor %}			
 		</tbody>
 	</table>
-
+	<div id="modal-habilitado" class="modal hide fade">
+			<!--<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3></h3>
+			</div>-->
+			<div class="modal-body">
+			    <p>Cliente habilitado!</p>
+			</div>
+			<!--<div class="modal-footer">
+				<a href="#" class="btn">Cerrar</a>
+				<a href="#" class="btn btn-primary" id="eliminar-btn-eliminar">Eliminar</a>
+			</div>-->    		
+		</div>	
 {% else %}
 	<div class="note">
 		Por el Momento no Clientes pendientes.

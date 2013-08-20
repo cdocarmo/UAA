@@ -13,17 +13,27 @@ var LOCALIDAD = "localidad";
 $(document).on("ready", inicio);
 function inicio ()
 {
-	reBind();
-	cargo_analitos();
-	cargo_localidades();
-	ingreso_analitos();
-	cargo_clientes_pendientes();
-	$("#clai").on("click", cargo_listas);
-	$("#tab-interno-clientes").on("click", cargo_clientes_pendientes);
+	//reBind();
+	//cargo_analitos();
+	//cargo_localidades();
+	//ingreso_analitos();
+	//cargo_clientes_pendientes();
+	//$("#aceptar").on("click", confirmar_datos);
+	//$("#clai").on("click", cargo_listas);
+	//$("#tab-interno-clientes").on("click", cargo_clientes_pendientes);
+	
 
 	//$('tr[class*=fila]').on("click", cargo_datos);
 	//$('#fila-analitos').on("hover", cambio_cursor);
 	//$('#preguntas button').on('click', enviar_pregunta);
+}
+
+function confirmar_datos(datos) 
+{	
+	console.log("Alert Callback");
+    bootbox.alert("Hello world!", function() {
+        console.log("Alert Callback");
+    });
 }
 
 function cargo_analitos(datos) 
@@ -35,7 +45,9 @@ function cargo_analitos(datos)
 
 function cargo_clientes_pendientes(datos) 
 {
-	$('#habilitar-clientes').load('/cliente/clientes-pendientes/');
+	$('#habilitar-clientes').load('/cliente/clientes-pendientes/', function(){
+		reBind();
+	});
 
 }
 
@@ -60,7 +72,7 @@ function cargo_listas(datos)
 
 
 //EVENTOS
-
+/*
 function reBind() {
 	limpiarCampos();
 	
@@ -210,3 +222,16 @@ function reBind() {
 		revisarInputs(this);
 	});
 }
+
+function limpiarCampos() {
+	//remuevo la clase para que no exista fila seleccionada
+	$('.seleccionada').removeClass('seleccionada');
+	//recorro los inputs para limpiarlos
+	// esto da error en csrf_token de django !($(this).is('input[type="submit"]') || 
+	$('input').each(function(){
+		if ($(this).is('input[type="reset"]') || $(this).is('input[type="button"]')){
+			$(this).val("");	
+		}
+	});
+}
+*/

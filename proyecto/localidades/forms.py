@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.forms.extras.widgets import SelectDateWidget
 import datetime
+from popup.widgets import SelectWithPopUp
 
 
 class LocalidadForm(forms.Form):
@@ -13,7 +14,7 @@ class LocalidadForm(forms.Form):
             attrs={'class':'input-text', 'id':"nombre", 'name':"nombre"}),
             required=True)
 
-    departamento = forms.ModelChoiceField(queryset=Departamento.objects.none())
+    departamento = forms.ModelChoiceField(queryset=Departamento.objects.none(), widget=SelectWithPopUp)
 
 
     coordenadas = forms.CharField(label=_(u'coordenadas'), max_length=30,

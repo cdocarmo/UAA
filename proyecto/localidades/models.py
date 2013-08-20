@@ -19,3 +19,12 @@ class Localidad(models.Model):
 
 	def __unicode__(self):
 		return _("%s,  %s") % (self.nombre, self.departamento)
+
+
+class Lugar(models.Model):
+
+	localidad = models.ForeignKey(Localidad)
+	departamento = models.ForeignKey(Departamento)
+	direccion = models.CharField(max_length=50)
+	def __unicode__(self):
+		return _("%s,  %s") % (self.localidad, self.direccion)

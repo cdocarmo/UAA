@@ -9,15 +9,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from analitos.forms import *
 from localidades.forms import *
 from usuarios.forms import *
-
+from django.contrib.auth.models import User
+from clientes.views import *
 
 @login_required(login_url='/login')
-def index(request):
-    return render_to_response('index.html',
-                            {}, 
-                            context_instance=RequestContext(request))
-
-
 def manager(request):
     if request.method=='POST':
     	if 'guardar-analito' in request.POST:
@@ -25,7 +20,7 @@ def manager(request):
 	        if formulario.is_valid():
 	            analito = Analito(
 	            nombre = formulario.cleaned_data['nombre'],
-	            categoria = formulario.cleaned_data['categorias'],
+	            categoria = formulario.cleaned_data['categoria'],
 	            valor_minimo = 0,
 	            valor_maximo = formulario.cleaned_data['vmaxp'],
 	            metodo_unit = formulario.cleaned_data['metodo_unit'],
@@ -87,4 +82,24 @@ def ingresar(request):
 @login_required(login_url='/login')
 def cerrar(request):
     logout(request)
-    return HttpResponseRedirect('/')    
+    return HttpResponseRedirect('/')  
+
+def acepto_cliente(request):
+	print request.is_ajax()
+	if request.is_ajax():
+		print "W"
+		if request.POST['cliente']:
+			cliente = User.objects.get(id=request.POST['cliente'])
+			if cliente:
+				cliente.is_active = 1
+				cliente.save()
+			return HttpResponse()
+"""
+
+def acepto_cliente(request, cli_ID):
+	cliente = User.objects.get(id=cli_ID)
+	if cliente:
+		cliente.is_active = 1
+		cliente.save()
+	return HttpResponseRedirect('/')  
+"""

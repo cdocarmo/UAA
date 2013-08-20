@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.forms.extras.widgets import SelectDateWidget
 import datetime
+from popup.widgets import SelectWithPopUp
 
 
 
@@ -18,7 +19,7 @@ class AnalitoForm(forms.Form):
     detalle = forms.CharField(label=u"Detalle", required=False,
         widget=forms.Textarea(attrs ={'class':'txt-area', 'cols': '70', 'rows': '3'}))
 
-    categorias = forms.ModelChoiceField(queryset=Categoria.objects.none())
+    categoria = forms.ModelChoiceField(queryset=Categoria.objects.none(), widget=SelectWithPopUp)
 
 
     vmaxp = forms.CharField(label=_(u'vmaxp'), max_length=30,
@@ -35,12 +36,20 @@ class AnalitoForm(forms.Form):
                            required=True)
     def __init__(self, *args, **kwargs):
         super(AnalitoForm, self).__init__(*args, **kwargs)
-
+        self.fields['categoria'].queryset = Categoria.objects.all()
+        """
         queryset = Categoria.objects.all()
         CHOICES =[]
         CHOICES.append(('','---------'))
         CHOICES.extend([(x.id, x.nombre) for x in queryset])
         CHOICES.append(('new','--Nueva Categoria--'))      
-        self.fields['categorias'].choices = CHOICES
+        self.fields['categoria'].choices = CHOICES
+        """
+class CategoriaForm(forms.ModelForm):
 
-
+    nombre = forms.CharField(label=_(u'Nombre'), max_length=30, 
+            widget=forms.TextInput(
+            attrs={'class':'input-text', 'id':"nombre", 'name':"nombre"}),
+            required=True)      
+    class Meta:
+        model = Categoria
