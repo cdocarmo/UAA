@@ -334,7 +334,20 @@ body {
 	cursor: pointer;
 }
 
+/*MODALES*/
+/*editar muestreo*/
+#modal-editar-muestreo {
+	width: 80%;
+	left: 30%;
+}
 
+#modal-editar-muestreo .formulario {
+	margin-top: 10px;
+}
+
+#botones-formulario {
+	margin-top: 0;
+}
 
 /* ==========================================================================
    Helper classes

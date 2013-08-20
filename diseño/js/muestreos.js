@@ -118,45 +118,52 @@ function reBind() {
 		//alert(MODO);
 	});
 	
+	//PESTAÑA "MUESTREOS PENDIENTES"
+	
+	$('.editar').on('click', function(){
+		$('#modal-editar-muestreo').modal('show');
+	});
+	
 	//PESTAÑA "MUESTREOS ANTERIORES"
 	
 	$('.ver').on('click', function(){
-		if (ultimo_muestreo != null) {
-			$(ultimo_muestreo).remove();
-		}
-		var id_muestreo = $(this).parent().parent().find('.numero-muestreo').html();
-		var fila = crearFilaConInfoDeMuestreos(id_muestreo);
-		var fila_anterior = $(this).parent().parent();
+		//$('#modal-editar-muestreo').modal('show');
+		///if (ultimo_muestreo != null) {
+			//$(ultimo_muestreo).remove();
+		//}
+		//var id_muestreo = $(this).parent().parent().find('.numero-muestreo').html();
+		//var fila = crearFilaConInfoDeMuestreos(id_muestreo);
+		//var fila_anterior = $(this).parent().parent();
 		//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
 		//hardcodeado: este aray debe ser llenado con lo obtenido via ajax
-		col_analitos = [5,6,7];
-		var html_cod = $('<td colspan="4" class="datos-muestreo">' +
-		'\t<ul>' +
-		'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <input value="Salto"></li>' +
-		'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <input value="Salto"></li>' +
-		'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <input value="Oficial 1º 2016"></li>' +
-		'\t\t<li><span class="item-muestreo-geo">Nro. de Referencia: </span> <input value="MN9338"></li>' +
-		'\t</ul>' +
-		'</td>' +
-		'<td colspan="1">' +
-		'\t\t<h4>Agregar otro analito</h4>' +
-		'\t\t<select id="listado-analitos"><option value="1">Analito 1</option><option value="2">Analito 2</option><option value="3">Analito 3</option></select>' +
-		'\t\t<a href="#" class="aplicar-cambios btn disabled">Aplicar Cambios</a>' +
-		'</td>' +
-		'<td colspan="2" class="datos-muestreo">' +
-		'\t<ul class="item-muestreo">' +
+		//col_analitos = [5,6,7];
+		//var html_cod = $('<td colspan="4" class="datos-muestreo">' +
+		//'\t<ul>' +
+		//'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <input value="Salto"></li>' +
+		//'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <input value="Salto"></li>' +
+		//'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <input value="Oficial 1º 2016"></li>' +
+		//'\t\t<li><span class="item-muestreo-geo">Nro. de Referencia: </span> <input value="MN9338"></li>' +
+		//'\t</ul>' +
+		//'</td>' +
+		//'<td colspan="1">' +
+		//'\t\t<h4>Agregar otro analito</h4>' +
+		//'\t\t<select id="listado-analitos"><option value="1">Analito 1</option><option value="2">Analito 2</option><option value="3">Analito 3</option></select>' +
+		//'\t\t<a href="#" class="aplicar-cambios btn disabled">Aplicar Cambios</a>' +
+		//'</td>' +
+		//'<td colspan="2" class="datos-muestreo">' +
+		//'\t<ul class="item-muestreo">' +
 		
-		'\t\t<li class="item-analitos" value="5"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
-		'\t\t<li class="item-analitos" value="6"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
-		'\t\t<li class="item-analitos" value="7"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
-		'\t</ul>' +
-		'</td>');
+		//'\t\t<li class="item-analitos" value="5"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
+		//'\t\t<li class="item-analitos" value="6"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
+		//'\t\t<li class="item-analitos" value="7"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
+		//'\t</ul>' +
+		//'</td>');
 		//se debe prestar atencion a los values de los tags, ahi debe ir guardado el id del analito
-		$(fila).append(html_cod);
-		$(fila_anterior).after(fila);
-		$(fila).show('slow');
-		ultimo_muestreo = fila;
-		reBind();
+		//$(fila).append(html_cod);
+		//$(fila_anterior).after(fila);
+		//$(fila).show('slow');
+		//ultimo_muestreo = fila;
+		//reBind();
 	});
 	
 	//CAMBIAR ICONO DE ANALITO AL PASAR PUNTERO POR ENCIMA
