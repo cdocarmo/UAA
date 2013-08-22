@@ -278,9 +278,16 @@ body {
 	list-style: none;
 }
 
+.lista-datos-muestreo li {
+	padding: 2px 3px;
+	margin: 2px 0;
+	border: 1px solid #999999;
+	width: 60%;
+}
+
 .item-muestreo-geo {
 	display: inline-block;
-	width: 140px;
+	width: 160px;
 }
 
 .fila-muestreo, .fila-muestreo td {
@@ -296,6 +303,13 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6687e0fd', endColorstr='#666dc1db',GradientType=0 ) !important; /* IE6-8 */
 }
 
+.imprimir-datos-muestreo {
+	margin-top: 10%;
+}
+
+.linea-separadora {
+	border: 1px solid #CCCCCC;
+}
 /*INGRESO DE DATOS MUESTREO*/
 
 #form-ingreso-datos {

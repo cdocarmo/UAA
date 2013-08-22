@@ -134,29 +134,39 @@ function reBind() {
 			if (ultimo_muestreo != null) {
 				$(ultimo_muestreo).remove();
 			}
-			var id_muestreo = $(this).parent().parent().find('.numero-muestreo').html();
-			var fila = crearFilaConInfoDeMuestreos(id_muestreo);
+			var id_pedido = $(this).parent().parent().find('.numero-pedido').html();
+			var fila = null;
 			var fila_anterior = $(this).parent().parent();
 			//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
-			var html_cod = '<td colspan="3" class="datos-muestreo">' +
-			'\t<ul>' +
-			'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <b>Salto</b></li>' +
-			'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <b>Salto</b></li>' +
-			'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <b>Oficial 1º 2016</b></li>' +
-			'\t</ul>' +
-			'</td>' +
-			'<td colspan="3" class="datos-muestreo">' +
-			'\t<ul>' +
-			'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
-			'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
-			'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
-			'\t\t<li><button class="btn btn-success">Imprimir datos de este muestreo</button></li>' +
-			'\t</ul>' +
-			'</td>' +
-			'<td> </td>';
-			$(fila).html(html_cod);
-			$(fila_anterior).after(fila);
-			$(fila).show('slow');
+			//se debe crear un for para iterar sobre cada muestreo del pedido obtenido y pasar los datos al html de abajo
+			var html_cod = "";
+			var max = 3;
+			for (var i=0;i<max;i++) {
+				html_cod = html_cod + '<td colspan="3" class="datos-muestreo">' +
+				'\t<ul class="lista-datos-muestreo">' +
+				'\t\t<li><span class="item-muestreo-geo">Número de muestreo:</span> <b class="pull-right">00000</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Código de Referencia:</span> <b class="pull-right">XXXXX</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <b class="pull-right">Salto</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <b class="pull-right">Salto</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <b class="pull-right">Oficial 1º 2016</b></li>' +
+				'\t</ul>' +
+				'</td>' +
+				'<td colspan="3" class="datos-muestreo">' +
+				'\t<ul class="lista-datos-analitos">' +
+				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
+				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
+				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
+				'\t\t<li><button class="btn btn-success imprimir-datos-muestreo">Imprimir datos de este muestreo</button></li>' +
+				'\t</ul>' +
+				'</td>' +
+				'<td> </td>';
+				fila = crearFilaConInfoDeMuestreos(id_pedido);
+				$(fila).html(html_cod);
+				$(fila_anterior).after(fila);
+				$(fila).show('slow');
+				fila_anterior = fila;
+				html_cod = ""
+			}
 			ultimo_muestreo = fila;
 			reBind();
 	});
@@ -304,8 +314,8 @@ function crearLineaNuevoMuestreo(obj) {
 	$('#lista-muestreos').prepend(nuevo_nodo);
 }
 
-function crearFilaConInfoDeMuestreos(numero_muestreo) {
-	var nodo_fila = $('<tr id="id' + numero_muestreo + '" class="fila-muestreo"> </tr>').hide();
+function crearFilaConInfoDeMuestreos(numero_pedido) {
+	var nodo_fila = $('<tr class="id' + numero_pedido + ' fila-muestreo"> </tr>').hide();
 	return nodo_fila;
 }
 
