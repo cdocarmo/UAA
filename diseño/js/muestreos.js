@@ -150,6 +150,7 @@ function reBind() {
 			'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
 			'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
 			'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
+			'\t\t<li><button class="btn btn-success">Imprimir datos de este muestreo</button></li>' +
 			'\t</ul>' +
 			'</td>' +
 			'<td> </td>';
@@ -206,23 +207,62 @@ function reBind() {
 	});
 	
 	//finalizar edicion muestreo
-	$('.aplicar-cambios').on('click', function(){
+	$('#guardar-edicion-muestreo').on('click', function(){
 		if (validarCamposEdicionDelMuestreo()) {
 			//llamada ajax
 			alert('Edición finalizada.');
-		}
+			$('#modal-editar-muestreo').modal('hide');
+			
+		}//else{
+			//alert('problemas');
+		//}
 	});
 }
 
 function validarCamposEdicionDelMuestreo() {
-	$('.item-muestreo-geo').parent().each(function(){
-		if (isEmpty($(this).find('input').val())) {
-			$(this).child().css('color', 'red');
-			return false;
-		}else{
-			return true;
+	var msg_alert = "";
+	var editar_muestreo = true;
+	//recoger todos los datos en un objeto
+	var obj = new Object();
+	obj['departamento'] = $('#departamentos-edicion').val();
+	obj['ciudad'] = $('#ciudades-edicion').val();
+	obj['direccion'] = $('#direccion-edicion').val();
+	obj['referencia'] = $('#numero-referencia-edicion');
+	var analitos = new Array();
+	$('.analito').each(function(){
+		if ($(this).is(':checked')) {
+			analitos.push($(this).attr('value'));
+			analitos_marcados++;	
 		}
 	});
+		
+	if ($('#direccion-edicion').val().length < 1) {
+		if ($('#locacion-edicion').find('#msg-vacio-direccion').length == 0) {
+			quitarMsg($('#direccion-edicion'));
+			$(crearMsgValidacion('Campo obligatorio', 'direccion-edicion')).appendTo($('#direccion-edicion').prev());	
+		}
+		editar_muestreo = false;
+	}else{
+		quitarMsg($('#direccion-edicion'));
+	}
+		
+	if (analitos_marcados > 0) {
+		quitarMsg($('#analitos-edicion'));
+		obj['col-analitos'] = analitos;
+	}else {
+		if ($('#analitos-edicion').find('#msg-vacio-analitos').length == 0) {
+			$(crearMsgValidacion('Debes seleccionar al menos un analito', 'analitos-edicion')).appendTo($('#analitos-edicion legend').append());	
+		}
+		editar_muestreo = false;
+	}
+	if (editar_muestreo) {
+		limpiarEdicionMuestreo();
+		return true;
+	}else{
+		return false;
+			//agregar_muestreo = true;
+	}
+	//analitos_marcados = 0;
 }
 
 function btnHabilitarCambios(boton) {
@@ -291,6 +331,7 @@ function quitarMensajes() {
 }
 
 function limpiar(total) {
+	//si el parametro total es true entonces limpia las lineas de los muestreos agregados arriba del formulario
 	$('.analito').each(function(){
 		$(this).attr('checked', false);
 	});
@@ -304,4 +345,14 @@ function limpiar(total) {
 			$('.ningun-muestreo').css('display', 'block');
 		});
 	}
+}
+
+function limpiarEdicionMuestreo() {
+	$('.analito').each(function(){
+		$(this).attr('checked', false);
+	});
+	$('#departamentos-edicion').prop('selectedIndex', 0);
+	$('#ciudades-edicion').prop('selectedIndex', 0);
+	$('#direccion-edicion').val('');
+	$('#numero-referencia-edicion').val('');
 }
