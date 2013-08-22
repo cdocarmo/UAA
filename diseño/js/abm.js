@@ -9,6 +9,8 @@ var ANALITO = "analito";
 var USUARIO = "usuario";
 var CLIENTE = "cliente";
 var LOCALIDAD = "localidad";
+var OPTIONCATEGORIAS = null;
+var OPTIONDEPARTAMENTOS = null;
 
 $(document).ready(function(){
 	reBind();
@@ -62,7 +64,8 @@ function reBind() {
 			
 		} else if ($(this).hasClass('fila-analitos')) {
 			$('#nombre').val($(this).find('.nombre').html());
-			$('#categorias> option[value=' + '"' +$(this).find('.categoria').html() + '"' + ']').attr('selected', 'selected');
+			cboxCategorias($('#categorias > option[value=' + '"' + $(this).find('.categoria').html() + '"' + ']'));
+			$('#categorias > option[value=' + '"' +$(this).find('.categoria').html() + '"' + ']').prop('selected', true);
 			$('#vminp').val($(this).find('.vminp').html());
 			$('#vmaxp').val($(this).find('.vmaxp').html());
 			$('#metodo-unit').val($(this).find('.metodo-unit').html());
@@ -70,7 +73,10 @@ function reBind() {
 			$('#observaciones').val($(this).find('.observaciones').html());
 		} else if ($(this).hasClass('fila-localidades')) {
 			$('#nombre-localidad').val($(this).find('.ciudad').html());
-			$('#departamentos> option[value=' + '"' +$(this).find('.departamento').html() + '"' + ']').attr('selected', 'selected');
+			cboxDepartamentos($('#departamentos > option[value=' + '"' +$(this).find('.departamento').html() + '"' + ']'));
+			//var selector = '#departamentos > option[value=' + '"' +$(this).find('.departamento').html() + '"' + ']';
+			//alert(selector);
+			$('#departamentos > option[value=' + '"' +$(this).find('.departamento').html() + '"' + ']').prop('selected', true);
 			$('#coordenadas-geograficas').val($(this).find('.coordenadas').html());
 			$('#distancia').val($(this).find('.distancia').html());
 		}
@@ -210,6 +216,20 @@ function revisarInputs(obj) {
 		completos = true;
 	}
 	return completos;
+}
+
+function cboxCategorias(option) {
+	if (OPTIONCATEGORIAS != null) {
+		$(OPTIONCATEGORIAS).prop('selected', false);
+	}
+	OPTIONCATEGORIAS = option
+}
+
+function cboxDepartamentos(option) {
+	if (OPTIONDEPARTAMENTOS != null) {
+		$(OPTIONDEPARTAMENTOS).prop('selected', false);
+	}
+	OPTIONCATEGORIAS = option
 }
 
 //para mandar via ajax
