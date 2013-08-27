@@ -9,6 +9,7 @@ var agregar_muestreo = true;
 var analitos_marcados = 0;
 var ultimo_muestreo = null;
 var item_muestreo_anterior = null;
+var boton_ver_anterior = null;
 var col_analitos = new Array();
 
 //TODO: debo capturar el enter para que no me guarde sin advertencia previa.
@@ -120,21 +121,32 @@ function reBind() {
 	
 	//PESTAÑA "MUESTREOS PENDIENTES"
 	
-	$('.editar').on('click', function(){
+	$('.editar-muestreo').on('click', function(){
 		$('#modal-editar-muestreo').modal('show');
 		//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
 		//hardcodeado: este array debe ser llenado con lo obtenido via ajax
-		var id_muestreo = $(this).parent().parent().find('.numero-muestreo').html(); //obtengo el id para buscar el muestreo
+		var id_muestreo = $(this).parent().parent().parent().parent().attr('id'); //obtengo el id para buscar el muestreo
+		$('#modal-editar-muestreo').find('#guardar-edicion-muestreo').attr('data-id', id_muestreo);
 		
 	});
 	
 	//PESTAÑA "MUESTREOS ANTERIORES"
 	
 	$('.ver').on('click', function(){
+			if (ocultarMostrarMuestreos(this)) {
+				return;
+			}
+			
 			if (ultimo_muestreo != null) {
 				$(ultimo_muestreo).remove();
 			}
-			var id_pedido = $(this).parent().parent().find('.numero-pedido').html();
+			
+			if ($(this).hasClass('editar')) {
+				var id_pedido = $(this).parent().parent().find('.numero-muestreo').html();	
+			}else{
+				var id_pedido = $(this).parent().parent().find('.numero-pedido').html();
+			}
+			
 			var fila = null;
 			var fila_anterior = $(this).parent().parent();
 			//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
@@ -144,30 +156,45 @@ function reBind() {
 			for (var i=0;i<max;i++) {
 				html_cod = html_cod + '<td colspan="3" class="datos-muestreo">' +
 				'\t<ul class="lista-datos-muestreo">' +
-				'\t\t<li><span class="item-muestreo-geo">Número de muestreo:</span> <b class="pull-right">00000</b></li>' +
-				'\t\t<li><span class="item-muestreo-geo">Código de Referencia:</span> <b class="pull-right">XXXXX</b></li>' +
-				'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <b class="pull-right">Salto</b></li>' +
-				'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <b class="pull-right">Salto</b></li>' +
-				'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <b class="pull-right">Oficial 1º 2016</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Número de muestreo:</span> <b class="pull-right nro-muestreo">00000</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Código de Referencia:</span> <b class="pull-right cod-referencia">XXXXX</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <b class="pull-right ciudad">Salto</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <b class="pull-right departamento">Salto</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <b class="pull-right direccion">Oficial 1º 2016</b></li>' +
 				'\t</ul>' +
 				'</td>' +
 				'<td colspan="3" class="datos-muestreo">' +
 				'\t<ul class="lista-datos-analitos">' +
 				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
 				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
-				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
-				'\t\t<li><button class="btn btn-success imprimir-datos-muestreo">Imprimir datos de este muestreo</button></li>' +
+				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>';
+				if ($(this).hasClass('editar')) {
+					html_cod = html_cod + '\t\t<li><button class="btn btn-success editar-muestreo" id="id' + i + '">Editar Muestreo</button></li>';	
+				} // la variable "i" debe ser sustituida por la variable que contiene el id del muestreo
+				
 				'\t</ul>' +
 				'</td>' +
 				'<td> </td>';
-				fila = crearFilaConInfoDeMuestreos(id_pedido);
+				fila = crearFilaConInfoDeMuestreos(id_pedido, i); //segundo parametro es temporal, debe sustituirse por el id de muestreo correcto
 				$(fila).html(html_cod);
 				$(fila_anterior).after(fila);
 				$(fila).show('slow');
+				if (i == (max - 1)) {
+					
+				}
 				fila_anterior = fila;
 				html_cod = ""
 			}
+			fila = crearFilaConInfoDeMuestreos(id_pedido);
+			html_cod = '\t\t<td colspan="3"></td>' +
+			'\t\t<td colspan="3"><button class="btn btn-success imprimir-datos-muestreo">Imprimir Datos</button></td>';
+			ocultarMostrarMuestreos(obj);
+			$(fila).html(html_cod);
+			$(fila_anterior).after(fila);
+			$(fila).show('slow');
+			html_cod = "";
 			ultimo_muestreo = fila;
+			
 			reBind();
 	});
 	
@@ -218,7 +245,7 @@ function reBind() {
 	
 	//finalizar edicion muestreo
 	$('#guardar-edicion-muestreo').on('click', function(){
-		if (validarCamposEdicionDelMuestreo()) {
+		if (validarCamposEdicionDelMuestreo($(this).attr('data-id'))) {
 			//llamada ajax
 			alert('Edición finalizada.');
 			$('#modal-editar-muestreo').modal('hide');
@@ -229,15 +256,37 @@ function reBind() {
 	});
 }
 
-function validarCamposEdicionDelMuestreo() {
+function ocultarMostrarMuestreos(obj) {
+	if ($(obj).hasClass('ocultar')) {
+		$('tr[class*=pedido]').remove();
+		$(obj).removeClass('ocultar').addClass('ver');
+		$(obj).html('Ver');
+		boton_ver_anterior = obj;
+		return true;
+	}else{
+		$('tr[class*=pedido]').remove();
+		$(obj).removeClass('ver').addClass('ocultar');
+		if (boton_ver_anterior != null) {
+			// para que el boton anterior cambie a funcion "ver".
+			$(boton_ver_anterior).removeClass('ocultar').addClass('ver');
+			$(boton_ver_anterior).html('Ver');
+		}
+		$(obj).html('Ocultar');
+		boton_ver_anterior = obj;
+		return false;
+	}
+}
+
+function validarCamposEdicionDelMuestreo(id) {
 	var msg_alert = "";
 	var editar_muestreo = true;
 	//recoger todos los datos en un objeto
 	var obj = new Object();
+	obj['id'] = id;
 	obj['departamento'] = $('#departamentos-edicion').val();
 	obj['ciudad'] = $('#ciudades-edicion').val();
 	obj['direccion'] = $('#direccion-edicion').val();
-	obj['referencia'] = $('#numero-referencia-edicion');
+	obj['referencia'] = $('#numero-referencia-edicion').val();
 	var analitos = new Array();
 	$('.analito').each(function(){
 		if ($(this).is(':checked')) {
@@ -266,6 +315,7 @@ function validarCamposEdicionDelMuestreo() {
 		editar_muestreo = false;
 	}
 	if (editar_muestreo) {
+		actualizarFilaMuestreo(obj);
 		limpiarEdicionMuestreo();
 		return true;
 	}else{
@@ -273,6 +323,19 @@ function validarCamposEdicionDelMuestreo() {
 			//agregar_muestreo = true;
 	}
 	//analitos_marcados = 0;
+}
+
+function actualizarFilaMuestreo(obj) {
+	$('#' + obj['id']).find('.cod-referencia').html(obj['referencia']);
+	$('#' + obj['id']).find('.ciudad').html(obj['ciudad']);
+	$('#' + obj['id']).find('.departamento').html(obj['departamento']);
+	$('#' + obj['id']).find('.direccion').html(obj['direccion']);
+	
+	$('#' + obj['id']).find('.lista-datos-analitos').empty();
+	for (var i=0; i<obj['col-analitos'].length; i++) {
+		$('#' + obj['id']).find('.lista-datos-analitos').append('<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;' + obj['col-analitos'][i] + '</li>');
+	}
+	
 }
 
 function btnHabilitarCambios(boton) {
@@ -314,8 +377,8 @@ function crearLineaNuevoMuestreo(obj) {
 	$('#lista-muestreos').prepend(nuevo_nodo);
 }
 
-function crearFilaConInfoDeMuestreos(numero_pedido) {
-	var nodo_fila = $('<tr class="id' + numero_pedido + ' fila-muestreo"> </tr>').hide();
+function crearFilaConInfoDeMuestreos(numero_pedido, id_muestreo) {
+	var nodo_fila = $('<tr class="pedido' + numero_pedido + ' fila-muestreo" id="muestreo' + id_muestreo + '"> </tr>').hide();
 	return nodo_fila;
 }
 
