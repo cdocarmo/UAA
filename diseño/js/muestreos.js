@@ -12,6 +12,11 @@ var item_muestreo_anterior = null;
 var boton_ver_anterior = null;
 var col_analitos = new Array();
 
+//banderas
+var select_departamentos = false;
+var select_ciudades = false;
+var select_direcciones = false;
+
 //TODO: debo capturar el enter para que no me guarde sin advertencia previa.
 
 $(document).ready(function(){
@@ -188,7 +193,7 @@ function reBind() {
 			fila = crearFilaConInfoDeMuestreos(id_pedido);
 			html_cod = '\t\t<td colspan="3"></td>' +
 			'\t\t<td colspan="3"><button class="btn btn-success imprimir-datos-muestreo">Imprimir Datos</button></td>';
-			ocultarMostrarMuestreos(obj);
+			ocultarMostrarMuestreos(this);
 			$(fila).html(html_cod);
 			$(fila_anterior).after(fila);
 			$(fila).show('slow');
@@ -253,6 +258,31 @@ function reBind() {
 		}//else{
 			//alert('problemas');
 		//}
+	});
+	
+	//NUEVO PUNTO DE REFERENCIA
+	
+	$('#nuevo-punto-referencia').on('click', function() {
+		//alert('anda');
+		$('#modal-nuevo-punto-referencia').modal('show');
+	});
+	
+	//SELECTEDS
+	$('#departamentos option').on('click', function(e){
+		e.preventDefault();
+		$('#ciudades').removeAttr('disabled');
+		//llamada ajax para cargar ciudades del departamento seleccionado
+	});
+	
+	$('#ciudades').on('click', function(e){
+		e.preventDefault();
+		$('#direcciones').removeAttr('disabled');
+		//llamada ajax para cargar direcciones de la ciudad seleccionada
+	});
+	
+	$('#direcciones').on('click', function(e){
+		e.preventDefault();
+		//hacer nada
 	});
 }
 
