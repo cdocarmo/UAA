@@ -318,6 +318,49 @@ function reBind() {
 		e.preventDefault();
 		//hacer nada
 	});
+	//para el modal nuevo punto geográfico
+	$('#departamentos-nuevo option').on('click', function(e){
+		e.preventDefault();
+		if ($(this).val() != 'seleccionar') {
+			$('#ciudades-nuevo').removeAttr('disabled');
+			//llamada ajax para cargar ciudades del departamento seleccionado
+		}
+	});
+	
+	//VALIDAR NUEVO PUNTO DE REFERENCIA
+	
+	$('#btn-nuevo-punto-referencia').on('click', function() {
+		var validar = true;
+		if ($('#departamentos-nuevo').val() == 'seleccionar') {
+			$('#departamentos-nuevo').css('border-color', 'red');
+			validar = false;
+		} else {
+			$('#departamentos-nuevo').css('border-color', '#CCC');
+		}
+		if ($('#ciudades-nuevo').val() == 'seleccionar') {
+			$('#ciudades-nuevo').css('border-color', 'red');
+			validar = false;
+		} else {
+			$('#ciudades-nuevo').css('border-color', '#CCC');
+		}
+		var msn = $('#direccion-nuevo').html(); //aca hay un bog raro de jquery que no se como arreglar
+		//var largo = msn.length;
+		
+		//if (largo < 1) {
+		//	$('#direccion-nuevo').css('border-color', 'red');
+		//	validar = false;
+		//} else {
+		//	$('#direccion-nuevo').css('border-color', '#CCC');
+		//}
+		if (validar) {
+			//llamada ajax para guardar nueva localidad
+			$('.nueva-ciudad-localidad').hide();
+			$('#ciudades-nuevo').attr('disabled', false);
+			ocultar_caja_nueva_ciudad = false;
+		}else{
+			alert('Corrije los campos marcados en rojo.');
+		}
+	});
 }
 
 function ocultarMostrarMuestreos(obj) {
