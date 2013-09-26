@@ -262,14 +262,16 @@ function reBind() {
 	
 	//NUEVO PUNTO DE REFERENCIA
 	
-	$('#nuevo-punto-referencia').on('click', function() {
+	$('#nuevo-punto-referencia').on('click', function(e) {
 		//alert('anda');
+		e.preventDefault();
 		$('#modal-nuevo-punto-referencia').modal('show');
 	});
 	
 	var ocultar = false;
 	
-	$('#buscar-punto-referencia').on('click', function() {
+	$('#buscar-punto-referencia').on('click', function(e) {
+		e.preventDefault();
 		if (!ocultar) {
 			$('.buscar-referencia').show();
 			$('#buscar-punto-referencia').html('Ocultar Búsqueda');
