@@ -249,6 +249,10 @@ body {
 
 /*MUESTREOS*/
 
+#buscar-punto-referencia {
+	margin-top: 2%;
+}
+
 #btn-agregar-muestreo {
 	margin-top: 18%;
 }

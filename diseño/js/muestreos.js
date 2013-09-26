@@ -267,6 +267,20 @@ function reBind() {
 		$('#modal-nuevo-punto-referencia').modal('show');
 	});
 	
+	var ocultar = false;
+	
+	$('#buscar-punto-referencia').on('click', function() {
+		if (!ocultar) {
+			$('.buscar-referencia').show();
+			$('#buscar-punto-referencia').html('Ocultar Búsqueda');
+			ocultar = true;
+		} else {
+			$('.buscar-referencia').hide();
+			$('#buscar-punto-referencia').html('Buscar Punto de Referencia');
+			ocultar = false;
+		}
+	});
+	
 	//SELECTEDS
 	$('#departamentos option').on('click', function(e){
 		e.preventDefault();
