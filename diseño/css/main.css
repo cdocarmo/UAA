@@ -372,6 +372,14 @@ body {
 	margin-top: 0;
 }
 
+#ciudades-nuevo {
+	margin-top: 1%;
+}
+
+#modal-nuevo-punto-referencia input {
+	width: 97% !important;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */

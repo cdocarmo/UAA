@@ -268,19 +268,37 @@ function reBind() {
 		$('#modal-nuevo-punto-referencia').modal('show');
 	});
 	
-	var ocultar = false;
+	var ocultar_boton_referencia = false;
 	
 	$('#buscar-punto-referencia').on('click', function(e) {
 		e.preventDefault();
-		if (!ocultar) {
+		if (!ocultar_boton_referencia) {
 			$('.buscar-referencia').show();
 			$('#buscar-punto-referencia').html('Ocultar Búsqueda');
-			ocultar = true;
+			ocultar_boton_referencia = true;
 		} else {
 			$('.buscar-referencia').hide();
 			$('#buscar-punto-referencia').html('Buscar Punto de Referencia');
-			ocultar = false;
+			ocultar_boton_referencia = false;
 		}
+	});
+	
+	var ocultar_caja_nueva_ciudad = false;
+	
+	$('#btn-nueva-ciudad').on('click', function(e) {
+		e.preventDefault();
+		if (!ocultar_caja_nueva_ciudad) {
+			$('.nueva-ciudad-localidad').show();
+			$('#ciudades-nuevo').attr('disabled', true);
+			ocultar_caja_nueva_ciudad = true;
+		}
+	});
+	
+	//CERRAR MODAL
+	$('#modal-nuevo-punto-referencia .close, #cerrar-nueva-referencia').on('click', function() {
+		$('.nueva-ciudad-localidad').hide();
+		$('#ciudades-nuevo').attr('disabled', false);
+		ocultar_caja_nueva_ciudad = false;
 	});
 	
 	//SELECTEDS
