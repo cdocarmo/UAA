@@ -188,6 +188,10 @@ body {
 
 /* FORMULARIOS */
 
+#nuevo-punto-referencia {
+	margin-top: 2%;
+}
+
 .campo-obligatorio {
 	visibility: hidden;
 	color: red;
