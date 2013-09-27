@@ -197,6 +197,10 @@ body {
 	margin-top: 0;
 }
 
+.subcategoria {
+	margin-top: 2%;
+}
+
 .campo-obligatorio {
 	visibility: hidden;
 	color: red;

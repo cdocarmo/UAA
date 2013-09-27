@@ -176,6 +176,14 @@ function reBind() {
 		revisarInputs(this);
 	});
 	
+	//SUBCATEGORIA
+	$('#categorias option').on('click', function(){
+		if ($(this).hasClass('tiene-subcategoria')) {
+			var selector = 'select.' + $(this).attr('id');
+			$(selector).show();
+		}
+	});
+	
 	//CERRAR
 	$('#modal-guardado .cerrar, #modal-guardado .close').on('click', function() {
 		limpiarCampos();
