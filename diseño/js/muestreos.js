@@ -327,6 +327,13 @@ function reBind() {
 		}
 	});
 	
+	//VALIDAR PUNTO DE REFERENCIA
+	//REVISAR SI EL CODIGO DE REFERENCIA INGRESADO EXISTE O NO
+	
+	$('#numero-referencia').focusout(function() {
+		buscarInsertarNroReferencia($(this).val());
+	});
+	
 	//VALIDAR NUEVO PUNTO DE REFERENCIA
 	
 	$('#btn-nuevo-punto-referencia').on('click', function() {
@@ -536,3 +543,11 @@ function limpiarEdicionMuestreo() {
 	$('#direccion-edicion').val('');
 	$('#numero-referencia-edicion').val('');
 }
+
+function buscarSiExisteNroReferencia(nro_referencia) {
+	//recibe el codigo ingresado y si existe retorna un html con los datos
+	//si no retorna un <p>No exite este número de referencia</p>
+	var respuesta = "";
+	return respuesta;
+}
+
