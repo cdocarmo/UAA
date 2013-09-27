@@ -201,6 +201,18 @@ body {
 	margin: 4% 0 4% 0;
 }
 
+#codigo-localidad {
+	text-transform: uppercase;
+}
+
+#env-nombre-codigo-ciudad #nombre-localidad {
+	width: 90% !important;
+}
+
+#env-nombre-codigo-ciudad #codigo-localidad {
+	width: 32% !important;
+}
+
 .form-registro-cliente div {
 	width: 48%;
 	/*margin-left: 5%;*/

@@ -94,29 +94,29 @@ function reBind() {
 		if ($('#' + tab_actual).find('.seleccionada')) {
 			//si hay fila seleccionada.
 			if (tab_actual == 'tab-analitos') {
-				$('#mensaje-modal').html(msg_a_punto_de_eliminar + ANALITO + ".");
+				$('#mensaje-modal-eliminar').html(msg_a_punto_de_eliminar + ANALITO + ".");
 			}else if (tab_actual == 'tab-usuarios') {
-				$('#mensaje-modal').html(msg_a_punto_de_eliminar + USUARIO + ".");
+				$('#mensaje-modal-eliminar').html(msg_a_punto_de_eliminar + USUARIO + ".");
 			}else if (tab_actual == 'tab-localidades') {
-				$('#mensaje-modal').html(msg_a_punto_de_eliminar + LOCALIDAD + ".");
+				$('#mensaje-modal-eliminar').html(msg_a_punto_de_eliminar + LOCALIDAD + ".");
 			}else if (tab_actual == 'tab-clientes') {
-				$('#mensaje-modal').html(msg_a_punto_de_eliminar + CLIENTE + ".");
+				$('#mensaje-modal-eliminar').html(msg_a_punto_de_eliminar + CLIENTE + ".");
 			}
 			//$('#modal-eliminar').css('visibility', 'hidden');
 		}else{
 			//si no hay fila seleccionada
 			if (tab_actual == 'tab-analitos') {
-				$('#mensaje-modal').html(msg_no_hay_seleccion + ANALITO + ".");
+				$('#mensaje-modal-eliminar').html(msg_no_hay_seleccion + ANALITO + ".");
 			}else if (tab_actual == 'tab-usuarios') {
-				$('#mensaje-modal').html(msg_no_hay_seleccion + USUARIO + ".");
+				$('#mensaje-modal-eliminar').html(msg_no_hay_seleccion + USUARIO + ".");
 			}else if (tab_actual == 'tab-localidades') {
-				$('#mensaje-modal').html(msg_no_hay_seleccion + LOCALIDAD + ".");
+				$('#mensaje-modal-eliminar').html(msg_no_hay_seleccion + LOCALIDAD + ".");
 			}else if (tab_actual == 'tab-clientes') {
-				$('#mensaje-modal').html(msg_no_hay_seleccion + CLIENTE + ".");
+				$('#mensaje-modal-eliminar').html(msg_no_hay_seleccion + CLIENTE + ".");
 			}
 			$('#eliminar-btn-eliminar').css('visibility', 'visible');
 		}
-		mostrarModal();
+		mostrarModal('eliminar');
 	});
 	
 	//Boton guardar
@@ -130,20 +130,22 @@ function reBind() {
 		});
 		if (!guardar) {
 			focus_flag = false;
-			$('#mensaje-modal').html("Llena los campos vacíos");	
+			$('#mensaje-modal-incompleto').html("Llena los campos vacíos");	
+			mostrarModal('incompleto');
 		}else{
 			//guarda segun el tab actual (usando ajax?)
 			if (tab_actual == 'tab-analitos') {
-				$('#mensaje-modal').html("Llamar guardar de analitos");
+				$('#mensaje-modal-guardado').html("Llamar guardar de analitos");
 			}else if (tab_actual == 'tab-usuarios') {
-				$('#mensaje-modal').html("Llamar guardar de analitos");
+				$('#mensaje-modal-guardado').html("Llamar guardar de analitos");
 			}else if (tab_actual == 'tab-localidades') {
-				$('#mensaje-modal').html("Llamar guardar de analitos");
+				$('#mensaje-modal-guardado').html("Llamar guardar de analitos");
 			}else if (tab_actual == 'tab-clientes') {
-				$('#mensaje-modal').html("Llamar guardar de analitos");
+				$('#mensaje-modal-guardado').html("Llamar guardar de analitos");
 			}
+			mostrarModal('guardado');
 		}
-		mostrarModal();
+		
 	});
 	
 	//habilito cliente
@@ -173,6 +175,16 @@ function reBind() {
 	$('input').focusout(function() {
 		revisarInputs(this);
 	});
+	
+	//CERRAR
+	$('#modal-guardado .cerrar, #modal-guardado .close').on('click', function() {
+		limpiarCampos();
+	});
+	
+	//BOTON LIMPIAR
+	$('button[id^=limpiar]').on('click', function() {
+		limpiarCampos();
+	});
 }
 
 function quitarMsg(obj) {
@@ -186,8 +198,12 @@ function quitarMensajes() {
 }
 
 function limpiarCampos() {
-	//remuevo la clase para que no exista fila seleccionada
-	$('.seleccionada').removeClass('seleccionada');
+	//limpio y remuevo la clase para que no exista fila seleccionada
+	$('.seleccionada').css({
+			fontWeight: "normal",
+			color: "#515151",
+			textShadow: "None"
+		}).removeClass("seleccionada");
 	//recorro los inputs para limpiarlos
 	$('input').each(function(){
 		if (!($(this).is('input[type="submit"]') || $(this).is('input[type="reset"]') || $(this).is('input[type="button"]'))){
@@ -234,12 +250,21 @@ function cboxDepartamentos(option) {
 
 //para mandar via ajax
 function habilitarCliente(identidad) {
-	$('#modal-habilitado').modal('hide')
+	$('#modal-habilitado').modal('hide');
 	return null;
 }
 
-function mostrarModal() {
-	$('#modal-eliminar').modal({
+function mostrarModal(tipo) {
+	var selector = '';
+	if (tipo == 'eliminar') {
+		selector = '#modal-eliminar';
+	} else if (tipo == 'guardado') {
+		selector = '#modal-guardado';
+	}
+	else if (tipo == 'incompleto') {
+		selector = '#modal-incompleto';
+	}
+	$(selector).modal({
 			show: true,
 			backdrop: 'static'
 	});

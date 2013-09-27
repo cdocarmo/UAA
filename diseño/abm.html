@@ -174,8 +174,17 @@
                             	<div class="row-fluid formulario">
 	                            	<fieldset id="ingreso-datos-localidades" class="span4">
 	                            		<legend>Datos</legend>
-	                            		<label for="nombre-localidad">Nombre</label>
-	                            		<input name="nombre-localidad" id="nombre-localidad" type="text" class="focusable" />
+	                            		<div class="row-fluid" id="env-nombre-codigo-ciudad">
+	                            			<div class="span6">
+	                            				<label for="nombre-localidad">Nombre</label>
+	                            				<input name="nombre-localidad" id="nombre-localidad" type="text" class="focusable" />
+	                            			</div>
+	                            			<div class="span4">
+	                            				<label for="codigo-localidad">C&oacute;digo</label>
+	                            				<input name="codigo-localidad" id="codigo-localidad" type="text" class="focusable" maxlength="4" />
+	                            			</div>
+	                            			<!--<div class="span2"></div>-->
+	                            		</div>
 	                            		<label for="departamentos">Departamento</label>
 	                            		<select id="departamentos">
 	                            			<option value="Artigas">Artigas</option>
@@ -491,16 +500,40 @@
                 </div>
             </div>
             <!-- VENTANAS MODALES -->
+            <div id="modal-guardado" class="modal hide fade">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3>Guardado!</h3>
+				</div>
+				<div class="modal-body">
+				    <p id="mensaje-modal-guardado"> </p>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn cerrar" data-dismiss="modal" aria-hidden="true">Cerrar</a>
+				</div>
+    		</div>
+    		<div id="modal-incompleto" class="modal hide fade">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3>Formulario incompleto...</h3>
+				</div>
+				<div class="modal-body">
+				    <p id="mensaje-modal-incompleto"> </p>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn cerrar" data-dismiss="modal" aria-hidden="true">Cerrar</a>
+				</div>
+    		</div>
             <div id="modal-eliminar" class="modal hide fade">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h3>Eliminar</h3>
 				</div>
 				<div class="modal-body">
-				    <p id="mensaje-modal"> </p>
+				    <p id="mensaje-modal-eliminar"> </p>
 				</div>
 				<div class="modal-footer">
-					<a href="#" class="btn">Cerrar</a>
+					<a href="#" class="btn cerrar" data-dismiss="modal" aria-hidden="true">Cerrar</a>
 					<a href="#" class="btn btn-primary" id="eliminar-btn-eliminar">Eliminar</a>
 				</div>
     		</div>
