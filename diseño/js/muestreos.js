@@ -188,17 +188,18 @@ function reBind() {
 					
 				}
 				fila_anterior = fila;
-				html_cod = ""
+				html_cod = "";
 			}
-			fila = crearFilaConInfoDeMuestreos(id_pedido);
-			html_cod = '\t\t<td colspan="3"></td>' +
-			'\t\t<td colspan="3"><button class="btn btn-success imprimir-datos-muestreo">Imprimir Datos</button></td>';
-			ocultarMostrarMuestreos(this);
-			$(fila).html(html_cod);
-			$(fila_anterior).after(fila);
-			$(fila).show('slow');
-			html_cod = "";
-			ultimo_muestreo = fila;
+			//ESTO COMENTADO A CONTINUACION DEBE SER ELIMINADO
+			//fila = crearFilaConInfoDeMuestreos(id_pedido);
+			//html_cod = '\t\t<td colspan="3"></td>' +
+			//'\t\t<td colspan="3"><button class="btn btn-success imprimir-datos-muestreo">Imprimir Datos</button></td>';
+			//ocultarMostrarMuestreos(this);
+			//$(fila).html(html_cod);
+			//$(fila_anterior).after(fila);
+			//$(fila).show('slow');
+			//html_cod = "";
+			//ultimo_muestreo = fila;
 			
 			reBind();
 	});
