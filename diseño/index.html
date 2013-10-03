@@ -63,6 +63,9 @@
                             <a href="#tab-pedidos-pendientes" data-toggle="tab" class="tab-pedidos-pendientes">Pedidos Pendientes</a>
                         </li>
                         <li>
+                            <a href="#tab-puntos-de-referencia" data-toggle="tab" class="tab-puntos-de-referencia">Puntos de Referencia</a>
+                        </li>
+                        <li>
                             <a href="#tab-ingresar-resultados-muestreos" data-toggle="tab" class="tab-resultados-muestreos">Ingresar Resultados de Muestreos</a>
                         </li>
                         <li>
@@ -312,6 +315,57 @@
                         				<td>52665</td>
                         				<td>06/03/2013</td>
                         				<td><button class="btn btn-primary ver editar">Ver</button></td>
+                        			</tr>
+                        		</tbody>
+                        	</table>
+                        </div>
+                         <!--LISTADO DE PUNTOS DE REFERENCIA: ADMIN-->
+                        <div class="cont-puntos-de-referencia tab-pane" id="tab-puntos-de-referencia">
+                        	<h2>Puntos de Referencia</h2>
+                        	<p class="pull-right">Filtrar por cliente: <input type="text" name="filtro-cliente" id="filtro-cliente"/><button class="btn btn-primary" id="btn-filtrar-cliente">Filtrar</button></p>
+                        	<table class="table table-striped">
+                        		<thead>
+                        			<tr>
+                        				<th>Numero de Referencia</th>
+	                        			<th>Departamento</th>
+	                        			<th>Localidad</th>
+	                        			<th>Direcci&oacute;n</th>
+	                        			<th>Cliente</th>
+	                        			<th>Habilitado</th>
+                        			</tr>
+                        		</thead>
+                        		<tbody>
+                        			<tr>
+                        				<td class="numero-de-referencia">MNT00549</td>
+                        				<td>Montevideo</td>
+                        				<td>Montevideo</td>
+                        				<td>Calle 1</td>
+                        				<td>Fulanito de tal</td>
+                        				<td><input type="checkbox" class="punto-referencia-habilitado" /></td>
+                        			</tr>
+                        			<tr>
+                        				<td class="numero-de-referencia">SALTCONST49</td>
+                        				<td>Salto</td>
+                        				<td>Constituci&oacute;n</td>
+                        				<td>Calle 10</td>
+                        				<td>Menganito de tal</td>
+                        				<td><input type="checkbox" class="punto-referencia-habilitado" checked="checked"/></td>
+                        			</tr>
+                        			<tr>
+                        				<td class="numero-de-referencia">PAYPAY78</td>
+                        				<td>Paysand&uacute;</td>
+                        				<td>Paysand&uacute;</td>
+                        				<td>Calle 4</td>
+                        				<td>Sultanito de tal</td>
+                        				<td><input type="checkbox" class="punto-referencia-habilitado" checked="checked"/></td>
+                        			</tr>
+                        			<tr>
+                        				<td class="numero-de-referencia">PAYQUEB09</td>
+                        				<td>Paysand&uacute;</td>
+                        				<td>Quebracho</td>
+                        				<td>Calle 12</td>
+                        				<td>Algo de tal</td>
+                        				<td><input type="checkbox" class="punto-referencia-habilitado" /></td>
                         			</tr>
                         		</tbody>
                         	</table>

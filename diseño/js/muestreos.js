@@ -28,6 +28,14 @@ $(document).ready(function(){
 
 function reBind() {
 	//PESTAÑA "NUEVO PEDIDO"
+	$('#numero-referencia').keypress(function(e){
+		if (e.which == 13 ) {
+			e.preventDefault();  // Evito que cuando hago enter se ejecute el evento que usa el boton Buscar Punto de Referencia
+			// Aqui deberia ir lo que se hace si el numero del punto de referencia esta bien colocado
+		}
+		// aqui llamar a un autocompletar
+	});
+	
 	$('#btn-agregar-muestreo').on('click', function(){
 		var msg_alert = "";
 		//recoger todos los datos en un objeto

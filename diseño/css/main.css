@@ -390,6 +390,11 @@ body {
 	margin-top: 10%;
 }
 
+/*LISTADO DE PUNTOS DE MUESTREO*/
+#btn-filtrar-cliente {
+	margin: 0 0 10px 10px;
+}
+
 /*MODALES*/
 /*editar muestreo*/
 #modal-editar-muestreo {
