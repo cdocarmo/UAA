@@ -216,7 +216,7 @@ function limpiarCampos() {
 		}).removeClass("seleccionada");
 	//recorro los inputs para limpiarlos
 	$('input').each(function(){
-		if (!($(this).is('input[type="submit"]') || $(this).is('input[type="reset"]') || $(this).is('input[type="button"]'))){
+		if (!($(this).is('input[type="submit"]') || !$(this).is('input[type="reset"]') || !$(this).is('input[type="button"]'))){
 			$(this).val("");	
 		}
 	});
