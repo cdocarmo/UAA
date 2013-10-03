@@ -359,7 +359,7 @@ function reBind() {
 		} else {
 			$('#ciudades-nuevo').css('border-color', '#CCC');
 		}
-		var msn = $('#direccion-nuevo').html(); //aca hay un bog raro de jquery que no se como arreglar
+		var msn = $('#direccion-nuevo').html(); //aca hay un bug raro de jquery que no se como arreglar
 		//var largo = msn.length;
 		
 		//if (largo < 1) {
@@ -376,6 +376,11 @@ function reBind() {
 		}else{
 			alert('Corrije los campos marcados en rojo.');
 		}
+	});
+	
+	//HABILITAR PUNTO DE REFERENCIA
+	$('.punto-referencia-habilitado').on('click', function(){
+		//llamada ajax para habilitar el punto de referencia.
 	});
 }
 
