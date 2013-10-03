@@ -10,6 +10,7 @@ var USUARIO = "usuario";
 var CLIENTE = "cliente";
 var LOCALIDAD = "localidad";
 var OPTIONCATEGORIAS = null;
+var OPTIONSUBCATEGORIAS = null;
 var OPTIONDEPARTAMENTOS = null;
 
 $(document).ready(function(){
@@ -65,7 +66,12 @@ function reBind() {
 		} else if ($(this).hasClass('fila-analitos')) {
 			$('#nombre').val($(this).find('.nombre').html());
 			cboxCategorias($('#categorias > option[value=' + '"' + $(this).find('.categoria').html() + '"' + ']'));
-			$('#categorias > option[value=' + '"' +$(this).find('.categoria').html() + '"' + ']').prop('selected', true);
+			cboxSubCategorias($('#subcategorias > option[value=' + '"' + $(this).find('.subcategoria').html() + '"' + ']'));
+			$('#categorias > option[value=' + '"' + $(this).find('.categoria').html() + '"' + ']').prop('selected', true);
+			//var option = $(this).find('.subcategoria').html();
+			$('#subcategorias > option[value=' + '"' + $(this).find('.subcategoria').html() + '"' + ']').prop('selected', true);
+			$('#label-subcategorias').show();
+			$('#subcategorias').show();
 			$('#vminp').val($(this).find('.vminp').html());
 			$('#vmaxp').val($(this).find('.vmaxp').html());
 			$('#metodo-unit').val($(this).find('.metodo-unit').html());
@@ -179,10 +185,13 @@ function reBind() {
 	
 	//SUBCATEGORIA
 	$('#categorias option').on('click', function(){
+		var selector = 'select.' + $(this).attr('id');
 		if ($(this).hasClass('tiene-subcategoria')) {
-			var selector = 'select.' + $(this).attr('id');
 			$('#label-subcategorias').show();
 			$(selector).show();
+		} else {
+			$('#label-subcategorias').hide();
+			$('.cbox-subcategoria').hide();
 		}
 	});
 	
@@ -254,14 +263,21 @@ function cboxCategorias(option) {
 	if (OPTIONCATEGORIAS != null) {
 		$(OPTIONCATEGORIAS).prop('selected', false);
 	}
-	OPTIONCATEGORIAS = option
+	OPTIONCATEGORIAS = option;
+}
+
+function cboxSubCategorias(option) {
+	if (OPTIONSUBCATEGORIAS != null) {
+		$(OPTIONSUBCATEGORIAS).prop('selected', false);
+	}
+	OPTIONCATEGORIAS = option;
 }
 
 function cboxDepartamentos(option) {
 	if (OPTIONDEPARTAMENTOS != null) {
 		$(OPTIONDEPARTAMENTOS).prop('selected', false);
 	}
-	OPTIONCATEGORIAS = option
+	OPTIONCATEGORIAS = option;
 }
 
 //para mandar via ajax

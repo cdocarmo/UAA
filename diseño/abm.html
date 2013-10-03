@@ -92,7 +92,7 @@
 	                            			<option value="Org&aacute;nica">Org&aacute;nica</option>
 	                            		</select>
 	                            		<label for="subcategorias" class="hide" id="label-subcategorias">Subcategor&iacute;a</label>
-	                            		<select class="subcategoria inorganica hide" id="subcategorias">
+	                            		<select class="cbox-subcategoria inorganica hide" id="subcategorias">
 	                            			<option value="seleccionar">Seleccionar Categor&iacute;a</option>
 	                            			<option value="Subcategoria1">Subcategoria1</option>
 	                            			<option value="Subcategoria2">Subcategoria2</option>
@@ -119,7 +119,8 @@
 			                        				<th>Id.</th>
 			                        				<th>Nombre</th>
 				                        			<th>Categor&iacute;a</th>
-				                        			<th>VmP</th>
+				                        			<th>Subcategor&iacute;a</th>
+				                        			<!--<th>VmP</th>-->
 				                        			<th>VMP</th>
 			                        			</tr>
 			                        		</thead>
@@ -128,7 +129,8 @@
 			                        				<td class="id">0002</td>
 			                        				<td class="nombre">pH</td>
 			                        				<td class="categoria">Muestreo</td>
-			                        				<td class="vminp">6.5</td>
+			                        				<td class="subcategoria"> </td>
+			                        				<!--<td class="vminp">6.5</td>-->
 			                        				<td class="vmaxp">8.5</td>
 			                        				<td class="metodo-unit invisible">ASDfsljfb k ejbf akjbdf jdsbf</td>
 			                        				<td class="metodo invisible">Dsdfsfdjufb kas bd</td>
@@ -138,7 +140,8 @@
 			                        				<td class="id">0003</td>
 			                        				<td class="nombre">Cloruros</td>
 			                        				<td class="categoria">Inorg&aacute;nica</td>
-			                        				<td class="vminp"> </td>
+			                        				<td class="subcategoria">Subcategoria1</td>
+			                        				<!--<td class="vminp"> </td>-->
 			                        				<td class="vmaxp">2000</td>
 			                        				<td class="metodo-unit invisible">ASDfsljfb k ejbf akjbdf jdsbf</td>
 			                        				<td class="metodo invisible">Dsdfsfdjufb kas bd</td>
@@ -148,7 +151,8 @@
 			                        				<td class="id">0004</td>
 			                        				<td class="nombre">Heter&oacute;trofos</td>
 			                        				<td class="categoria">Microbiolog&iacute;a</td>
-			                        				<td class="vminp"> </td>
+			                        				<td class="subcategoria"> </td>
+			                        				<!--<td class="vminp"> </td>-->
 			                        				<td class="vmaxp">500</td>
 			                        				<td class="metodo-unit invisible">ASDfsljfb k ejbf akjbdf jdsbf</td>
 			                        				<td class="metodo invisible">Dsdfsfdjufb kas bd</td>
@@ -158,7 +162,8 @@
 			                        				<td class="id">0005</td>
 			                        				<td class="nombre">Aldrin</td>
 			                        				<td class="categoria">Org&aacute;nica</td>
-			                        				<td class="vminp">0.03</td>
+			                        				<td class="subcategoria"> </td>
+			                        				<!--<td class="vminp">0.03</td>-->
 			                        				<td class="vmaxp"> </td>
 			                        				<td class="metodo-unit invisible">ASDfsljfb k ejbf akjbdf jdsbf</td>
 			                        				<td class="metodo invisible">Dsdfsfdjufb kas bd</td>
@@ -366,6 +371,7 @@
 		                            	<div class="row-fluid formulario">
 			                            	<fieldset id="ingreso-datos-clientes" class="span4">
 			                            		<legend>Datos</legend>
+			                            		<input type="checkbox" id="habilitado-cliente">Habilitado</input>
 			                            		<label for="nombres-usuario">Nombres</label>
 			                            		<input name="nombres-cliente" id="nombres-cliente" type="text" class="focusable" />
 			                            		<label for="apellidos">Apellidos</label>
@@ -384,8 +390,7 @@
 			                            		<label for="telefono">Tel&eacute;fono</label>
 			                            		<input name="telefono-cliente" id="telefono-cliente" type="text" class="focusable" />
 			                            		<label for="nombre-usuario">Celular</label>
-			                            		<input name="celular-cliente" id="celular-cliente" type="text" class="focusable" /><br />
-			                            		<input type="checkbox" id="habilitado-cliente">Habilitado</input>
+			                            		<input name="celular-cliente" id="celular-cliente" type="text" class="focusable" />
 			                            	</fieldset>
 			                            	<fieldset class="span8" id="clientes">
 			                            		<legend>Listado de Usuarios (para actualizar o eliminar selecciona uno)</legend>
