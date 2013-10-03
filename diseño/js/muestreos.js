@@ -332,7 +332,7 @@ function reBind() {
 	//REVISAR SI EL CODIGO DE REFERENCIA INGRESADO EXISTE O NO
 	
 	$('#numero-referencia').focusout(function() {
-		buscarInsertarNroReferencia($(this).val());
+		//buscarInsertarNroReferencia($(this).val());
 	});
 	
 	//VALIDAR NUEVO PUNTO DE REFERENCIA

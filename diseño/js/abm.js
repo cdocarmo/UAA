@@ -122,7 +122,8 @@ function reBind() {
 	//Boton guardar
 	$('a[id^=guardar]').click(function(){
 		var guardar = true;
-		$('#' + tab_actual + ' input').each(function() {
+		var selector = '#' + tab_actual;
+		$( selector + ' input, ' + selector + ' select').each(function() {
 			var completos = revisarInputs(this);
 			if (completos == false) {
 				guardar = completos;
@@ -172,7 +173,7 @@ function reBind() {
 		}
 	});
 	
-	$('input').focusout(function() {
+	$('input, select').focusout(function() {
 		revisarInputs(this);
 	});
 	
@@ -180,6 +181,7 @@ function reBind() {
 	$('#categorias option').on('click', function(){
 		if ($(this).hasClass('tiene-subcategoria')) {
 			var selector = 'select.' + $(this).attr('id');
+			$('#label-subcategorias').show();
 			$(selector).show();
 		}
 	});
@@ -228,10 +230,16 @@ function crearMsgValidacion(msg, id) {
 function revisarInputs(obj) {
 	var completos = false;
 	if (focus_flag == false) {
-		if (($(obj).val().length < 1) || ($(obj).val() == "__.___")) {
+		if (($(obj).val().length < 1) || ($(obj).val() == "__.___") || ($(obj).val() == 'seleccionar')) {
 			//quitarMsg(this) deberia estar en un condicional quizas...
 			quitarMsg(obj);
-			$(crearMsgValidacion(msg_input_vacio, $(obj).attr("id"))).appendTo($(obj).prev());
+			var objeto_label;
+			if (obj.nodeName == 'SELECT') {
+				objeto_label = $(obj).prev();
+			} else {
+				objeto_label = $(obj).prev();
+			}
+			$(crearMsgValidacion(msg_input_vacio, $(obj).attr("id"))).appendTo(objeto_label);
 		}else{
 			completos = true;
 			quitarMsg(obj);
