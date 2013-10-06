@@ -306,7 +306,8 @@ function reBind() {
 	//CERRAR MODAL
 	$('#modal-nuevo-punto-referencia .close, #cerrar-nueva-referencia').on('click', function() {
 		$('.nueva-ciudad-localidad').hide();
-		$('#ciudades-nuevo').attr('disabled', false);
+		//$('#ciudades-nuevo').attr('disabled', false);
+		$('#departamentos-nuevo option[value="seleccionar"]').prop('selected', true);
 		ocultar_caja_nueva_ciudad = false;
 	});
 	
@@ -331,7 +332,6 @@ function reBind() {
 	$('#departamentos-nuevo option').on('click', function(e){
 		e.preventDefault();
 		if ($(this).val() != 'seleccionar') {
-			$('#ciudades-nuevo').removeAttr('disabled');
 			//llamada ajax para cargar ciudades del departamento seleccionado
 		}
 	});
@@ -360,14 +360,14 @@ function reBind() {
 			$('#ciudades-nuevo').css('border-color', '#CCC');
 		}
 		var msn = $('#direccion-nuevo').html(); //aca hay un bug raro de jquery que no se como arreglar
-		//var largo = msn.length;
+		var largo = msn.length;
 		
-		//if (largo < 1) {
-		//	$('#direccion-nuevo').css('border-color', 'red');
-		//	validar = false;
-		//} else {
-		//	$('#direccion-nuevo').css('border-color', '#CCC');
-		//}
+		if (largo < 1) {
+			$('#direccion-nuevo').css('border-color', 'red');
+			validar = false;
+		} else {
+			$('#direccion-nuevo').css('border-color', '#CCC');
+		}
 		if (validar) {
 			//llamada ajax para guardar nueva localidad
 			$('.nueva-ciudad-localidad').hide();
