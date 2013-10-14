@@ -14,5 +14,20 @@ class LocalidadAdmin(admin.ModelAdmin):
 	search_fields = ('nombre', )
 	ordering = ('nombre', )
 
+
+class LugarAdmin(admin.ModelAdmin):
+	#prepopulated_fields = {"slug": ("nombre", )}
+	fieldsets = (
+			(None, {
+					'fields': (('codigo'), ('cliente'),
+						('localidad', 'departamento', 'direccion'))
+				}),
+		)
+	list_display = ['id', 'codigo', 'localidad', 'departamento', 'direccion']
+	list_filter = ['departamento']
+	search_fields = ('codigo', )
+	ordering = ('codigo', )
+
 admin.site.register(Localidad, LocalidadAdmin)
+admin.site.register(Lugar, LugarAdmin)
 admin.site.register(Departamento)

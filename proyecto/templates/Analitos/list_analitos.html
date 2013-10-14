@@ -6,21 +6,23 @@
 				<th>Id.</th>
 				<th>Nombre</th>
     			<th>Categor&iacute;a</th>
-    			<th>VmP</th>
     			<th>VMP</th>
+    			<th>Método utilizado (UNIT)</th>
+
 			</tr>
 		</thead>
 		<tbody>
 			{% for analito in analitos %}
 				<tr class="fila-analitos">
-					<td>{{ analito.id }}</td>
-					<td>{{ analito.nombre }}</td>
-					<td>{{ analito.categoria }}</td>
-					<td>{{ analito.valor_minimo }}</td>
-					<td>{{ analito.valor_maximo }}</td>
-					<td class="metodo-unit invisible">ASDfsljfb k ejbf akjbdf jdsbf</td>
-					<td class="metodo invisible">Dsdfsfdjufb kas bd</td>
-					<td class="observaciones invisible">FADsdkjfb s sdkjfbasd jhabsd faj</td>	
+					<td class="numero-referencia">{{ analito.id }}</td>
+					<td class="nombre">{{ analito.nombre }}</td>
+					<td class="categorias">{{ analito.categoria }}</td>
+					<td class="vmaxp">{{ analito.valor_maximo }}</td>
+					<td class="metodo-unit">{{ analito.metodo_unit }}</td>
+					<td class="observaciones invisible">{{ analito.observaciones }}</td>
+					<td class="metodo invisible">{{ analito.metodo }}</td>
+					<!-- <td class="observaciones invisible">FADsdkjfb s sdkjfbasd jhabsd faj</td>	
+					-->
 				</tr>
 			{% endfor %}			
 		</tbody>

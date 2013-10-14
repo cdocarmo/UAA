@@ -9,8 +9,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from forms import *
 from django.contrib.auth.models import User
-
+import json
 from usuarios.models import UserProfile
+from localidades.models import Lugar
+from django.utils import simplejson
 
 def registro_cliente(request, step=1):
     #step = request.POST.get('step','1')
@@ -57,3 +59,15 @@ def cargo_clientes_pendientes(request):
     return render_to_response('clientes/list_clientes_pendientes.html',
                             {'clientes':clientes}, 
                             context_instance=RequestContext(request))
+
+
+def cargo_lugar_cliente(request):
+    if request.is_ajax():
+        print request.POST['numero']
+        if request.POST['numero']:
+            lugar = Lugar.objects.get(codigo=request.POST['numero'])
+            if lugar:
+                return HttpResponse(json.dumps( {'depo': str(lugar.departamento) , 
+                    'locali': str(lugar.localidad) , 'dire': str(lugar.direccion)}))
+
+    return HttpResponse(json.dumps( {'resul': "mensagem"}))

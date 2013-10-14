@@ -32,6 +32,7 @@
 							<div class="row-fluid formulario">
 						    	<fieldset id="ingreso-datos-analitos" class="span4">
 						    		<legend>Datos</legend>
+                                    {{ formAnalito.id }}
 						    		<label for="nombre">Nombre</label>
 						    		{{ formAnalito.nombre }}
 						    		<label for="categoria">Categor&iacute;a</label>
@@ -70,7 +71,7 @@
                     	<form class="formularios-dos-columnas" method='post' action=''>{% csrf_token %}
                         	<div class="row-fluid formulario">
                             	<fieldset id="ingreso-datos-localidades" class="span4">
-                            		
+                            		{{ formLocalidad.id }}
                                     <legend>Datos</legend>
                                     <label for="nombre">Nombre</label>
                                     {{ formLocalidad.nombre }}
@@ -78,8 +79,6 @@
                                     {{ formLocalidad.departamento }}
                                     <label for="coordenadas">Coordenadas Geográficas</label>
                                     {{ formLocalidad.coordenadas }}
-                                    <label for="dist_mdeo">Distancia desde Montevideo (en KMs)</label>           
-                                    {{ formLocalidad.dist_mdeo }}
                             	</fieldset>
                             	<fieldset class="span8" id="Localidades">
                             		<legend>Listado de Localidades (para actualizar o eliminar selecciona uno)</legend>
@@ -113,25 +112,19 @@
                                     <div class="row-fluid formulario">
                                         <fieldset id="ingreso-datos-clientes" class="span4">
                                             <legend>Datos</legend>
-                                            <label for="nombres-usuario">Nombres</label>
-                                            <input name="nombres-cliente" id="nombres-cliente" type="text" />
-                                            <label for="apellidos">Apellidos</label>
-                                            <input name="apellidos-cliente" id="apellidos-cliente" type="text" />
+                                            <label for="nombres-usuario">Empresa</label>
+                                            {{ formCliente.razon }}
                                             <label for="domicilio">Domicilio</label>
-                                            <input name="domicilio" id="domicilio-cliente" type="text" />
-                                            <label for="localidad">Localidad</label>
-                                            <input name="localidad" id="localidad-cliente" type="text" />
-                                            <label for="domicilio">Domicilio</label>
-                                            <select id="clientes-departamento">
-                                                <option>Artigas</option>
-                                                <option>Salto</option>
-                                                <option>Rivera</option>
-                                                <option>Paysand&uacute;</option>
-                                            </select>
+                                            {{ formCliente.domicilio }}
                                             <label for="telefono">Tel&eacute;fono</label>
-                                            <input name="telefono-cliente" id="telefono-cliente" type="text" />
+                                            {{ formCliente.telefono }}
                                             <label for="nombre-usuario">Celular</label>
-                                            <input name="celular-cliente" id="celular-cliente" type="text" /><br />
+                                            {{ formCliente.celular }}
+                                            <label for="localidad">Localidad</label>
+                                            {{ formCliente.localidad }}
+                                            <label for="apellidos">Responsable</label>
+                                            {{ formCliente.firstname }}{{ formCliente.lastname }}
+                                            <br />
                                             <input type="checkbox" id="habilitado-cliente">Habilitado</input>
                                         </fieldset>
                                         <fieldset class="span8" id="clientes">

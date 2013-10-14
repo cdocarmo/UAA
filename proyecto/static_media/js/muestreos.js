@@ -9,18 +9,35 @@ var agregar_muestreo = true;
 var analitos_marcados = 0;
 var ultimo_muestreo = null;
 var item_muestreo_anterior = null;
+var boton_ver_anterior = null;
 var col_analitos = new Array();
+
+//banderas
+var select_departamentos = false;
+var select_ciudades = false;
+var select_direcciones = false;
 
 //TODO: debo capturar el enter para que no me guarde sin advertencia previa.
 
 $(document).ready(function(){
+
 	limpiar(true);
 	reBind2();
+	cargo_cate_analitos();
 });
 
 //EVENTOS
 
 function reBind2() {
+
+	$('#numero-referencia').keypress(function(e){
+		if (e.which == 13 ) {
+			e.preventDefault();  // Evito que cuando hago enter se ejecute el evento que usa el boton Buscar Punto de Referencia
+			// Aqui deberia ir lo que se hace si el numero del punto de referencia esta bien colocado
+		}
+		// aqui llamar a un autocompletar
+	});
+		
 	//PESTAÑA "NUEVO PEDIDO"
 	$('#btn-agregar-muestreo').on('click', function(){
 		var msg_alert = "";
@@ -118,45 +135,84 @@ function reBind2() {
 		//alert(MODO);
 	});
 	
+	//PESTAÑA "MUESTREOS PENDIENTES"
+	
+	$('.editar-muestreo').on('click', function(){
+		$('#modal-editar-muestreo').modal('show');
+		//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
+		//hardcodeado: este array debe ser llenado con lo obtenido via ajax
+		var id_muestreo = $(this).parent().parent().parent().parent().attr('id'); //obtengo el id para buscar el muestreo
+		$('#modal-editar-muestreo').find('#guardar-edicion-muestreo').attr('data-id', id_muestreo);
+		
+	});
+	
 	//PESTAÑA "MUESTREOS ANTERIORES"
 	
 	$('.ver').on('click', function(){
-		if (ultimo_muestreo != null) {
-			$(ultimo_muestreo).remove();
-		}
-		var id_muestreo = $(this).parent().parent().find('.numero-muestreo').html();
-		var fila = crearFilaConInfoDeMuestreos(id_muestreo);
-		var fila_anterior = $(this).parent().parent();
-		//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
-		//hardcodeado: este aray debe ser llenado con lo obtenido via ajax
-		col_analitos = [5,6,7];
-		var html_cod = $('<td colspan="4" class="datos-muestreo">' +
-		'\t<ul>' +
-		'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <input value="Salto"></li>' +
-		'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <input value="Salto"></li>' +
-		'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <input value="Oficial 1º 2016"></li>' +
-		'\t\t<li><span class="item-muestreo-geo">Nro. de Referencia: </span> <input value="MN9338"></li>' +
-		'\t</ul>' +
-		'</td>' +
-		'<td colspan="1">' +
-		'\t\t<h4>Agregar otro analito</h4>' +
-		'\t\t<select id="listado-analitos"><option value="1">Analito 1</option><option value="2">Analito 2</option><option value="3">Analito 3</option></select>' +
-		'\t\t<a href="#" class="aplicar-cambios btn disabled">Aplicar Cambios</a>' +
-		'</td>' +
-		'<td colspan="2" class="datos-muestreo">' +
-		'\t<ul class="item-muestreo">' +
-		
-		'\t\t<li class="item-analitos" value="5"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
-		'\t\t<li class="item-analitos" value="6"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
-		'\t\t<li class="item-analitos" value="7"><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>' +
-		'\t</ul>' +
-		'</td>');
-		//se debe prestar atencion a los values de los tags, ahi debe ir guardado el id del analito
-		$(fila).append(html_cod);
-		$(fila_anterior).after(fila);
-		$(fila).show('slow');
-		ultimo_muestreo = fila;
-		reBind();
+			if (ocultarMostrarMuestreos(this)) {
+				return;
+			}
+			
+			if (ultimo_muestreo != null) {
+				$(ultimo_muestreo).remove();
+			}
+			
+			if ($(this).hasClass('editar')) {
+				var id_pedido = $(this).parent().parent().find('.numero-muestreo').html();	
+			}else{
+				var id_pedido = $(this).parent().parent().find('.numero-pedido').html();
+			}
+			
+			var fila = null;
+			var fila_anterior = $(this).parent().parent();
+			//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
+			//se debe crear un for para iterar sobre cada muestreo del pedido obtenido y pasar los datos al html de abajo
+			var html_cod = "";
+			var max = 3;
+			for (var i=0;i<max;i++) {
+				html_cod = html_cod + '<td colspan="3" class="datos-muestreo">' +
+				'\t<ul class="lista-datos-muestreo">' +
+				'\t\t<li><span class="item-muestreo-geo">Número de muestreo:</span> <b class="pull-right nro-muestreo">00000</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Código de Referencia:</span> <b class="pull-right cod-referencia">XXXXX</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <b class="pull-right ciudad">Salto</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <b class="pull-right departamento">Salto</b></li>' +
+				'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <b class="pull-right direccion">Oficial 1º 2016</b></li>' +
+				'\t</ul>' +
+				'</td>' +
+				'<td colspan="3" class="datos-muestreo">' +
+				'\t<ul class="lista-datos-analitos">' +
+				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
+				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
+				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>';
+				if ($(this).hasClass('editar')) {
+					html_cod = html_cod + '\t\t<li><button class="btn btn-success editar-muestreo" id="id' + i + '">Editar Muestreo</button></li>';	
+				} // la variable "i" debe ser sustituida por la variable que contiene el id del muestreo
+				
+				'\t</ul>' +
+				'</td>' +
+				'<td> </td>';
+				fila = crearFilaConInfoDeMuestreos(id_pedido, i); //segundo parametro es temporal, debe sustituirse por el id de muestreo correcto
+				$(fila).html(html_cod);
+				$(fila_anterior).after(fila);
+				$(fila).show('slow');
+				if (i == (max - 1)) {
+					
+				}
+				fila_anterior = fila;
+				html_cod = "";
+			}
+			//ESTO COMENTADO A CONTINUACION DEBE SER ELIMINADO
+			//fila = crearFilaConInfoDeMuestreos(id_pedido);
+			//html_cod = '\t\t<td colspan="3"></td>' +
+			//'\t\t<td colspan="3"><button class="btn btn-success imprimir-datos-muestreo">Imprimir Datos</button></td>';
+			//ocultarMostrarMuestreos(this);
+			//$(fila).html(html_cod);
+			//$(fila_anterior).after(fila);
+			//$(fila).show('slow');
+			//html_cod = "";
+			//ultimo_muestreo = fila;
+			
+			reBind2();
 	});
 	
 	//CAMBIAR ICONO DE ANALITO AL PASAR PUNTERO POR ENCIMA
@@ -205,23 +261,232 @@ function reBind2() {
 	});
 	
 	//finalizar edicion muestreo
-	$('.aplicar-cambios').on('click', function(){
-		if (validarCamposEdicionDelMuestreo()) {
+	$('#guardar-edicion-muestreo').on('click', function(){
+		if (validarCamposEdicionDelMuestreo($(this).attr('data-id'))) {
 			//llamada ajax
 			alert('Edición finalizada.');
+			$('#modal-editar-muestreo').modal('hide');
+			
+		}//else{
+			//alert('problemas');
+		//}
+	});
+	
+	//NUEVO PUNTO DE REFERENCIA
+	
+	$('#nuevo-punto-referencia').on('click', function(e) {
+		//alert('anda');
+		e.preventDefault();
+		$('#modal-nuevo-punto-referencia').modal('show');
+	});
+	
+	var ocultar_boton_referencia = false;
+	
+	$('#buscar-punto-referencia').on('click', function(e) {
+		e.preventDefault();
+		if (!ocultar_boton_referencia) {
+			$('.buscar-referencia').show();
+			$('#buscar-punto-referencia').html('Ocultar Búsqueda');
+			ocultar_boton_referencia = true;
+		} else {
+			$('.buscar-referencia').hide();
+			$('#buscar-punto-referencia').html('Buscar Punto de Referencia');
+			ocultar_boton_referencia = false;
+		}
+	});
+	
+	var ocultar_caja_nueva_ciudad = false;
+	
+	$('#btn-nueva-ciudad').on('click', function(e) {
+		e.preventDefault();
+		if (!ocultar_caja_nueva_ciudad) {
+			$('.nueva-ciudad-localidad').show();
+			$('#ciudades-nuevo').attr('disabled', true);
+			ocultar_caja_nueva_ciudad = true;
+		}
+	});
+	
+	//CERRAR MODAL
+	$('#modal-nuevo-punto-referencia .close, #cerrar-nueva-referencia').on('click', function() {
+		$('.nueva-ciudad-localidad').hide();
+		$('#ciudades-nuevo').attr('disabled', false);
+		ocultar_caja_nueva_ciudad = false;
+	});
+	
+	//SELECTEDS
+	$('#departamentos option').on('click', function(e){
+		e.preventDefault();
+		$('#ciudades').removeAttr('disabled');
+		//llamada ajax para cargar ciudades del departamento seleccionado
+	});
+	
+	$('#ciudades').on('click', function(e){
+		e.preventDefault();
+		$('#direcciones').removeAttr('disabled');
+		//llamada ajax para cargar direcciones de la ciudad seleccionada
+	});
+	
+	//$('#direcciones').on('click', function(e){
+	//	e.preventDefault();
+		//hacer nada
+	//});
+	//para el modal nuevo punto geográfico
+	$('#departamentos-nuevo option').on('click', function(e){
+		e.preventDefault();
+		if ($(this).val() != 'seleccionar') {
+			$('#ciudades-nuevo').removeAttr('disabled');
+			//llamada ajax para cargar ciudades del departamento seleccionado
+		}
+	});
+	
+	//VALIDAR PUNTO DE REFERENCIA
+	//REVISAR SI EL CODIGO DE REFERENCIA INGRESADO EXISTE O NO
+	
+	//$('#numero-referencia').focusout(function() {
+	//	buscarInsertarNroReferencia1($(this).val());
+	//});
+
+	$( "#numero-referencia" ).keypress(function( event ) {
+		if ( event.which == 13 ) {
+	 		buscarInsertarNroReferencia($(this).val());
+		}
+
+	});
+
+    $('#depto_new').change(function(event){
+    	cargar_localidad($(this).val(), 'ciudades-nuevo');
+    });
+
+    $('#depto').change(function(event){
+    	cargar_localidad($(this).val(), 'ciudades');
+    });
+	
+    $('#ciudades').change(function(event){
+    	cargar_lugar($('#depto').val(), $(this).val());
+    });
+
+    $('#direccion').on('click', function(event){
+    	console.log("DD");
+
+    	busco_lugar($('#depto').val(), $('#ciudades').val(), $(this).val());
+    });
+
+	//VALIDAR NUEVO PUNTO DE REFERENCIA
+	
+	$('#btn-nuevo-punto-referencia').on('click', function() {
+		var validar = true;
+		if ($('#departamentos-nuevo').val() == 'seleccionar') {
+			$('#departamentos-nuevo').css('border-color', 'red');
+			validar = false;
+		} else {
+			$('#departamentos-nuevo').css('border-color', '#CCC');
+		}
+		if ($('#ciudades-nuevo').val() == 'seleccionar') {
+			$('#ciudades-nuevo').css('border-color', 'red');
+			validar = false;
+		} else {
+			$('#ciudades-nuevo').css('border-color', '#CCC');
+		}
+		var msn = $('#direccion-nuevo').html(); //aca hay un bog raro de jquery que no se como arreglar
+		//var largo = msn.length;
+		
+		//if (largo < 1) {
+		//	$('#direccion-nuevo').css('border-color', 'red');
+		//	validar = false;
+		//} else {
+		//	$('#direccion-nuevo').css('border-color', '#CCC');
+		//}
+		if (validar) {
+			//llamada ajax para guardar nueva localidad
+			$('.nueva-ciudad-localidad').hide();
+			$('#ciudades-nuevo').attr('disabled', false);
+			ocultar_caja_nueva_ciudad = false;
+		}else{
+			alert('Corrije los campos marcados en rojo.');
 		}
 	});
 }
 
-function validarCamposEdicionDelMuestreo() {
-	$('.item-muestreo-geo').parent().each(function(){
-		if (isEmpty($(this).find('input').val())) {
-			$(this).child().css('color', 'red');
-			return false;
-		}else{
-			return true;
+function ocultarMostrarMuestreos(obj) {
+	if ($(obj).hasClass('ocultar')) {
+		$('tr[class*=pedido]').remove();
+		$(obj).removeClass('ocultar').addClass('ver');
+		$(obj).html('Ver');
+		boton_ver_anterior = obj;
+		return true;
+	}else{
+		$('tr[class*=pedido]').remove();
+		$(obj).removeClass('ver').addClass('ocultar');
+		if (boton_ver_anterior != null) {
+			// para que el boton anterior cambie a funcion "ver".
+			$(boton_ver_anterior).removeClass('ocultar').addClass('ver');
+			$(boton_ver_anterior).html('Ver');
+		}
+		$(obj).html('Ocultar');
+		boton_ver_anterior = obj;
+		return false;
+	}
+}
+
+function validarCamposEdicionDelMuestreo(id) {
+	var msg_alert = "";
+	var editar_muestreo = true;
+	//recoger todos los datos en un objeto
+	var obj = new Object();
+	obj['id'] = id;
+	obj['departamento'] = $('#departamentos-edicion').val();
+	obj['ciudad'] = $('#ciudades-edicion').val();
+	obj['direccion'] = $('#direccion-edicion').val();
+	obj['referencia'] = $('#numero-referencia-edicion').val();
+	var analitos = new Array();
+	$('.analito').each(function(){
+		if ($(this).is(':checked')) {
+			analitos.push($(this).attr('value'));
+			analitos_marcados++;	
 		}
 	});
+		
+	if ($('#direccion-edicion').val().length < 1) {
+		if ($('#locacion-edicion').find('#msg-vacio-direccion').length == 0) {
+			quitarMsg($('#direccion-edicion'));
+			$(crearMsgValidacion('Campo obligatorio', 'direccion-edicion')).appendTo($('#direccion-edicion').prev());	
+		}
+		editar_muestreo = false;
+	}else{
+		quitarMsg($('#direccion-edicion'));
+	}
+		
+	if (analitos_marcados > 0) {
+		quitarMsg($('#analitos-edicion'));
+		obj['col-analitos'] = analitos;
+	}else {
+		if ($('#analitos-edicion').find('#msg-vacio-analitos').length == 0) {
+			$(crearMsgValidacion('Debes seleccionar al menos un analito', 'analitos-edicion')).appendTo($('#analitos-edicion legend').append());	
+		}
+		editar_muestreo = false;
+	}
+	if (editar_muestreo) {
+		actualizarFilaMuestreo(obj);
+		limpiarEdicionMuestreo();
+		return true;
+	}else{
+		return false;
+			//agregar_muestreo = true;
+	}
+	//analitos_marcados = 0;
+}
+
+function actualizarFilaMuestreo(obj) {
+	$('#' + obj['id']).find('.cod-referencia').html(obj['referencia']);
+	$('#' + obj['id']).find('.ciudad').html(obj['ciudad']);
+	$('#' + obj['id']).find('.departamento').html(obj['departamento']);
+	$('#' + obj['id']).find('.direccion').html(obj['direccion']);
+	
+	$('#' + obj['id']).find('.lista-datos-analitos').empty();
+	for (var i=0; i<obj['col-analitos'].length; i++) {
+		$('#' + obj['id']).find('.lista-datos-analitos').append('<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;' + obj['col-analitos'][i] + '</li>');
+	}
+	
 }
 
 function btnHabilitarCambios(boton) {
@@ -263,8 +528,8 @@ function crearLineaNuevoMuestreo(obj) {
 	$('#lista-muestreos').prepend(nuevo_nodo);
 }
 
-function crearFilaConInfoDeMuestreos(numero_muestreo) {
-	var nodo_fila = $('<tr id="id' + numero_muestreo + '" class="fila-muestreo"> </tr>').hide();
+function crearFilaConInfoDeMuestreos(numero_pedido, id_muestreo) {
+	var nodo_fila = $('<tr class="pedido' + numero_pedido + ' fila-muestreo" id="muestreo' + id_muestreo + '"> </tr>').hide();
 	return nodo_fila;
 }
 
@@ -290,6 +555,7 @@ function quitarMensajes() {
 }
 
 function limpiar(total) {
+	//si el parametro total es true entonces limpia las lineas de los muestreos agregados arriba del formulario
 	$('.analito').each(function(){
 		$(this).attr('checked', false);
 	});
@@ -303,4 +569,118 @@ function limpiar(total) {
 			$('.ningun-muestreo').css('display', 'block');
 		});
 	}
+}
+
+function limpiarEdicionMuestreo() {
+	$('.analito').each(function(){
+		$(this).attr('checked', false);
+	});
+	$('#departamentos-edicion').prop('selectedIndex', 0);
+	$('#ciudades-edicion').prop('selectedIndex', 0);
+	$('#direccion-edicion').val('');
+	$('#numero-referencia-edicion').val('');
+}
+
+function buscarSiExisteNroReferencia(nro_referencia) {
+	//recibe el codigo ingresado y si existe retorna un html con los datos
+	//si no retorna un <p>No exite este número de referencia</p>
+	var respuesta = "";
+	return respuesta;
+}
+
+function buscarInsertarNroReferencia (argument) {
+	jQuery.ajax({
+	    type: 'POST',
+	    url: "cliente/cargo-lugar/",
+	    data: { numero: argument },
+	    dataType: 'json',
+	    success:  function(json) {
+			$('.buscar-referencia').hide();
+			$('#buscar-punto-referencia').html('Buscar Punto de Referencia');
+			ocultar_boton_referencia = false;
+
+	    	$('#datos-referencia li').remove()
+			$('#datos-referencia').append( '<li> Localidad: ' + json.locali + '</li>');
+			$('#datos-referencia').append( '<li> Departamento: ' + json.depo + '</li>');
+			$('#datos-referencia').append( '<li> Dirección: ' + json.dire + '</li>' );
+		},
+		error : function(xhr,errmsg,err) {
+			$('#datos-referencia li').remove()
+			console.log(xhr.status + ": " + xhr.responseText);
+		}
+	});
+
+
+	// body...
+}
+
+function cargar_localidad (argument, xItem) {
+	jQuery.ajax({
+	    type: 'POST',
+	    url: "localidades/cargo-ciudad/",
+	    data: { numero: argument },
+	    dataType: 'json',
+	    success:  function(data) {
+	        var options = '<option value="">Selecciona una ciudad</option>';
+	        for (var i = 0; i < data.length; i++){
+	            options += '<option value="'+data[i]["pk"]+'">' +data[i]["fields"]["nombre"] +'</option>'
+	        }
+	        $('#' + xItem).html(options)
+	        $("#"+ xItem +"option:first").attr('selected', 'selected');	    	
+
+		},
+		error : function(xhr,errmsg,err) {
+			$('#datos-referencia li').remove()
+			console.log(xhr.status + ": " + xhr.responseText);
+		}
+	});
+}
+
+
+function cargar_lugar (xDepa, xCiudad) {
+	jQuery.ajax({
+	    type: 'POST',
+	    url: "localidades/cargo-lugar/",
+	    data: { Depa: xDepa, Ciudad: xCiudad},
+	    dataType: 'json',
+	    success:  function(data) {
+	        var options = '<option value="">Selecciona una direccion</option>';
+	        for (var i = 0; i < data.length; i++){
+	            options += '<option value="'+data[i]["pk"]+'">' +data[i]["fields"]["direccion"] +'</option>'
+	        }
+	        $('#direccion').html(options)
+	        $("#direccion option:first").attr('selected', 'selected');	    	
+
+		},
+		error : function(xhr,errmsg,err) {
+			$('#datos-referencia li').remove()
+			console.log(xhr.status + ": " + xhr.responseText);
+		}
+	});
+}
+
+function busco_lugar (xLugar) {
+	jQuery.ajax({
+	    type: 'POST',
+	    url: "localidades/busco-lugar/",
+	    data: { Lugar: xLugar},
+	    dataType: 'json',
+	    success:  function(data) {
+	    	console.log(data);
+			$('#direccion').value("FFF");
+
+		},
+		error : function(xhr,errmsg,err) {
+			$('#datos-referencia li').remove()
+			console.log(xhr.status + ": " + xhr.responseText);
+		}
+	});
+}
+
+
+function cargo_cate_analitos(datos) 
+{
+	$('#analidos-pedido').load('/analitos/cate-analitos-pedidos/', function(){
+		reBind2();
+	});
 }

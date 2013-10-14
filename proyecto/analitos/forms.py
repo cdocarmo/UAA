@@ -11,13 +11,19 @@ from popup.widgets import SelectWithPopUp
 
 class AnalitoForm(forms.Form):
 
+    id = forms.CharField(label=_(u'id'), max_length=30, 
+        widget=forms.TextInput(
+        attrs={'class':'input-text', 'id':"id-analito", 'name':"id-analito", 
+        'type':'hidden', 'value':"0"}),
+        required=True)
 
     nombre = forms.CharField(label=_(u'Nombre'), max_length=30, 
             widget=forms.TextInput(
             attrs={'class':'input-text', 'id':"nombre", 'name':"nombre"}),
             required=True)
     detalle = forms.CharField(label=u"Detalle", required=False,
-        widget=forms.Textarea(attrs ={'class':'txt-area', 'cols': '70', 'rows': '3'}))
+        widget=forms.Textarea(attrs ={'class':'txt-area', 'cols': '70', 
+            'rows': '3', 'id':"detalle"}))
 
     categoria = forms.ModelChoiceField(queryset=Categoria.objects.none(), widget=SelectWithPopUp)
 

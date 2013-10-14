@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 import datetime
 from django.contrib.auth.models import User
-
+from usuarios.models import UserProfile
 
 class Departamento(models.Model):
 	nombre = models.CharField(max_length=100, verbose_name=u'Departamento')
@@ -22,9 +22,10 @@ class Localidad(models.Model):
 
 
 class Lugar(models.Model):
-
+	codigo = models.CharField(max_length=50)
+	cliente = models.ForeignKey(UserProfile)
 	localidad = models.ForeignKey(Localidad)
 	departamento = models.ForeignKey(Departamento)
 	direccion = models.CharField(max_length=50)
 	def __unicode__(self):
-		return _("%s,  %s") % (self.localidad, self.direccion)
+		return _("%s") % (self.direccion)

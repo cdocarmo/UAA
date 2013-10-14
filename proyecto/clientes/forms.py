@@ -66,41 +66,45 @@ class ClienteForm(ModelForm):
 
     firstname = forms.CharField(label=_(u'Nombre'), max_length=30, 
                                widget=forms.TextInput(attrs={'class':"input-xxlarge",
-                                'name':"nombre-usuario", 'id':"nombre-usuario", 'type':"text"}), help_text = ayudas['username'])
+                                'name':"nombres-cliente", 'id':"nombres-cliente", 'type':"text"}), help_text = ayudas['username'])
 
     lastname = forms.CharField(label=_(u'Apellido'), max_length=30, 
                                widget=forms.TextInput(attrs={'class':"input-xxlarge",
-                                'name':"apellidos", 'id':"apellidos", 'type':"text"}), help_text = ayudas['username'])
+                                'name':"apellidos-cliente", 'id':"apellidos-cliente", 'type':"text"}), help_text = ayudas['username'])
 
 
     email = forms.CharField(label=_(u'email'), max_length=30, 
                                widget=forms.TextInput(attrs={'class':"input-xxlarge",
-                                'name':"email", 'id':"email", 'type':"text"}), help_text = ayudas['username'])
+                                'name':"email-cliente", 'id':"email-cliente", 'type':"text"}), help_text = ayudas['username'])
 
 
     domicilio = forms.CharField(label=_(u'domicilio'), max_length=30, 
                                widget=forms.TextInput(attrs={'class':"input-xxlarge",
-                                'name':"domicilio", 'id':"domicilio", 'type':"text"}), help_text = ayudas['username'])
+                                'name':"domicilio-cliente", 'id':"domicilio-cliente", 'type':"text"}), help_text = ayudas['username'])
 
-    ciudad = forms.ModelChoiceField(queryset=Localidad.objects.none(), widget=SelectWithPopUp)
+    localidad = forms.ModelChoiceField(queryset=Localidad.objects.none(), widget=SelectWithPopUp)
 
 
     telefono = forms.CharField(label=_(u'telefono'), max_length=30, 
                                widget=forms.TextInput(attrs={'class':"input-xxlarge",
-                                'name':"telefono", 'id':"telefono", 'type':"text"}), help_text = ayudas['username'])
+                                'name':"telefono-cliente", 'id':"telefono-cliente", 'type':"text"}), help_text = ayudas['username'])
+
+    celular = forms.CharField(label=_(u'celular'), max_length=30, 
+                               widget=forms.TextInput(attrs={'class':"input-xxlarge",
+                                'name':"celular-cliente", 'id':"celular-cliente", 'type':"text"}), help_text = ayudas['username'])
 
 
     razon = forms.CharField(label=_(u'razon'), max_length=30, 
                                widget=forms.TextInput(attrs={'class':"input-xxlarge",
-                                'name':"razon", 'id':"razon", 'type':"text"}), help_text = ayudas['username'])
+                                'name':"razon-cliente", 'id':"razon-cliente", 'type':"text"}), help_text = ayudas['username'])
     #step = forms.IntegerField(widget=forms.HiddenInput, initial=1)
 
 
     class Meta:
         model = Cliente
-        fields = ("firstname", "lastname", "email", "domicilio", "telefono", "razon")
+        fields = ("firstname", "lastname", "email", "domicilio", "telefono", "razon", "celular")
 
 
     def __init__(self, *args, **kwargs):
         super(ClienteForm, self).__init__(*args, **kwargs)
-        self.fields['categoria'].queryset = Categoria.objects.all()
+        self.fields['localidad'].queryset = Localidad.objects.all()

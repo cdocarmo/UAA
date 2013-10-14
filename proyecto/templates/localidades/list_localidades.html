@@ -7,17 +7,15 @@
 				<th>Nombre</th>
     			<th>Departamento</th>
     			<th>Coordenadas Geogr&aacute;ficas</th>
-    			<th>Distancia desde Montevideo (en KMs)</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for localidad in localidades %}
 				<tr class="fila-localidades">
-					<td>{{ localidad.id }}</td>
-					<td>{{ localidad.nombre }}</td>
-					<td>{{ localidad.departamento }}</td>
-					<td>{{ localidad.coordenadas }}</td>
-					<td>{{ localidad.dist_mdeo }}</td>
+					<td class="numero-referencia">{{ localidad.id }}</td>
+					<td td class="ciudad">{{ localidad.nombre }}</td>
+					<td class="departamento">{{ localidad.departamento }}</td>
+					<td class="coordenadas">{{ localidad.coordenadas }}</td>
 				</tr>
 			{% endfor %}			
 		</tbody>

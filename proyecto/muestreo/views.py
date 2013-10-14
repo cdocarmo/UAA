@@ -8,8 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from analitos.forms import *
 from localidades.forms import *
+from localidades.models import *
 from usuarios.forms import *
-
+from muestreo.forms import *
+import string
 
 @login_required(login_url='/login')
 def index(request):
@@ -28,11 +30,35 @@ def index(request):
 	            analito.save()
 
 	            return HttpResponseRedirect('')
+        if 'btn-nuevo-punto-referencia' in request.POST:
+			formLugar = NuevoLugarForm(request.POST)
+			print formLugar.errors
+			if formLugar.is_valid():
+				if string.strip(formLugar.cleaned_data['new_ciudad']) != "":
+					xCiudad = Localidad(
+					nombre = formLugar.cleaned_data['new_ciudad'], 
+					departamento = formLugar.cleaned_data['departamento'])
+					xCiudad.save()
+				else:
+					xCiudad = formLugar.cleaned_data['cuidad']
+
+
+				xCli = request.user.get_profile()
+				xLugar = Lugar(
+				codigo = "1",
+				cliente = xCli,
+				localidad = xCiudad,
+				departamento = formLugar.cleaned_data['departamento'],
+				direccion = formLugar.cleaned_data['direccion'])
+				xLugar.save()
+	        	return HttpResponseRedirect('')
     else:
-        formAnalito = AnalitoForm()
+        fromPedido = PedidoForm()
         formLocalidad = LocalidadForm()
+        formLugar = NuevoLugarForm()
     return render_to_response('index.html',
-                            {'formAnalito':formAnalito,
-                            'formLocalidad':formLocalidad}, 
+                            {'fromPedido':fromPedido,
+                            'formLocalidad':formLocalidad,
+                            'formLugar':formLugar}, 
                             context_instance=RequestContext(request))
 

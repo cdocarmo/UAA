@@ -35,7 +35,6 @@ function inicio ()
 	//$("#aceptar").on("click", confirmar_datos);
 	$("#clai").on("click", cargo_listas);
 	$("#tab-interno-clientes").on("click", cargo_clientes_pendientes);
-	$("#id_categorias").on("change", categoria_click);
 
 	//$('tr[class*=fila]').on("click", cargo_datos);
 	//$('#fila-analitos').on("hover", cambio_cursor);
@@ -146,7 +145,8 @@ function reBind() {
 			
 		} else if ($(this).hasClass('fila-analitos')) {
 			$('#nombre').val($(this).find('.nombre').html());
-			$('#categorias> option[value=' + '"' +$(this).find('.categoria').html() + '"' + ']').attr('selected', 'selected');
+			cboxCategorias($('#categorias > option[value=' + '"' + $(this).find('.categoria').html() + '"' + ']'));
+			$('#categorias > option[value=' + '"' +$(this).find('.categoria').html() + '"' + ']').prop('selected', true);
 			$('#vminp').val($(this).find('.vminp').html());
 			$('#vmaxp').val($(this).find('.vmaxp').html());
 			$('#metodo-unit').val($(this).find('.metodo-unit').html());
@@ -154,7 +154,10 @@ function reBind() {
 			$('#observaciones').val($(this).find('.observaciones').html());
 		} else if ($(this).hasClass('fila-localidades')) {
 			$('#nombre-localidad').val($(this).find('.ciudad').html());
-			$('#departamentos> option[value=' + '"' +$(this).find('.departamento').html() + '"' + ']').attr('selected', 'selected');
+			cboxDepartamentos($('#departamentos > option[value=' + '"' +$(this).find('.departamento').html() + '"' + ']'));
+			//var selector = '#departamentos > option[value=' + '"' +$(this).find('.departamento').html() + '"' + ']';
+			//alert(selector);
+			$('#departamentos > option[value=' + '"' +$(this).find('.departamento').html() + '"' + ']').prop('selected', true);
 			$('#coordenadas-geograficas').val($(this).find('.coordenadas').html());
 			$('#distancia').val($(this).find('.distancia').html());
 		}
@@ -172,35 +175,36 @@ function reBind() {
 		if ($('#' + tab_actual).find('.seleccionada')) {
 			//si hay fila seleccionada.
 			if (tab_actual == 'tab-analitos') {
-				$('#mensaje-modal').html(msg_a_punto_de_eliminar + ANALITO + ".");
+				$('#mensaje-modal-eliminar').html(msg_a_punto_de_eliminar + ANALITO + ".");
 			}else if (tab_actual == 'tab-usuarios') {
-				$('#mensaje-modal').html(msg_a_punto_de_eliminar + USUARIO + ".");
+				$('#mensaje-modal-eliminar').html(msg_a_punto_de_eliminar + USUARIO + ".");
 			}else if (tab_actual == 'tab-localidades') {
-				$('#mensaje-modal').html(msg_a_punto_de_eliminar + LOCALIDAD + ".");
+				$('#mensaje-modal-eliminar').html(msg_a_punto_de_eliminar + LOCALIDAD + ".");
 			}else if (tab_actual == 'tab-clientes') {
-				$('#mensaje-modal').html(msg_a_punto_de_eliminar + CLIENTE + ".");
+				$('#mensaje-modal-eliminar').html(msg_a_punto_de_eliminar + CLIENTE + ".");
 			}
 			//$('#modal-eliminar').css('visibility', 'hidden');
 		}else{
 			//si no hay fila seleccionada
 			if (tab_actual == 'tab-analitos') {
-				$('#mensaje-modal').html(msg_no_hay_seleccion + ANALITO + ".");
+				$('#mensaje-modal-eliminar').html(msg_no_hay_seleccion + ANALITO + ".");
 			}else if (tab_actual == 'tab-usuarios') {
-				$('#mensaje-modal').html(msg_no_hay_seleccion + USUARIO + ".");
+				$('#mensaje-modal-eliminar').html(msg_no_hay_seleccion + USUARIO + ".");
 			}else if (tab_actual == 'tab-localidades') {
-				$('#mensaje-modal').html(msg_no_hay_seleccion + LOCALIDAD + ".");
+				$('#mensaje-modal-eliminar').html(msg_no_hay_seleccion + LOCALIDAD + ".");
 			}else if (tab_actual == 'tab-clientes') {
-				$('#mensaje-modal').html(msg_no_hay_seleccion + CLIENTE + ".");
+				$('#mensaje-modal-eliminar').html(msg_no_hay_seleccion + CLIENTE + ".");
 			}
 			$('#eliminar-btn-eliminar').css('visibility', 'visible');
 		}
-		mostrarModal();
+		mostrarModal('eliminar');
 	});
 	
 	//Boton guardar
 	$('a[id^=guardar]').click(function(){
 		var guardar = true;
-		$('#' + tab_actual + ' input').each(function() {
+		var selector = '#' + tab_actual;
+		$( selector + ' input, ' + selector + ' select').each(function() {
 			var completos = revisarInputs(this);
 			if (completos == false) {
 				guardar = completos;
@@ -208,43 +212,34 @@ function reBind() {
 		});
 		if (!guardar) {
 			focus_flag = false;
-			$('#mensaje-modal').html("Llena los campos vacíos");	
+			$('#mensaje-modal-incompleto').html("Llena los campos vacíos");	
+			mostrarModal('incompleto');
 		}else{
 			//guarda segun el tab actual (usando ajax?)
 			if (tab_actual == 'tab-analitos') {
-				$('#mensaje-modal').html("Llamar guardar de analitos");
+				$('#mensaje-modal-guardado').html("Llamar guardar de analitos");
 			}else if (tab_actual == 'tab-usuarios') {
-				$('#mensaje-modal').html("Llamar guardar de analitos");
+				$('#mensaje-modal-guardado').html("Llamar guardar de analitos");
 			}else if (tab_actual == 'tab-localidades') {
-				$('#mensaje-modal').html("Llamar guardar de analitos");
+				$('#mensaje-modal-guardado').html("Llamar guardar de analitos");
 			}else if (tab_actual == 'tab-clientes') {
-				$('#mensaje-modal').html("Llamar guardar de analitos");
+				$('#mensaje-modal-guardado').html("Llamar guardar de analitos");
 			}
+			mostrarModal('guardado');
 		}
-		mostrarModal();
+		
 	});
 	
-
+	//habilito cliente
 	$('.habilitar').click(function(){
 		$('#modal-habilitado').modal('show');
-		//
+		//setTimeout("$('#modal-habilitado').modal('hide')", 1500);
 		var ident = $(this).parent().parent().find('.id').text();
 		habilitarCliente(ident);
-		setTimeout("$('#modal-habilitado').modal('hide')", 2500);
 		var nodo = $(this).parent().parent();
 		$('#listado-todos-clientes').append($(nodo).clone());
 		$(this).parent().parent().remove();
 	});
-	
-
-		//Borro fila
-	$('.habilitar').click(function(){
-		$('#modal-habilitado').modal('show');
-		setTimeout("$('#modal-habilitado').modal('hide')", 1500);
-		
-		$(this).parent().parent().remove();
-	});
-
 	
 	//Validaciones
 	$(window).focusin(function(e){
@@ -259,8 +254,27 @@ function reBind() {
 		}
 	});
 	
-	$('input').focusout(function() {
+	$('input, select').focusout(function() {
 		revisarInputs(this);
+	});
+	
+	//SUBCATEGORIA
+	$('#categorias option').on('click', function(){
+		if ($(this).hasClass('tiene-subcategoria')) {
+			var selector = 'select.' + $(this).attr('id');
+			$('#label-subcategorias').show();
+			$(selector).show();
+		}
+	});
+	
+	//CERRAR
+	$('#modal-guardado .cerrar, #modal-guardado .close').on('click', function() {
+		limpiarCampos();
+	});
+	
+	//BOTON LIMPIAR
+	$('button[id^=limpiar]').on('click', function() {
+		limpiarCampos();
 	});
 }
 
@@ -274,9 +288,14 @@ function quitarMensajes() {
 	});
 }
 
+
 function limpiarCampos() {
 	//remuevo la clase para que no exista fila seleccionada
-	$('.seleccionada').removeClass('seleccionada');
+	$('.seleccionada').css({
+			fontWeight: "normal",
+			color: "#515151",
+			textShadow: "None"
+		}).removeClass("seleccionada");
 	//recorro los inputs para limpiarlos
 	// esto da error en csrf_token de django !($(this).is('input[type="submit"]') || 
 	$('input').each(function(){
@@ -286,6 +305,24 @@ function limpiarCampos() {
 	});
 }
 
+function limpiarCampos() {
+	//limpio y remuevo la clase para que no exista fila seleccionada
+	$('.seleccionada').css({
+			fontWeight: "normal",
+			color: "#515151",
+			textShadow: "None"
+		}).removeClass("seleccionada");
+	//recorro los inputs para limpiarlos
+	$('input').each(function(){
+		if (!($(this).is('input[type="submit"]') || !$(this).is('input[type="reset"]') || !$(this).is('input[type="button"]'))){		
+		
+			$(this).val("");	
+		}
+	});
+}
+
+
+
 function crearMsgValidacion(msg, id) {
 	var nodo_msg = $('<span id="msg-vacio-' + id + '" style="color:red; margin-left:5%">' + msg + '</span>');
 	return nodo_msg;
@@ -294,10 +331,16 @@ function crearMsgValidacion(msg, id) {
 function revisarInputs(obj) {
 	var completos = false;
 	if (focus_flag == false) {
-		if (($(obj).val().length < 1) || ($(obj).val() == "__.___")) {
+		if (($(obj).val().length < 1) || ($(obj).val() == "__.___") || ($(obj).val() == 'seleccionar')) {
 			//quitarMsg(this) deberia estar en un condicional quizas...
 			quitarMsg(obj);
-			$(crearMsgValidacion(msg_input_vacio, $(obj).attr("id"))).appendTo($(obj).prev());
+			var objeto_label;
+			if (obj.nodeName == 'SELECT') {
+				objeto_label = $(obj).prev();
+			} else {
+				objeto_label = $(obj).prev();
+			}
+			$(crearMsgValidacion(msg_input_vacio, $(obj).attr("id"))).appendTo(objeto_label);
 		}else{
 			completos = true;
 			quitarMsg(obj);
@@ -308,44 +351,35 @@ function revisarInputs(obj) {
 	return completos;
 }
 
-function mostrarModal() {
-	$('#modal-eliminar').modal({
+function cboxCategorias(option) {
+	if (OPTIONCATEGORIAS != null) {
+		$(OPTIONCATEGORIAS).prop('selected', false);
+	}
+	OPTIONCATEGORIAS = option
+}
+
+function cboxDepartamentos(option) {
+	if (OPTIONDEPARTAMENTOS != null) {
+		$(OPTIONDEPARTAMENTOS).prop('selected', false);
+	}
+	OPTIONCATEGORIAS = option
+}
+
+
+function mostrarModal(tipo) {
+	var selector = '';
+	if (tipo == 'eliminar') {
+		selector = '#modal-eliminar';
+	} else if (tipo == 'guardado') {
+		selector = '#modal-guardado';
+	}
+	else if (tipo == 'incompleto') {
+		selector = '#modal-incompleto';
+	}
+	$(selector).modal({
 			show: true,
 			backdrop: 'static'
 	});
-}
-
-function categoria_click () {
-
-   	var model = $('#id_categorias').val();
-	
-	if (model=="new") {
-		/*
-		p = xpopup({
-		    url: "/analitos/categoria/",
-
-		    modal: true,
-		    width: 600,
-		    height: 300,
-		    modal: true, // Block UI and show PopUp
-		    name: 'testPopup',
-            close: function() {
-                console.log(p);
-            }		    
-		});
-		p.center();
-		if (p.closed()) {
-			console.log(p);
-		}
-		*/
-		
-		var strFeatures = "left=200,top=100,width=650,height=550,fullscreen=no" 
-		var Pagina = "Plan de control pop up.aspx"; 
-		objNewWindow = window.open("/add/categoria","newWin", strFeatures); 
-		objNewWindow.focus();
-		
-
-   }
 }
 
 

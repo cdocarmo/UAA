@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
-from analitos.models import Analito
+from analitos.models import Analito, Categoria
 from forms import *
 from django.utils.html import escape
 
@@ -43,6 +43,12 @@ def cargo_analitos(request):
                             context_instance=RequestContext(request))
 
 
+def cate_analitos_pedidos(request):
+    cate = Categoria.objects.all().order_by("nombre")
+    print cate
+    return render_to_response('analitos/pedido_analitos.html',
+                            {'categoria':cate}, 
+                            context_instance=RequestContext(request))
 
 
 
