@@ -286,8 +286,12 @@ body {
 	margin-top: 2%;
 }
 
-#btn-agregar-muestreo {
+#btn-agregar-muestreo, #btn-agregar-muestreo-edicion {
 	margin-top: 18%;
+}
+
+#btn-agregar-muestreo-edicion {
+	margin-top: 5%;
 }
 
 #lista-muestreos {

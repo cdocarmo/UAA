@@ -134,7 +134,8 @@ function reBind() {
 	
 	//PESTAÑA "MUESTREOS PENDIENTES"
 	
-	$('.editar-muestreo').on('click', function(){
+	$('.agregar-muestreo').on('click', function(){
+		//alert("aca");
 		$('#modal-editar-muestreo').modal('show');
 		//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
 		//hardcodeado: este array debe ser llenado con lo obtenido via ajax
@@ -182,7 +183,7 @@ function reBind() {
 				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
 				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>';
 				if ($(this).hasClass('editar')) {
-					html_cod = html_cod + '\t\t<li><button class="btn btn-success editar-muestreo" id="id' + i + '">Editar Muestreo</button></li>';	
+					html_cod = html_cod + '\t\t<li><button class="btn btn-success agregar-muestreo" id="id' + i + '">Agregar Muestreo</button></li>';	
 				} // la variable "i" debe ser sustituida por la variable que contiene el id del muestreo
 				
 				'\t</ul>' +
