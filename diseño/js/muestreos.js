@@ -165,39 +165,50 @@ function reBind() {
 			var fila_anterior = $(this).parent().parent();
 			//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
 			//se debe crear un for para iterar sobre cada muestreo del pedido obtenido y pasar los datos al html de abajo
-			var html_cod = "";
+			var caja_cod = "";
 			var max = 3;
 			for (var i=0;i<max;i++) {
-				html_cod = html_cod + '<td colspan="3" class="datos-muestreo">' +
-				'\t<ul class="lista-datos-muestreo">' +
-				'\t\t<li><span class="item-muestreo-geo">Número de muestreo:</span> <b class="pull-right nro-muestreo">00000</b></li>' +
-				'\t\t<li><span class="item-muestreo-geo">Código de Referencia:</span> <b class="pull-right cod-referencia">XXXXX</b></li>' +
-				'\t\t<li><span class="item-muestreo-geo">Ciudad:</span> <b class="pull-right ciudad">Salto</b></li>' +
-				'\t\t<li><span class="item-muestreo-geo">Departamento: </span> <b class="pull-right departamento">Salto</b></li>' +
-				'\t\t<li><span class="item-muestreo-geo">Dirección: </span> <b class="pull-right direccion">Oficial 1º 2016</b></li>' +
-				'\t</ul>' +
-				'</td>' +
-				'<td colspan="3" class="datos-muestreo">' +
-				'\t<ul class="lista-datos-analitos">' +
-				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Cromo</li>' +
-				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Plomo</li>' +
-				'\t\t<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;Color</li>';
+				caja_cod = caja_cod + '<td colspan=5 class="datos-pedido-muestreo">' + 
+				'<table>' +
+						'<caption>Pedido nro: 001</caption>' +
+						'<tr>' +
+							'<th>Número de Muestreo</th>' +
+							'<th>Cód. de Referencia</th>' +
+							'<th>Ciudad</th>' +
+							'<th>Departamento</th>' +
+							'<th>Dirección</th>' +
+							'<th>Analito</th>' +
+							'<th></th>' +
+							'<th></th>' +
+						'</tr>';
+				for (var j=0;j<max; j++) {
+					caja_cod = caja_cod +
+						'<tr>' +
+							'<td>0001</td>' +
+							'<td>XXJX00</td>' +
+							'<td>Salto</td>' +
+							'<td>Salto</td>' +
+							'<td>Oficial 1 2016</td>' +
+							'<td>Plomo</td>' +
+							'<td><button class="btn btn-primary" id="muestreo-id' + j + '">Editar</button></td>' +
+							'<td><button class="btn btn-danger">X</button></td>' +
+						'</tr>';
+				}
+				caja_cod = caja_cod + '</table>';
 				if ($(this).hasClass('editar')) {
-					html_cod = html_cod + '\t\t<li><button class="btn btn-success agregar-muestreo" id="id' + i + '">Agregar Muestreo</button></li>';	
+					caja_cod = caja_cod + '\t\t<button class="btn btn-success agregar-muestreo" id="id' + i + '">Agregar Muestreo</button>';	
 				} // la variable "i" debe ser sustituida por la variable que contiene el id del muestreo
 				
-				'\t</ul>' +
-				'</td>' +
-				'<td> </td>';
+				caja_cod = caja_cod + '</td>';
 				fila = crearFilaConInfoDeMuestreos(id_pedido, i); //segundo parametro es temporal, debe sustituirse por el id de muestreo correcto
-				$(fila).html(html_cod);
+				$(fila).html(caja_cod);
 				$(fila_anterior).after(fila);
 				$(fila).show('slow');
 				if (i == (max - 1)) {
 					
 				}
 				fila_anterior = fila;
-				html_cod = "";
+				caja_cod = "";
 			}
 			//ESTO COMENTADO A CONTINUACION DEBE SER ELIMINADO
 			//fila = crearFilaConInfoDeMuestreos(id_pedido);

@@ -309,21 +309,14 @@ body {
 	background-color: #eee;
 }
 
+.datos-pedido-muestreo {
+	padding: 4% 10% !important;
+}
+
 /*Fila invisible*/
 
 .muestreo {
 	display: none;
-}
-
-.datos-muestreo li {
-	list-style: none;
-}
-
-.lista-datos-muestreo li {
-	padding: 2px 3px;
-	margin: 2px 0;
-	border: 1px solid #999999;
-	width: 60%;
 }
 
 .item-muestreo-geo {
