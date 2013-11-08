@@ -144,6 +144,39 @@ function reBind() {
 		
 	});
 	
+	$('button[id^=muestreo-id]').on('click', function(){
+		var id_muestreo = $(this).attr('id').split('-')[2]; //obtengo el id para buscar el muestreo
+		var ident = $(this).attr('id').split('-')[2]; //obtengo el numero de muestreo desde el attr id del boton
+		//alert('id es ' + ident);
+		var cod_referencia = $(this).parent().parent().find('.cod-ref').html();
+		//var departamento = $(this).parent().parent().find('.departamento').val();
+		//var ciudad = $(this).parent().parent().find('.ciudad').val();
+		//var direccion = $(this).parent().parent().find('.direccion').val();
+		//obtener los analitos marcados
+		var analitos = new Array();
+		$(this).parent().parent().find('.analitos span').each(function(){
+				analitos.push($(this).attr('id'));	
+		});
+		
+		$('#numero-referencia-edicion').val(cod_referencia);
+		//$('#departamentos-edicion option:contains("' + departamento + '")').prop('selected', true);
+		//$('#ciudades-edicion option:contains("' + ciudad + '")').prop('selected', true);
+		//$('#direcciones-edicion option:contains("' + direccion + '")').prop('selected', true);
+		//$('#modal-editar-muestreo').find('#guardar-edicion-muestreo').attr('data-id', id_muestreo);
+		//marcar los analitos obtenidos
+		
+		for (var i=0; i<analitos.length; i++) {
+			//alert('analito ' + analitos[i]);
+			var selector = '#' + analitos[i] + '-edicion';
+			//alert(selector);
+			$(selector).get(0).checked = true;
+			//$(selector).get(0).checked = true;
+		}
+		
+		$('#modal-editar-muestreo').modal('show');
+		$('#guardar-edicion-muestreo').attr('data-id', id_muestreo);
+	});
+	
 	//PESTAÑA "MUESTREOS ANTERIORES"
 	
 	$('.ver').on('click', function(){
@@ -183,15 +216,15 @@ function reBind() {
 						'</tr>';
 				for (var j=0;j<max; j++) {
 					caja_cod = caja_cod +
-						'<tr>' +
-							'<td>0001</td>' +
-							'<td>XXJX00</td>' +
-							'<td>Salto</td>' +
-							'<td>Salto</td>' +
-							'<td>Oficial 1 2016</td>' +
-							'<td>Plomo</td>' +
-							'<td><button class="btn btn-primary" id="muestreo-id' + j + '">Editar</button></td>' +
-							'<td><button class="btn btn-danger">X</button></td>' +
+						'<tr id="muestreo-' + j + '">' + // aqui "j" debe ser el numero de muestreo
+							'<td class="num-muestreo">0001</td>' +
+							'<td class="cod-ref">XXJX00</td>' +
+							'<td class="departamento">Salto</td>' +
+							'<td class="ciudad">Salto</td>' +
+							'<td class="direccion">Oficial 1 2016</td>' +
+							'<td class="analitos"><span class="badge badge-success" id="plomo">Plomo</span></class><span class="badge badge-success" id="hierro">Hierro</span></class><span class="badge badge-success" id="arsenico">Arsénico</span></class></td>' +
+							'<td><button class="btn btn-primary" id="muestreo-id-' + j + '">Editar</button></td>' +
+							'<td><button class="btn btn-danger elim-muestreo">X</button></td>' +
 						'</tr>';
 				}
 				caja_cod = caja_cod + '</table>';
@@ -225,6 +258,7 @@ function reBind() {
 	});
 	
 	//CAMBIAR ICONO DE ANALITO AL PASAR PUNTERO POR ENCIMA
+	//TODO: revisar la utilidad de esto
 	$('.item-muestreo li').on('mouseover', function(){
 		item_muestreo_anterior = $(this);
 		$(this).find('i').removeClass('icon-tint');
@@ -269,11 +303,18 @@ function reBind() {
 		btnHabilitarCambios($(this).parent().parent().parent().find('.aplicar-cambios'));
 	});
 	
+	//elimina fila de muestreo en la lista de muestreos del pedido.
+	$('.elim-muestreo').on('click', function() {
+		$(this).parent().parent().remove();
+	});
+	
 	//finalizar edicion muestreo
 	$('#guardar-edicion-muestreo').on('click', function(){
 		if (validarCamposEdicionDelMuestreo($(this).attr('data-id'))) {
 			//llamada ajax
 			alert('Edición finalizada.');
+			//renovar fila de muestreo
+			$()
 			$('#modal-editar-muestreo').modal('hide');
 			
 		}//else{

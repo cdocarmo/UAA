@@ -311,6 +311,7 @@ body {
 
 .datos-pedido-muestreo {
 	padding: 4% 10% !important;
+	border-top: 1px solid black !important;
 }
 
 /*Fila invisible*/
