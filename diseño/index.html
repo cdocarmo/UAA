@@ -93,8 +93,8 @@
                             	<div class="row-fluid formulario">
 	                            	<fieldset id="locacion" class="span4">
 	                            		<legend>Datos Geogr&aacute;ficos</legend>
-	                            		<label for="numero-referencia">N&uacute;mero de Referencia</label>
-	                            		<input name="numero-referencia" id="numero-referencia" type="text" />
+	                            		<label for="codigo-referencia">C&oacute;digo de Referencia*</label>
+	                            		<input name="codigo-referencia" id="codigo-referencia" type="text" />
 	                            		<!--<ul class="nav">
 	                            			<li>Salto</li>
 	                            			<li>Bel&eacute;n</li>
@@ -102,7 +102,7 @@
 	                            		</ul>-->
 			                            <button class="btn btn-primary" id="buscar-punto-referencia">Buscar Punto de Referencia</button>
 			                            <div class="hide buscar-referencia">
-			                            	<label for="departamentos">Departamento</label>
+			                            	<label for="departamentos">Departamento*</label>
 				                            <select id="departamentos" >
 				                            	<option value="seleccionar">Seleccionar Departamento</option>
 				                            	<option value="Artigas">Artigas</option>
@@ -111,14 +111,14 @@
 				                            	<option value="Rio Negro">R&iacute;o Negro</option>
 				                            	<option value="Tacuarembo">Tacuaremb&oacute;</option>
 				                            </select>
-				                            <label for="ciudades">Ciudad/Localidad</label>
+				                            <label for="ciudades">Ciudad/Localidad*</label>
 				                           	<select id="ciudades" disabled="" >
 				                           		<option value="seleccionar">Seleccionar Ciudad/Localidad</option>
 				                            	<option value="Salto">Salto</option>
 				                            	<option value="Constitucion">Constituci&oacute;n</option>
 				                            	<option value="Belen">Bel&eacute;n</option>
 				                            </select>
-		                            		<label for="direccion">Direcci&oacute;n</label>
+		                            		<label for="direccion">Direcci&oacute;n*</label>
 		                            		<select id="direcciones" disabled="">
 		                            			<option value="seleccionar">Seleccionar Direcci&oacute;n</option>
 				                            	<option value="dir1">Direccion 1</option>
@@ -130,7 +130,7 @@
 	                            		<!--<a href="#" id="limpiar" class="btn">Limpiar formulario</a>-->
 	                            		<div id="observaciones">
 	                            			<label for="observaciones-muestreo">Observaciones</label>
-	                            			<textarea name="observaciones-muestreo"></textarea>
+	                            			<textarea name="observaciones-muestreo" id="observaciones-muestreo"> </textarea>
 	                            		</div>
 	                            		<a href="#" id="btn-agregar-muestreo" class="btn btn-success">Agregar este muestreo al pedido</a>
 	                            	</fieldset>
@@ -566,7 +566,7 @@
 	                        <!--<a href="#" id="limpiar" class="btn">Limpiar formulario</a>-->
 	                        <div id="observaciones-edicion">
 	                            <label for="observaciones-muestreo-edicion">Observaciones</label>
-	                            <textarea name="observaciones-muestreo-edicion"></textarea>
+	                            <textarea name="observaciones-muestreo-edicion" id="observaciones-muestreo-edicion"></textarea>
 	                        </div>
 	                     	<a href="#" id="btn-agregar-muestreo-edicion" class="btn btn-success">Agregar este muestreo al pedido</a>
 	                 	</fieldset>

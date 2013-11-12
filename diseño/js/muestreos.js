@@ -9,6 +9,8 @@ var agregar_muestreo = true;
 var analitos_marcados = 0;
 var ultimo_muestreo = null;
 var item_muestreo_anterior = null;
+var numero_muestreo_edicion = null;
+var item_muestreo_edicion = null;
 var boton_ver_anterior = null;
 var col_analitos = new Array();
 
@@ -16,8 +18,6 @@ var col_analitos = new Array();
 var select_departamentos = false;
 var select_ciudades = false;
 var select_direcciones = false;
-
-//TODO: debo capturar el enter para que no me guarde sin advertencia previa.
 
 $(document).ready(function(){
 	limpiar(true);
@@ -37,14 +37,18 @@ function reBind() {
 	});
 	
 	$('#btn-agregar-muestreo').on('click', function(){
+		//TODO: aqui debo poner un condicional segun el modo.
 		var msg_alert = "";
 		//recoger todos los datos en un objeto
 		var obj = new Object();
-		obj['departamento'] = $('#departamentos').val();
-		obj['ciudad'] = $('#ciudades').val();
-		obj['direccion'] = $('#direccion').val();
-		obj['referencia'] = $('#numero-referencia');
+		obj['cod_ref'] = $('#codigo-referencia').val();
+		//obj['departamento'] = $('#departamentos').val();
+		//obj['ciudad'] = $('#ciudades').val();
+		//obj['direccion'] = $('#direccion').val();
+		//obj['referencia'] = $('#numero-referencia');
+		obj['observacion'] = $('#observaciones-muestreo').val();
 		var analitos = new Array();
+		//recorro todos los analitos para ver cual está marcado
 		$('.analito').each(function(){
 			if ($(this).is(':checked')) {
 				analitos.push($(this).attr('value'));
@@ -52,14 +56,15 @@ function reBind() {
 			}
 		});
 		
-		if ($('#direccion').val().length < 1) {
-			var temp = $('#locacion').find('#msg-vacio-direccion');
-			if ($('#locacion').find('#msg-vacio-direccion').length == 0) {
-				$(crearMsgValidacion('Campo obligatorio', 'direccion')).appendTo($('#direccion').prev());	
+		//si codigo de referencia esta vacio muestro alerta
+		if ($('#codigo-referencia').val().length < 1) {
+			//var temp = $('#locacion').find('#msg-vacio-direccion');
+			if ($('#locacion').find('#msg-vacio-codigo-referencia').length == 0) {
+				$(crearMsgValidacion('Campo obligatorio', 'codigo-referencia')).appendTo($('#codigo-referencia').prev());	
 			}
 			agregar_muestreo = false;
 		}else{
-			quitarMsg($('#direccion'));
+			quitarMsg($('#codigo-referencia'));
 		}
 		
 		if (analitos_marcados > 0) {
@@ -72,10 +77,24 @@ function reBind() {
 			agregar_muestreo = false;
 		}
 		if (agregar_muestreo) {
-			obj['nro_muestreo'] = prox_numero_muestreo;
+			if (MODO == "nuevo") {
+				obj['nro_muestreo'] = prox_numero_muestreo;
+				prox_numero_muestreo++;
+			}else{
+				obj['nro_muestreo'] = numero_muestreo_edicion;
+				for (item in col_muestreos) {
+					//TODO: revisar que si esto es el li del muestreo o es el ul padre, porque borra todo, 
+					//TODO: el item_muestreo_edicion lo obtengo de linea 123
+					if (col_muestreos[item].nro_muestreo == $(item_muestreo_edicion).attr('id').substring(4)) {
+						//alert('entra a eliminar');
+						var temp = col_muestreos.splice(item);
+					}
+				}
+				$(item_muestreo_edicion).remove();
+			}
 			crearLineaNuevoMuestreo(obj);
 			col_muestreos.push(obj);
-			prox_numero_muestreo++;
+			
 			$('.ningun-muestreo').css('display', 'none');
 			modificarTitulo();
 			limpiar(false);
@@ -83,6 +102,7 @@ function reBind() {
 			agregar_muestreo = true;
 		}
 		analitos_marcados = 0;
+		MODO = "nuevo";
 	});
 	
 	$('#lista-muestreos').on('click', function(e) {
@@ -102,19 +122,33 @@ function reBind() {
 			modificarTitulo();
 		}else if (e.target.nodeName == 'A'){
 			MODO = "modificar";
+			item_muestreo_edicion = $(e.target).parent();
 			//alert(MODO);
 			limpiar(false);
-			//TODO: llamar un metodo que deje todos los fondos blancos
 			blanquearFondos();
 			$(e.target).parent().css('background-color', '#dee');
 			for (item in col_muestreos) {
 				var temp = $(e.target).parent().attr('id').substring(4);
 				if (item == temp) {
 					rellenarFormulario(col_muestreos[item]);
-					$('#btn-agregar-muestreo').html("Modificar este muestreo");
+					numero_muestreo_edicion = col_muestreos[item].nro_muestreo;
+					$('a#btn-agregar-muestreo').text('Modificar este muestreo');
 					return;
 				}
 			}
+		}
+	});
+	
+	$('#pedido-muestreo').on('submit', function(){
+		//aca debo llamar al metodo que guarda el pedido
+		if($('#lista-muestreos').children().length < 1){
+			alert('Aun no has añadido muestreos al pedido.');
+		}else{
+			col_muestreos = new Array();
+			col_analitos = new Array();
+			modificarTitulo();
+			limpiar(true);
+			alert('Enviar form.');
 		}
 	});
 	// LIMPIAR FORMULARIO
@@ -543,18 +577,15 @@ function rellenarFormulario(obj) {
 		selector = '#' + nombre;
 		$(selector).get(0).checked = true;
 	}
-	var departamento = obj['departamento'];
-	var ciudad  = obj['ciudad'];
-	$('#departamentos option[value="' + departamento + '"]').get(0).selected = true;
-	$('#ciudades option[value="' + ciudad + '"]').get(0).selected = true;
-	$('#direccion').val(obj['direccion']);
-	$('#numero-referencia').val('');
+	
+	$('#codigo-referencia').val(obj['cod_ref']);
+	$('#observaciones-muestreo').val(obj['observacion']);
 }
 
 function crearLineaNuevoMuestreo(obj) {
 	//alert(obj.nro_muestreo);
 	var nuevo_nodo = $('<li id="nro-' + obj.nro_muestreo + '"><a href="#"><i class="icon-edit"></i>&nbsp&nbsp&nbspMuestreo numero <span class="nro-de-muestreo">' + col_muestreos.length 
-	+ '</span> - C&oacute;digo de referencia <span class="codigo-referencia">' + obj.referencia + '</span><i class="icon-remove pull-right"></i></a></li>');
+	+ '</span> - C&oacute;digo de referencia <span class="codigo-referencia">' + obj.cod_ref + '</span><i class="icon-remove pull-right"></i></a></li>');
 	$('#lista-muestreos').prepend(nuevo_nodo);
 }
 
@@ -591,8 +622,9 @@ function limpiar(total) {
 	});
 	$('#departamentos').prop('selectedIndex', 0);
 	$('#ciudades').prop('selectedIndex', 0);
-	$('#direccion').val('');
-	$('#numero-referencia').val('');
+	$('#codigo-referencia').val('');
+	$('#observaciones-muestreo').val('');
+	
 	if (total) {
 		$('li[id^=nro-]').each(function(){
 			$(this).remove();
