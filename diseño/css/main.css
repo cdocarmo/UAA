@@ -310,8 +310,12 @@ body {
 }
 
 .datos-pedido-muestreo {
-	padding: 4% 10% !important;
+	padding: 4% !important;
 	border-top: 1px solid black !important;
+}
+
+.dtp-muestreo input {
+	width: 80px !important;
 }
 
 /*Fila invisible*/

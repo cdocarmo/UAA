@@ -245,6 +245,7 @@ function reBind() {
 							'<th>Departamento</th>' +
 							'<th>Dirección</th>' +
 							'<th>Analito</th>' +
+							'<th>Fecha</th>' +
 							'<th></th>' +
 							'<th></th>' +
 						'</tr>';
@@ -257,7 +258,8 @@ function reBind() {
 							'<td class="ciudad">Salto</td>' +
 							'<td class="direccion">Oficial 1 2016</td>' +
 							'<td class="analitos"><span class="badge badge-success" id="plomo">Plomo</span></class><span class="badge badge-success" id="hierro">Hierro</span></class><span class="badge badge-success" id="arsenico">Arsénico</span></class></td>' +
-							'<td><button class="btn btn-primary" id="muestreo-id-' + j + '">Editar</button></td>' +
+							'<td class="fecha dtp-muestreo input-append date"><input type="text"></input><span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span></td>' +
+							'<td><button class="btn btn-primary" id="muestreo-id-' + j + '">Editar Detalles</button></td>' +
 							'<td><button class="btn btn-danger elim-muestreo">X</button></td>' +
 						'</tr>';
 				}
@@ -287,7 +289,7 @@ function reBind() {
 			//$(fila).show('slow');
 			//html_cod = "";
 			//ultimo_muestreo = fila;
-			
+			setearDateTimePickers();
 			reBind();
 	});
 	
@@ -650,3 +652,9 @@ function buscarSiExisteNroReferencia(nro_referencia) {
 	return respuesta;
 }
 
+function setearDateTimePickers() {
+	$('.dtp-muestreo').datetimepicker({
+        		format: 'dd/MM/yyyy',
+        		language: 'es-UY'
+        	});
+}
