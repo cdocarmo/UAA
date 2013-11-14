@@ -245,28 +245,28 @@
                         				<td>52665</td>
                         				<td>3</td>
                         				<td>04/06/2013</td>
-                        				<td><button class="btn btn-primary ver">Ver</button></td>
+                        				<td><button class="btn btn-primary ver anterior">Ver</button></td>
                         			</tr>
                         			<tr>
                         				<td class="numero-pedido">0003</td>
                         				<td>09543</td>
                         				<td>3</td>
                         				<td>02/04/2013</td>
-                        				<td><button class="btn btn-primary ver">Ver</button></td>
+                        				<td><button class="btn btn-primary ver anterior">Ver</button></td>
                         			</tr>
                         			<tr>
                         				<td class="numero-pedido">0004</td>
                         				<td>49593</td>
                         				<td>3</td>
                         				<td>22/05/2013</td>
-                        				<td><button class="btn btn-primary ver">Ver</button></td>
+                        				<td><button class="btn btn-primary ver anterior">Ver</button></td>
                         			</tr>
                         			<tr>
                         				<td class="numero-pedido">0006</td>
                         				<td>13494</td>
                         				<td>3</td>
                         				<td>06/03/2013</td>
-                        				<td><button class="btn btn-primary ver">Ver</button></td>
+                        				<td><button class="btn btn-primary ver anterior">Ver</button></td>
                         			</tr>
                         		</tbody>
                         	</table>
@@ -298,28 +298,28 @@
                         				<td>FFD02</td>
                         				<td class="nro-muestreos">4</td>
                         				<td>04/06/2013</td>
-                        				<td><button class="btn btn-primary ver editar">Ver</button></td>
+                        				<td><button class="btn btn-primary ver pendiente">Ver</button></td>
                         			</tr>
                         			<tr>
                         				<td class="numero-pedido">0003</td>
                         				<td>FFD03</td>
                         				<td class="nro-muestreos">3</td>
                         				<td>02/04/2013</td>
-                        				<td><button class="btn btn-primary ver editar">Ver</button></td>
+                        				<td><button class="btn btn-primary ver pendiente">Ver</button></td>
                         			</tr>
                         			<tr>
                         				<td class="numero-pedido">0004</td>
                         				<td>FED11</td>
                         				<td class="nro-muestreos">5</td>
                         				<td>22/05/2013</td>
-                        				<td><button class="btn btn-primary ver editar">Ver</button></td>
+                        				<td><button class="btn btn-primary ver pendiente">Ver</button></td>
                         			</tr>
                         			<tr>
                         				<td class="numero-pedido">0006</td>
                         				<td>FFD02</td>
                         				<td class="nro-muestreos">1</td>
                         				<td>06/03/2013</td>
-                        				<td><button class="btn btn-primary ver editar">Ver</button></td>
+                        				<td><button class="btn btn-primary ver pendiente">Ver</button></td>
                         			</tr>
                         		</tbody>
                         	</table>
@@ -522,19 +522,21 @@
 		<div id="modal-editar-muestreo" class="modal hide fade">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3>Agregar Muestreos (Pedido nro.: 000)</h3>
+				<h3><span class="titulo-modal-muestreo">Agregar Muestreos</span> <span class="pedido-nro">(Pedido nro.: 000)</span></h3>
+				<ul id="lista-muestreos-edicion">
+                </ul>
 			</div>
-			<form id="pedido-muestreo">
+			<form id="pedido-muestreo-edicion">
 				<div class="modal-body">
                 	<div class="row-fluid formulario">
 	                	<fieldset id="locacion-edicion" class="span4">
 	                    	<legend>Datos Geogr&aacute;ficos</legend>
-	                        <label for="numero-referencia">N&uacute;mero de Referencia</label>
-	                        <input name="numero-referencia" id="numero-referencia-edicion" type="text" data-toggle="tooltip" title="Salto, Salto, Oficial 1 2016"/>
-	                        <label for="latitud-referencia">Latitud</label>
-	                        <input name="latitud-referencia" id="latitud-referencia" type="text" />
-	                        <label for="longitud-referencia">Longitud</label>
-	                        <input name="longitud-referencia" id="longitud-referencia" type="text" />
+	                        <label for="codigo-referencia-edicion">N&uacute;mero de Referencia</label>
+	                        <input name="codigo-referencia-edicion" id="codigo-referencia-edicion" type="text" data-toggle="tooltip" title="Salto, Salto, Oficial 1 2016" />
+	                        <label for="latitud-referencia-edicion">Latitud</label>
+	                        <input name="latitud-referencia-edicion" id="latitud-referencia-edicion" type="text" />
+	                        <label for="longitud-referencia-edicion">Longitud</label>
+	                        <input name="longitud-referencia-edicion" id="longitud-referencia-edicion" type="text" />
 	                        <!--<ul class="nav">
 	                            <li>Salto</li>
 	                            <li>Bel&eacute;n</li>
@@ -571,9 +573,9 @@
 	                        <!--<a href="#" id="limpiar" class="btn">Limpiar formulario</a>-->
 	                        <div id="observaciones-edicion">
 	                            <label for="observaciones-muestreo-edicion">Observaciones</label>
-	                            <textarea name="observaciones-muestreo-edicion" id="observaciones-muestreo-edicion"></textarea>
+	                            <textarea name="observaciones-muestreo-edicion" id="observaciones-muestreo-edicion"> </textarea>
 	                        </div>
-	                     	<!--<a href="#" id="btn-agregar-muestreo-edicion" class="btn btn-success">Agregar este muestreo al pedido</a>-->
+	                     	<a href="#" id="btn-agregar-muestreo-edicion" class="btn btn-success">Agregar este muestreo al pedido</a>
 	                 	</fieldset>
 	                    <fieldset class="span8" id="analitos-edicion">
 	                    	<legend>Selecci&oacute;n de Analitos</legend>
@@ -660,7 +662,7 @@
 				<div class="modal-footer">
 					<div id="botones-formulario" class="row-fluid">
 						<div class="span6"> </div>
-						<a href="#" class="btn span3 limpiar-todo">Cerrar</a>
+						<a href="#" class="btn span3 cerrar-muestreo" data-dismiss="modal">Cerrar</a>
 						<a href="#" class="btn btn-primary span3" id="guardar-edicion-muestreo" data-id="">Guardar</a>
 					</div>
 				</div>
