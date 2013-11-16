@@ -385,7 +385,8 @@ function reBind() {
 			//llamada ajax
 			alert('Edición finalizada.');
 			//renovar fila de muestreo
-			$()
+			//TODO: ver este vacio
+			//$()
 			$('#modal-editar-muestreo').modal('hide');
 			
 		}//else{
@@ -403,16 +404,30 @@ function reBind() {
 	
 	var ocultar_boton_referencia = false;
 	
-	$('#buscar-punto-referencia').on('click', function(e) {
+	$('button[id^=buscar-punto-referencia]').on('click', function(e) {
 		e.preventDefault();
-		if (!ocultar_boton_referencia) {
-			$('.buscar-referencia').show();
-			$('#buscar-punto-referencia').html('Ocultar Búsqueda');
-			ocultar_boton_referencia = true;
-		} else {
-			$('.buscar-referencia').hide();
-			$('#buscar-punto-referencia').html('Buscar Punto de Referencia');
-			ocultar_boton_referencia = false;
+		if (MODO == 'nuevo') {
+			if (!ocultar_boton_referencia) {
+				$('.buscar-referencia').show();
+				$('#buscar-punto-referencia').html('Ocultar Búsqueda');
+				ocultar_boton_referencia = true;
+			} else {
+				$('.buscar-referencia').hide();
+				$('#buscar-punto-referencia').html('Buscar Punto de Referencia');
+				resetSelectsBuscarPuntoReferencia();
+				ocultar_boton_referencia = false;
+			}	
+		}else if (MODO == 'modificar') {
+			if (!ocultar_boton_referencia) {
+				$('.buscar-referencia-edicion').show();
+				$('#buscar-punto-referencia-edicion').html('Ocultar Búsqueda');
+				ocultar_boton_referencia = true;
+			} else {
+				$('.buscar-referencia-edicion').hide();
+				$('#buscar-punto-referencia-edicion').html('Buscar Punto de Referencia');
+				resetSelectsBuscarPuntoReferencia();
+				ocultar_boton_referencia = false;
+			}
 		}
 	});
 	
@@ -441,15 +456,28 @@ function reBind() {
 	});
 	
 	//SELECTEDS
-	$('#departamentos option').on('click', function(e){
+	$('.departamentos option').on('click', function(e){
 		e.preventDefault();
-		$('#ciudades').removeAttr('disabled');
-		//llamada ajax para cargar ciudades del departamento seleccionado
+		if ($(this).parent().hasClass('edicion')) {
+			$('#ciudades-edicion').removeAttr('disabled');
+			//llamada ajax para cargar ciudades del departamento seleccionado
+		}else if (MODO == 'ḿodificar') {
+			$('#ciudades').removeAttr('disabled');
+			//llamada ajax para cargar ciudades del departamento seleccionado
+		}
+		
 	});
 	
-	$('#ciudades').on('click', function(e){
+	$('.ciudades option').on('click', function(e){
 		e.preventDefault();
-		$('#direcciones').removeAttr('disabled');
+		if ($(this).parent().hasClass('edicion')) {
+			$('#direcciones-edicion').removeAttr('disabled');
+			//llamada ajax para cargar ciudades del departamento seleccionado
+		}else if (MODO == 'ḿodificar') {
+			$('#direcciones').removeAttr('disabled');
+			//llamada ajax para cargar ciudades del departamento seleccionado
+		}
+		
 		//llamada ajax para cargar direcciones de la ciudad seleccionada
 	});
 	
@@ -668,9 +696,24 @@ function limpiar(total) {
 		$(this).attr('checked', false);
 	});
 	//debo acomodar para ver como hacer para nuevo pedido e igual para edicion
+	resetSelectsBuscarPuntoReferencia();
+	
+	if (total) {
+		$('li[id^=nro-]').each(function(){
+			$(this).remove();
+			$('.ningun-muestreo').css('display', 'block');
+		});
+	}
+}
+
+function resetSelectsBuscarPuntoReferencia() {
 	if (MODO == 'nuevo') {
 		$('#departamentos').prop('selectedIndex', 0);
 		$('#ciudades').prop('selectedIndex', 0);
+		$('#direcciones').prop('selectedIndex', 0);
+		//$('#departamentos').prop('disabled', 'disabled');
+		$('#ciudades').prop('disabled', 'disabled');
+		$('#direcciones').prop('disabled', 'disabled');
 		$('#codigo-referencia').val('');
 		//$('#longitud-referencia-edicion').val('');
 		//$('#latitud-referencia-edicion').val('');
@@ -678,17 +721,14 @@ function limpiar(total) {
 	}else if (MODO == 'modificar' || MODO == 'agregar') {
 		$('#departamentos-edicion').prop('selectedIndex', 0);
 		$('#ciudades-edicion').prop('selectedIndex', 0);
+		$('#direcciones-edicion').prop('selectedIndex', 0);
+		//$('#departamentos-edicion').prop('disabled', 'disabled');
+		$('#ciudades-edicion').prop('disabled', 'disabled');
+		$('#direcciones-edicion').prop('disabled', 'disabled');
 		$('#codigo-referencia-edicion').val('');
 		$('#longitud-referencia-edicion').val('');
 		$('#latitud-referencia-edicion').val('');
 		$('#observaciones-muestreo-edicion').val('');
-	}
-	
-	if (total) {
-		$('li[id^=nro-]').each(function(){
-			$(this).remove();
-			$('.ningun-muestreo').css('display', 'block');
-		});
 	}
 }
 
