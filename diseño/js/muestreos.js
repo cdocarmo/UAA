@@ -39,6 +39,11 @@ function reBind() {
 		}
 		// aqui llamar a un autocompletar
 	});
+	//cuando voy al tab nuevo pedido
+	$('.tab-nuevo-pedido').bind('shown', function(){
+		MODO = 'nuevo';
+		alert('modo: ' + MODO);
+	});
 	
 	$('a[id^=btn-agregar-muestreo]').on('click', function(){
 		//TODO: aqui debo poner un condicional segun el modo.
