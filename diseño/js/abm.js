@@ -12,6 +12,7 @@ var LOCALIDAD = "localidad";
 var OPTIONCATEGORIAS = null;
 var OPTIONSUBCATEGORIAS = null;
 var OPTIONDEPARTAMENTOS = null;
+var OPTIONUNIDADVALIDEZ = null;
 
 $(document).ready(function(){
 	reBind();
@@ -34,7 +35,7 @@ function reBind() {
 		//quitar la marca de seleccion
 		$('.seleccionada').css({
 			fontWeight: "normal",
-			color: "#515151",
+			color: "blue",
 			textShadow: "None"
 		}).removeClass("seleccionada");
 		//agregar marca de seleccion
@@ -76,6 +77,9 @@ function reBind() {
 			$('#vmaxp').val($(this).find('.vmaxp').html());
 			$('#metodo-unit').val($(this).find('.metodo-unit').html());
 			$('#metodo').val($(this).find('.metodo').html());
+			$('#numero-validez').val($(this).find('.validez .numero').html());
+			cboxUnidadValidez($('#unidad-validez > option[value=' + '"' + $(this).find('.validez .unidad').html() + '"' + ']'));
+			$('#unidad-validez > option[value=' + '"' + $(this).find('.validez .unidad').html() + '"' + ']').prop('selected', true);
 			$('#observaciones').val($(this).find('.observaciones').html());
 		} else if ($(this).hasClass('fila-localidades')) {
 			$('#nombre-localidad').val($(this).find('.ciudad').html());
@@ -283,6 +287,13 @@ function cboxDepartamentos(option) {
 		$(OPTIONDEPARTAMENTOS).prop('selected', false);
 	}
 	OPTIONCATEGORIAS = option;
+}
+
+function cboxUnidadValidez(option) {
+	if (OPTIONUNIDADVALIDEZ != null) {
+		$(OPTIONUNIDADVALIDEZ).prop('selected', false);
+	}
+	OPTIONUNIDADVALIDEZ = option;
 }
 
 //para mandar via ajax

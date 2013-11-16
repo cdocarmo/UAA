@@ -275,6 +275,10 @@ body {
 	vertical-align: middle !important;
 }
 
+.fila-analitos:hover {
+	color: blue;
+}
+
 .formularios-dos-columnas, #analitos .row-fluid {
 	margin-top: 2%; important!
 }

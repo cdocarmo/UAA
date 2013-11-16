@@ -110,11 +110,11 @@
 	                            		<input name="metodo" id="metodo" type="text" class="focusable" maxlength="55" />
 	                            		<div id="dias-de-vencimiento">
 	                            			<label for="validez">Validez</label>
-	                            			<input name="validez" type="text" maxlength="3" class="no-obligatorio"/>
-	                            			<select>
-	                            				<option>d&iacute;as</option>
-	                            				<option>semanas</option>
-	                            				<option>meses</option>
+	                            			<input name="validez" type="text" maxlength="3" class="no-obligatorio" id="numero-validez"/>
+	                            			<select id="unidad-validez">
+	                            				<option value="dias">d&iacute;as</option>
+	                            				<option value="semanas">semanas</option>
+	                            				<option value="meses">meses</option>
 	                            			</select>
 	                            		</div>
 	                            		<label for="observaciones">Observaciones</label>
@@ -143,6 +143,7 @@
 			                        				<td class="vmaxp">8.5</td>
 			                        				<td class="metodo-unit invisible">ASDfsljfb k ejbf akjbdf jdsbf</td>
 			                        				<td class="metodo invisible">Dsdfsfdjufb kas bd</td>
+			                        				<td class="validez invisible"><span class="numero">10</span><span class="unidad">dias</span></td>
 			                        				<td class="observaciones invisible">FADsdkjfb s sdkjfbasd jhabsd faj</td>
 			                        			</tr>
 			                        			<tr class="fila-analitos">
@@ -154,6 +155,7 @@
 			                        				<td class="vmaxp">2000</td>
 			                        				<td class="metodo-unit invisible">ASDfsljfb k ejbf akjbdf jdsbf</td>
 			                        				<td class="metodo invisible">Dsdfsfdjufb kas bd</td>
+			                        				<td class="validez invisible"><span class="numero">10</span><span class="unidad">dias</span></td>
 			                        				<td class="observaciones invisible">FADsdkjfb s sdkjfbasd jhabsd faj</td>
 			                        			</tr>
 			                        			<tr class="fila-analitos">
@@ -165,6 +167,7 @@
 			                        				<td class="vmaxp">500</td>
 			                        				<td class="metodo-unit invisible">ASDfsljfb k ejbf akjbdf jdsbf</td>
 			                        				<td class="metodo invisible">Dsdfsfdjufb kas bd</td>
+			                        				<td class="validez invisible"><span class="numero">10</span><span class="unidad">dias</span></td>
 			                        				<td class="observaciones invisible">FADsdkjfb s sdkjfbasd jhabsd faj</td>
 			                        			</tr>
 			                        			<tr class="fila-analitos">
@@ -176,6 +179,7 @@
 			                        				<td class="vmaxp"> </td>
 			                        				<td class="metodo-unit invisible">ASDfsljfb k ejbf akjbdf jdsbf</td>
 			                        				<td class="metodo invisible">Dsdfsfdjufb kas bd</td>
+			                        				<td class="validez invisible"><span class="numero">10</span><span class="unidad">dias</span></td>
 			                        				<td class="observaciones invisible">FADsdkjfb s sdkjfbasd jhabsd faj</td>
 			                        			</tr>
 			                        		</tbody>
