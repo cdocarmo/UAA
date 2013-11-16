@@ -265,6 +265,16 @@ body {
 	margin-left: 0; important!
 }
 
+#dias-de-vencimiento input {
+	width: 20%;
+}
+
+#dias-de-vencimiento select {
+	width: 40%;
+	margin-bottom: 10px;
+	vertical-align: middle !important;
+}
+
 .formularios-dos-columnas, #analitos .row-fluid {
 	margin-top: 2%; important!
 }

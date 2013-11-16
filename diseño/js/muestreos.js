@@ -42,7 +42,7 @@ function reBind() {
 	//cuando voy al tab nuevo pedido
 	$('.tab-nuevo-pedido').bind('shown', function(){
 		MODO = 'nuevo';
-		alert('modo: ' + MODO);
+		//alert('modo: ' + MODO);
 	});
 	
 	$('a[id^=btn-agregar-muestreo]').on('click', function(){
