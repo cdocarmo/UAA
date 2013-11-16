@@ -224,9 +224,11 @@ function limpiarCampos() {
 			textShadow: "None"
 		}).removeClass("seleccionada");
 	//recorro los inputs para limpiarlos
-	$('input').each(function(){
-		if (!($(this).is('input[type="submit"]') || !$(this).is('input[type="reset"]') || !$(this).is('input[type="button"]'))){
-			$(this).val("");	
+	$('input, select').each(function(){
+		if ($(this).is('[type=text]')) {
+			$(this).val("");
+		}else if ($(this).prop('tagName')) {
+			$(this).prop('selectedIndex', 0);
 		}
 	});
 }
@@ -237,6 +239,9 @@ function crearMsgValidacion(msg, id) {
 }
 
 function revisarInputs(obj) {
+	if ($(obj).hasClass('no-obligatorio')){
+		return true;
+	}
 	var completos = false;
 	if (focus_flag == false) {
 		if (($(obj).val().length < 1) || ($(obj).val() == "__.___") || ($(obj).val() == 'seleccionar')) {
