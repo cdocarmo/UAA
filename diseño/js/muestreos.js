@@ -10,6 +10,7 @@ var analitos_marcados = 0;
 var ultimo_muestreo = null;
 var item_muestreo_anterior = null;
 var numero_muestreo_edicion = null;
+var codigo_de_referencia_buffer = null;
 var item_muestreo_edicion = null;
 var boton_ver_anterior = null;
 var col_analitos = new Array();
@@ -211,6 +212,10 @@ function reBind() {
 		var ident = $(this).attr('id').split('-')[2]; //obtengo el numero de muestreo desde el attr id del boton
 		//alert('id es ' + ident);
 		var cod_referencia = $(this).parent().parent().find('.cod-ref').html();
+		codigo_de_referencia_buffer = cod-referencia; //para ver si se cambio de locacion y actualizar la fila de los muestreos
+		var longitud = $(this).parent().parent().find('.longitud').html();
+		var latitud = $(this).parent().parent().find('.latitud').html();
+		var observaciones = $(this).parent().parent().find('.observaciones').html();
 		//var departamento = $(this).parent().parent().find('.departamento').val();
 		//var ciudad = $(this).parent().parent().find('.ciudad').val();
 		//var direccion = $(this).parent().parent().find('.direccion').val();
@@ -220,7 +225,10 @@ function reBind() {
 				analitos.push($(this).attr('id'));	
 		});
 		
-		$('#numero-referencia-edicion').val(cod_referencia);
+		$('#codigo-referencia-edicion').val(cod_referencia);
+		$('#longitud-referencia-edicion').val(longitud);
+		$('#latitud-referencia-edicion').val(latitud);
+		$('#observaciones-muestreo-edicion').val(observaciones);
 		//$('#departamentos-edicion option:contains("' + departamento + '")').prop('selected', true);
 		//$('#ciudades-edicion option:contains("' + ciudad + '")').prop('selected', true);
 		//$('#direcciones-edicion option:contains("' + direccion + '")').prop('selected', true);
@@ -280,6 +288,9 @@ function reBind() {
 							if ($(this).hasClass('pendiente')){
 								caja_cod = caja_cod +
 								'<th></th>' +
+								'<th></th>' +
+								'<th></th>' +
+								'<th></th>' +
 								'<th></th>';
 							}
 							caja_cod = caja_cod + '</tr>';
@@ -295,16 +306,19 @@ function reBind() {
 							if ($(this).hasClass('anterior')) {
 								caja_cod = caja_cod +
 								'<td class="fecha">11/11/13</td>';
-							}else{
+							}else{ //si son muestreos pendientes
 								caja_cod = caja_cod +
 								'<td class="fecha dtp-muestreo input-append date"><input type="text"></input><span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span></td>' +
 								'<td><button class="btn btn-primary" id="muestreo-id-' + j + '">Editar Detalles</button></td>' +
-								'<td><button class="btn btn-danger elim-muestreo">X</button></td>';
+								'<td><button class="btn btn-danger elim-muestreo">X</button></td>' +
+								'<td class="invisible latitud">12\' 34 23</td>' +
+								'<td class="invisible longitud">123\' 43 32</td>' +
+								'<td class="invisible observaciones">Observaciones bien observadas</td>';
 							}
 						caja_cod = caja_cod + '</tr>';
 				}
 				caja_cod = caja_cod + '</table>';
-				if ($(this).hasClass('editar')) {
+				if ($(this).hasClass('pendiente')) {
 					caja_cod = caja_cod + '\t\t<button class="btn btn-success agregar-muestreo" id="id' + i + '">Agregar Muestreo</button>';	
 				} // la variable "i" debe ser sustituida por la variable que contiene el id del muestreo
 				
@@ -385,7 +399,7 @@ function reBind() {
 	});
 	
 	//finalizar edicion muestreo
-	$('#guardar-edicion-muestreo').on('click', function(){
+	$('#guardar-edicion-muestreo').unbind().on('click', function(){
 		if (validarCamposEdicionDelMuestreo($(this).attr('data-id'))) {
 			//llamada ajax
 			alert('Edición finalizada.');
@@ -573,10 +587,13 @@ function validarCamposEdicionDelMuestreo(id) {
 	//recoger todos los datos en un objeto
 	var obj = new Object();
 	obj['id'] = id;
-	obj['departamento'] = $('#departamentos-edicion').val();
-	obj['ciudad'] = $('#ciudades-edicion').val();
-	obj['direccion'] = $('#direccion-edicion').val();
-	obj['referencia'] = $('#numero-referencia-edicion').val();
+	//obj['departamento'] = $('#departamentos-edicion').val();
+	//obj['ciudad'] = $('#ciudades-edicion').val();
+	//obj['direccion'] = $('#direccion-edicion').val();
+	obj['referencia'] = $('#codigo-referencia-edicion').val();
+	obj['ĺatitud'] = $('#latitud-referencia-edicion').val();
+	obj['longitud'] = $('#longitud-referencia-edicion').val();
+	obj['observaciones'] = $('#observaciones-muestreo-edicion').val();
 	var analitos = new Array();
 	$('.analito').each(function(){
 		if ($(this).is(':checked')) {
@@ -584,16 +601,15 @@ function validarCamposEdicionDelMuestreo(id) {
 			analitos_marcados++;	
 		}
 	});
-		
-	if ($('#direccion-edicion').val().length < 1) {
-		if ($('#locacion-edicion').find('#msg-vacio-direccion').length == 0) {
-			quitarMsg($('#direccion-edicion'));
-			$(crearMsgValidacion('Campo obligatorio', 'direccion-edicion')).appendTo($('#direccion-edicion').prev());	
-		}
-		editar_muestreo = false;
-	}else{
-		quitarMsg($('#direccion-edicion'));
-	}
+	//if ($('#direccion-edicion').val().length < 1) {
+	//	if ($('#locacion-edicion').find('#msg-vacio-direccion').length == 0) {
+	//		quitarMsg($('#direccion-edicion'));
+	//		$(crearMsgValidacion('Campo obligatorio', 'direccion-edicion')).appendTo($('#direccion-edicion').prev());	
+	//	}
+	//	editar_muestreo = false;
+	//}else{
+	//	quitarMsg($('#direccion-edicion'));
+	//}
 		
 	if (analitos_marcados > 0) {
 		quitarMsg($('#analitos-edicion'));
@@ -617,14 +633,33 @@ function validarCamposEdicionDelMuestreo(id) {
 }
 
 function actualizarFilaMuestreo(obj) {
-	$('#' + obj['id']).find('.cod-referencia').html(obj['referencia']);
-	$('#' + obj['id']).find('.ciudad').html(obj['ciudad']);
-	$('#' + obj['id']).find('.departamento').html(obj['departamento']);
-	$('#' + obj['id']).find('.direccion').html(obj['direccion']);
+	$('#muestreo-' + obj['id']).find('.cod-referencia').html(obj['referencia']);
 	
-	$('#' + obj['id']).find('.lista-datos-analitos').empty();
+	
+	$('#muestreo' + obj['id']).find('.lista-datos-analitos').empty();
+	$('#muestreo-' + obj['id']).find('.badge').each(function() {
+		$(this).remove();
+	});
+	if (obj['referencia'] != codigo_de_referencia_buffer) {
+		alert('hay que llamar ajax para obtener los datos de departamento, ciudad y direccion (linea 643 - muestreos.js)');
+		//TODO: AJAX: si entra aquí hay que obtener departamento, ciudad y direccion via ajax segun el nuevo codigo de referencia en
+		//obj['referencia'] para actualizar la fila.
+		//descomentar lo que sigue
+		//var dep = datodeajax;
+		//var ciud = datodeajax;
+		//var dir = datodeajax;
+		//$('#muestreo-' + obj['id']).find('.ciudad').html(ciud);
+		//$('#muestreo-' + obj['id']).find('.departamento').html(dep);
+		//$('#muestreo-' + obj['id']).find('.direccion').html(dir);
+	}else{
+		$('#muestreo-' + obj['id']).find('.ciudad').html(obj['ciudad']);
+		$('#muestreo-' + obj['id']).find('.departamento').html(obj['departamento']);
+		$('#muestreo-' + obj['id']).find('.direccion').html(obj['direccion']);
+	}
 	for (var i=0; i<obj['col-analitos'].length; i++) {
-		$('#' + obj['id']).find('.lista-datos-analitos').append('<li><i class="icon-tint"> </i>&nbsp;&nbsp;&nbsp;' + obj['col-analitos'][i] + '</li>');
+		var txt_analito = obj['col-analitos'][i];
+		
+		$('#muestreo-' + obj['id']).find('.analitos').append('<span class="badge badge-success" id="' + txt_analito.toLowerCase() + '">' + txt_analito + '</span>');
 	}
 	
 }
