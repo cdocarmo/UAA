@@ -24,6 +24,11 @@ var select_departamentos = false;
 var select_ciudades = false;
 var select_direcciones = false;
 
+//FUNCION QUE EXTIENDE LA CLASE STRING DANDOLE LA CAPACIDAD DE CAPITALIZAR
+String.prototype.capitalize = function() {
+    return this.toLowerCase().replace(/(^|\s)([a-z])/g, function(m, p1, p2) { return p1 + p2.toUpperCase(); });
+};
+
 $(document).ready(function(){
 	limpiar(true);
 	reBind();
@@ -212,7 +217,7 @@ function reBind() {
 		var ident = $(this).attr('id').split('-')[2]; //obtengo el numero de muestreo desde el attr id del boton
 		//alert('id es ' + ident);
 		var cod_referencia = $(this).parent().parent().find('.cod-ref').html();
-		codigo_de_referencia_buffer = cod-referencia; //para ver si se cambio de locacion y actualizar la fila de los muestreos
+		codigo_de_referencia_buffer = cod_referencia; //para ver si se cambio de locacion y actualizar la fila de los muestreos
 		var longitud = $(this).parent().parent().find('.longitud').html();
 		var latitud = $(this).parent().parent().find('.latitud').html();
 		var observaciones = $(this).parent().parent().find('.observaciones').html();
@@ -403,14 +408,12 @@ function reBind() {
 		if (validarCamposEdicionDelMuestreo($(this).attr('data-id'))) {
 			//llamada ajax
 			alert('Edición finalizada.');
-			//renovar fila de muestreo
-			//TODO: ver este vacio
-			//$()
+			
 			$('#modal-editar-muestreo').modal('hide');
 			
-		}//else{
-			//alert('problemas');
-		//}
+		}else{
+			//alert('');
+		}
 	});
 	
 	//NUEVO PUNTO DE REFERENCIA
@@ -659,7 +662,7 @@ function actualizarFilaMuestreo(obj) {
 	for (var i=0; i<obj['col-analitos'].length; i++) {
 		var txt_analito = obj['col-analitos'][i];
 		
-		$('#muestreo-' + obj['id']).find('.analitos').append('<span class="badge badge-success" id="' + txt_analito.toLowerCase() + '">' + txt_analito + '</span>');
+		$('#muestreo-' + obj['id']).find('.analitos').append('<span class="badge badge-success" id="' + txt_analito.toLowerCase() + '">' + txt_analito.capitalize() + '</span>');
 	}
 	
 }
@@ -769,6 +772,9 @@ function resetSelectsBuscarPuntoReferencia() {
 		$('#longitud-referencia-edicion').val('');
 		$('#latitud-referencia-edicion').val('');
 		$('#observaciones-muestreo-edicion').val('');
+		$('.buscar-referencia-edicion').hide();
+		$('#buscar-punto-referencia-edicion').html('Buscar Punto de Referencia');
+		ocultar_boton_referencia = false;
 	}
 }
 
