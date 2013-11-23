@@ -30,6 +30,7 @@ String.prototype.capitalize = function() {
     return this.toLowerCase().replace(/(^|\s)([a-z])/g, function(m, p1, p2) { return p1 + p2.toUpperCase(); });
 };
 
+
 $(document).ready(function(){
 	limpiar(true);
 	reBind();
@@ -38,6 +39,15 @@ $(document).ready(function(){
 //EVENTOS
 
 function reBind() {
+	$.fn.datetimepicker.defaults = {
+  			maskInput: true,           // disables the text input mask
+  			pickDate: true,            // disables the date picker
+  			pickTime: false,            // disables de time picker
+  			pick12HourFormat: false,   // enables the 12-hour format time picker
+  			pickSeconds: false,         // disables seconds in the time picker
+  			endDate: Infinity,          // set a maximum date
+  			autoClose: true
+};
 	//PESTAÑA "NUEVO PEDIDO"
 	$('#numero-referencia').keypress(function(e){
 		if (e.which == 13 ) {
@@ -197,6 +207,14 @@ function reBind() {
 	
 	//PESTAÑA "MUESTREOS PENDIENTES"
 	
+	$('.dtp-muestreo').on('changeDate', function(e){
+		//TODO: aca hacer una llamada ajax para modificar la fecha en la bd
+		//variable fecha contiene este formato: dd/mm/yyyy
+		var fecha = $(this).find('input').val();
+		var id_muestreo = $(this).parent().attr('id').split('-')[1];
+		//alert(id_muestreo);
+	});
+	
 	$('.agregar-muestreo').on('click', function(){
 		//alert("aca");
 		$('.titulo-modal-muestreo').html(agregar_muestreos);
@@ -280,6 +298,7 @@ function reBind() {
 			var caja_cod = "";
 			var max = 3;
 			for (var i=0;i<max;i++) {
+				//fila del pedido
 				caja_cod = caja_cod + '<td colspan=5 class="datos-pedido-muestreo">' + 
 				'<table>' +
 						'<caption>Pedido nro: 001</caption>' +
@@ -301,6 +320,7 @@ function reBind() {
 							}
 							caja_cod = caja_cod + '</tr>';
 				for (var j=0;j<max; j++) {
+					//fila del muestreo
 					caja_cod = caja_cod +
 						'<tr id="muestreo-' + j + '">' + // aqui "j" debe ser el numero de muestreo
 							'<td class="num-muestreo">0001</td>' +
@@ -442,7 +462,7 @@ function reBind() {
 				resetSelectsBuscarPuntoReferencia();
 				ocultar_boton_referencia = false;
 			}	
-		}else if (MODO == 'modificar') {
+		}else if ((MODO == 'modificar') || (MODO == 'agregar')) {
 			if (!ocultar_boton_referencia) {
 				$('.buscar-referencia-edicion').show();
 				$('#buscar-punto-referencia-edicion').html('Ocultar Búsqueda');
@@ -484,6 +504,9 @@ function reBind() {
 	//SELECTEDS
 	$('.departamentos option').on('click', function(e){
 		e.preventDefault();
+		if ($(this).val() == 'seleccionar') {
+			return;
+		}
 		if ($(this).parent().hasClass('edicion')) {
 			$('#ciudades-edicion').removeAttr('disabled');
 			//llamada ajax para cargar ciudades del departamento seleccionado
@@ -496,6 +519,9 @@ function reBind() {
 	
 	$('.ciudades option').on('click', function(e){
 		e.preventDefault();
+		if ($(this).val() == 'seleccionar') {
+			return;
+		}
 		if ($(this).parent().hasClass('edicion')) {
 			$('#direcciones-edicion').removeAttr('disabled');
 			//llamada ajax para cargar ciudades del departamento seleccionado
@@ -512,6 +538,9 @@ function reBind() {
 		//TODO: actualizar los campos cod-ref latitud y longitud
 		//lo siguiente esta hardcodeado pero son datos que se deberian
 		//obtener via ajax
+		if ($(this).val() == 'seleccionar') {
+			return;
+		}
 		$('#codigo-referencia').val('HARDCOD001');
 		$('#latitud-referencia').val('12\' 34 23hardc');
 		$('#longitud-referencia').val('12\' 34 23hardc');
@@ -523,6 +552,9 @@ function reBind() {
 		//TODO: actualizar los campos cod-ref latitud y longitud
 		//lo siguiente esta hardcodeado pero son datos que se deberian
 		//obtener via ajax
+		if ($(this).val() == 'seleccionar') {
+			return;
+		}
 		$('#codigo-referencia-edicion').val('HARDCOD001');
 		$('#latitud-referencia-edicion').val('12\' 34 23hardc');
 		$('#longitud-referencia-edicion').val('12\' 34 23hardc');
