@@ -39,16 +39,17 @@ $(document).ready(function(){
 //EVENTOS
 
 function reBind() {
-	$.fn.datetimepicker.defaults = {
-  			maskInput: true,           // disables the text input mask
-  			pickDate: true,            // disables the date picker
-  			pickTime: false,            // disables de time picker
-  			pick12HourFormat: false,   // enables the 12-hour format time picker
-  			pickSeconds: false,         // disables seconds in the time picker
-  			endDate: Infinity,          // set a maximum date
-  			autoClose: true
-};
+	//$.fn.datetimepicker.defaults = {
+  	//		maskInput: true,           // disables the text input mask
+  	//		pickDate: true,            // disables the date picker
+  	//		pickTime: false,            // disables de time picker
+  	//		pick12HourFormat: false,   // enables the 12-hour format time picker
+  	//		pickSeconds: false,         // disables seconds in the time picker
+  	//		endDate: Infinity,          // set a maximum date
+  	//		autoClose: true
+	//};
 	//PESTAÑA "NUEVO PEDIDO"
+	setearDateTimePickers();
 	$('#numero-referencia').keypress(function(e){
 		if (e.which == 13 ) {
 			e.preventDefault();  // Evito que cuando hago enter se ejecute el evento que usa el boton Buscar Punto de Referencia
