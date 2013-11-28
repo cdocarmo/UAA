@@ -60,6 +60,10 @@ function reBind() {
 	//cuando voy al tab nuevo pedido
 	$('.tab-nuevo-pedido').bind('shown', function(){
 		MODO = 'nuevo';
+		$('tr[class*=pedido]').remove();
+		$('.table').find('.ocultar').html('Ver');
+		$('.table').find('.ocultar').removeClass('ocultar').addClass('ver');
+		
 		//alert('modo: ' + MODO);
 	});
 	
