@@ -332,8 +332,12 @@ body {
 	width: 80px !important;
 }
 
+#lbl-fecha-nuevo-pedido {
+	margin-top: 2%;
+}
+
 #dtp-nuevo-pedido {
-	margin-top: 5%;
+	/*margin-top: 5%;*/
 }
 
 #dtp-nuevo-pedido input {
