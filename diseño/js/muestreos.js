@@ -832,6 +832,7 @@ function limpiar(total) {
 	$('.analito').each(function(){
 		$(this).attr('checked', false);
 	});
+	$('#fecha-muestreo').val('');
 	//debo acomodar para ver como hacer para nuevo pedido e igual para edicion
 	resetSelectsBuscarPuntoReferencia();
 	
