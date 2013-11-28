@@ -458,9 +458,10 @@ function reBind() {
 	
 	//NUEVO PUNTO DE REFERENCIA
 	
-	$('#nuevo-punto-referencia').on('click', function(e) {
+	$('button[id^=nuevo-punto-referencia]').on('click', function(e) {
 		//alert('anda');
 		e.preventDefault();
+		$('#modal-nuevo-punto-referencia').css('z-index', 3000);
 		$('#modal-nuevo-punto-referencia').modal('show');
 	});
 	
