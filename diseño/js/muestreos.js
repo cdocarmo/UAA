@@ -58,13 +58,15 @@ function reBind() {
 		// aqui llamar a un autocompletar
 	});
 	//cuando voy al tab nuevo pedido
-	$('.tab-nuevo-pedido').bind('shown', function(){
-		MODO = 'nuevo';
+	$('.tab-nuevo-pedido, .tab-pedidos-anteriores, .tab-pedidos-pendientes, .tab-puntos-de-referencia, .tab-resultados-muestreos, .tab-obtener-informes, .tab-calidad').bind('shown', function(){
+		//cada vez que se agrega una nueva pestaña hay que agregarla al selector de arriba.
+		if ($(this).hasClass('tab-nuevo-pedido')){
+			MODO = 'nuevo';
+			//alert('modo: ' + MODO);
+		}
 		$('tr[class*=pedido]').remove();
 		$('.table').find('.ocultar').html('Ver');
 		$('.table').find('.ocultar').removeClass('ocultar').addClass('ver');
-		
-		//alert('modo: ' + MODO);
 	});
 	
 	$('#select-alfabeto option').on('click', function(){
