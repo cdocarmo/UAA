@@ -296,6 +296,12 @@ body {
 
 /*MUESTREOS*/
 
+.existe {
+	color: #0000FF;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 #buscar-punto-referencia {
 	margin-top: 2%;
 }
@@ -310,6 +316,7 @@ body {
 
 #lista-muestreos {
 	list-style-type: none;
+	margin-top: 6%;
 	/*display: none;*/
 }
 

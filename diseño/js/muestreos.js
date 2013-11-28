@@ -63,6 +63,14 @@ function reBind() {
 		//alert('modo: ' + MODO);
 	});
 	
+	$('#select-alfabeto option').on('click', function(){
+		if ($(this).hasClass('existe')){
+			//TODO:AJAX cargar select con los clientes cuyo apellido o nombre empieza con la letra de la variable "letra" 
+			var letra = $(this).html();
+			$('#select-listado-clientes').attr('disabled', false);
+		}
+	});
+	
 	$('a[id^=btn-agregar-muestreo]').on('click', function(){
 		//TODO: aqui debo poner un condicional segun el modo.
 		if ($(this).attr('id') == 'btn-agregar-muestreo' && MODO == 'agregar') {
@@ -837,6 +845,8 @@ function limpiar(total) {
 	resetSelectsBuscarPuntoReferencia();
 	
 	if (total) {
+		$('#select-alfabeto').prop('selectedIndex', 0);
+		$('#select-listado-clientes').attr('disabled', true);
 		$('li[id^=nro-]').each(function(){
 			$(this).remove();
 			$('.ningun-muestreo').css('display', 'block');
