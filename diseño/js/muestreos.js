@@ -31,8 +31,10 @@ String.prototype.capitalize = function() {
 };
 
 
+
 $(document).ready(function(){
 	limpiar(true);
+	//$('#modal-editar-muestreo').css('z-index', 1000);
 	reBind();
 });
 
@@ -237,6 +239,7 @@ function reBind() {
 		MODO = 'agregar';
 		limpiar(true);
 		$('#modal-editar-muestreo').modal('show');
+		$('#btn-agregar-muestreo-edicion').hide();
 		//Aca se deben obtener los datos via AJAX y colocarlas en variables para pasarlas al siguiente str
 		//hardcodeado: este array debe ser llenado con lo obtenido via ajax
 		var id_muestreo = $(this).parent().parent().parent().parent().attr('id'); //obtengo el id para buscar el muestreo
@@ -285,6 +288,7 @@ function reBind() {
 		$('#btn-agregar-muestreo-edicion').addClass('hide');
 		$('.titulo-modal-muestreo').html(editar_muestreo);
 		$('#modal-editar-muestreo').modal('show');
+		$('#btn-agregar-muestreo-edicion').show();
 		$('#guardar-edicion-muestreo').attr('data-id', id_muestreo);
 	});
 	
