@@ -355,7 +355,9 @@ function reBind() {
 				caja_cod = caja_cod + '</table>';
 				if ($(this).hasClass('pendiente')) {
 					caja_cod = caja_cod + '\t\t<button class="btn btn-success agregar-muestreo" id="id' + i + '">Agregar Muestreo</button>';	
-				} // la variable "i" debe ser sustituida por la variable que contiene el id del muestreo
+				}else{// la variable "i" debe ser sustituida por la variable que contiene el id del muestreo
+					caja_cod = caja_cod + '\t\t<button class="btn btn-success imprimir-pedido" id="id' + i + '">Imprimir Pedido</button>';
+				}
 				
 				caja_cod = caja_cod + '</td>';
 				fila = crearFilaConInfoDeMuestreos(id_pedido, i); //segundo parametro es temporal, debe sustituirse por el id de muestreo correcto
