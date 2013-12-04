@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>PDF</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap-datetimepicker.min.css" /><!--plugin-->
+        <link rel="stylesheet" href="css/main.css">
+        <!--IMPRESION-->
+        <style type="text/css">
+        	@media print {
+        		@page {
+        			size: landscape;
+        		}
+        		#main { /*solo en firefox*/
+        			margin:40px 0;
+        		}
+        		#boton-imprimir-pdf {
+        			display: none;
+        		}
+        		#cabecera-pdf {
+        			padding-top: 30px;
+        		}
+        		table { 
+        			page-break-inside:auto 
+        		}
+   				tr { 
+   					page-break-inside:avoid; 
+   					page-break-after:auto 
+   				}
+        	}
+        </style>
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+		
+        <!-- Add your site or application content here -->
+        <div class="navbar" id="cabecera-pdf">
+        	<div class="navbar-inner">
+        		<img class="logo brand" src="img/logo_UAA.jpg">
+        		<ul class="nav">
+        		<li>
+        			<h1 id="h1-pdf">PLANILLA DE PEDIDO DE MUESTREO</h1>
+        		</li>
+        		<li>
+        			<ul class="metadata-formulario-pdf">
+        				<li>
+        					<b>FORMULARIO</b>
+        				</li>
+        				<li>
+        					C&oacute;digo: XXXX
+        				</li>
+        				<li>
+        					Versi&oacute;n: XXXX
+        				</li>
+        				<li>
+        					Fecha: XXXX
+        				</li>
+        			</ul>
+        		</li>
+        		<li>
+        			<button href="#" class="btn btn-primary" id="boton-imprimir-pdf">IMPRIMIR</button>
+        		</li>
+        	</ul>
+        	</div>
+        	<div id="segundo-div">
+        		<div class="pull-left" id="form-nro-pdf">Formulario nro: XXXX</div>
+        		<div class="pull-right" id="form-fecha-pdf">Fecha: XXXX</div>
+        	</div>
+        </div>
+        <div id="contenedor">
+        	<table class="table table-striped table-bordered pull-left">
+        		<thead>
+        			<tr>
+        				<th>Departamento</th>
+        				<th>Ciudad</th>
+        				<th>Direcci&oacute;n</th>
+        				<th>Observaciones</th>
+        				<th>Nro. Referencia</th>
+        				<th>Nro. Muestra</th>
+        				<th><div class="txt-vertical">Microbil&oacute;gicas</div></th>
+        				<th><div class="txt-vertical">Microcistinas</div></th>
+        				<th><div class="txt-vertical">Ars&eacute;nico</div></th>
+        				<th><div class="txt-vertical">Cadmio</div></th>
+        				<th><div class="txt-vertical">Cianuro</div></th>
+        				<th><div class="txt-vertical">Cloruro</div></th>
+        				<th><div class="txt-vertical">Cobre</div></th>
+        				<th><div class="txt-vertical">Cromo</div></th>
+        				<th><div class="txt-vertical">Fluoruro</div></th>
+        				<th><div class="txt-vertical">Hierro</div></th>
+        				<th><div class="txt-vertical">Nitrato</div></th>
+        				<th><div class="txt-vertical">Nitrito</div></th>
+        				<th><div class="txt-vertical">Mercurio</div></th>
+        				<th><div class="txt-vertical">Plomo</div></th>
+        				<th><div class="txt-vertical">Selenio</div></th>
+        				<th><div class="txt-vertical">Zinc</div></th>
+        				<th><div class="txt-vertical">PH</div></th>
+        				<th><div class="txt-vertical">Dureza</div></th>
+        				<th><div class="txt-vertical">Turbiedad</div></th>
+        				<th><div class="txt-vertical">Color</div></th>
+        				<th><div class="txt-vertical">Pesticidas</div></th>
+        				<th><div class="txt-vertical">Ac. Org&aacute;nicos</div></th>
+        				<th><div class="txt-vertical">Cloroformo</div></th>
+        				<th><div class="txt-vertical">Aluminio</div></th>
+        				<th><div class="txt-vertical">Sulfato</div></th>
+        				<th><div class="txt-vertical">Cloro</div></th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<tr>
+        				<td>Salto</td>
+        				<td>Belen</td>
+        				<td>Calle 1 666</td>
+        				<td>Observaciones de alguna clase.</td>
+        				<td>XXXX</td>
+        				<td>XXXXX</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>3</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>2</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>2</td>
+        				<td> </td>
+        				<td></td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        			</tr>
+        			<tr>
+        				<td>Salto</td>
+        				<td>Belen</td>
+        				<td>Calle 1 666</td>
+        				<td>Observaciones de alguna clase.</td>
+        				<td>XXXX</td>
+        				<td>XXXXX</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>3</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>2</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>2</td>
+        				<td> </td>
+        				<td></td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        			</tr>
+        			<tr>
+        				<td>Salto</td>
+        				<td>Belen</td>
+        				<td>Calle 1 666</td>
+        				<td>Observaciones de alguna clase.</td>
+        				<td>XXXX</td>
+        				<td>XXXXX</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>3</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>2</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>2</td>
+        				<td> </td>
+        				<td></td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        			</tr>
+        			<tr>
+        				<td>Salto</td>
+        				<td>Belen</td>
+        				<td>Calle 1 666</td>
+        				<td>Observaciones de alguna clase.</td>
+        				<td>XXXX</td>
+        				<td>XXXXX</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>3</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>2</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>2</td>
+        				<td> </td>
+        				<td></td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        			</tr>
+        			<tr>
+        				<td>Salto</td>
+        				<td>Belen</td>
+        				<td>Calle 1 666</td>
+        				<td>Observaciones de alguna clase.</td>
+        				<td>XXXX</td>
+        				<td>XXXXX</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>3</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>2</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>2</td>
+        				<td> </td>
+        				<td></td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        			</tr>
+        			<tr>
+        				<td>Salto</td>
+        				<td>Belen</td>
+        				<td>Calle 1 666</td>
+        				<td>Observaciones de alguna clase.</td>
+        				<td>XXXX</td>
+        				<td>XXXXX</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>3</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>2</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>2</td>
+        				<td> </td>
+        				<td></td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        			</tr>
+        			<tr>
+        				<td>Salto</td>
+        				<td>Belen</td>
+        				<td>Calle 1 666</td>
+        				<td>Observaciones de alguna clase.</td>
+        				<td>XXXX</td>
+        				<td>XXXXX</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>3</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>2</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>2</td>
+        				<td> </td>
+        				<td></td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        			</tr>
+        			<tr>
+        				<td>Salto</td>
+        				<td>Belen</td>
+        				<td>Calle 1 666</td>
+        				<td>Observaciones de alguna clase.</td>
+        				<td>XXXX</td>
+        				<td>XXXXX</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>3</td>
+        				<td> </td>
+        				<td> </td>
+        				<td>2</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        				<td>1</td>
+        				<td>2</td>
+        				<td> </td>
+        				<td></td>
+        				<td>1</td>
+        				<td> </td>
+        				<td> </td>
+        				<td> </td>
+        			</tr>
+        		</tbody>
+        	</table>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+        <script>
+        	$('#boton-imprimir-pdf').on('click', function() {
+        		window.print();
+        	});
+        </script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
