@@ -145,11 +145,54 @@ body {
 	min-width: 40px;
 }
 
+#h1-pdf {
+	margin-left: 110px;
+}
+
+.metadata-formulario-pdf {
+	list-style: none;
+	margin-bottom: 4px;
+}
+
+#boton-imprimir-pdf {
+	margin: 10% 0 10% 60%;
+}
+
+#segundo-div {
+	margin-top: 6px;
+}
+
+#form-nro-pdf {
+	padding-left: 170px;
+}
+
+#form-fecha-pdf {
+	padding-right: 25%;
+}
+
 #user-pic {
 	width: 40px;
 }
 
 /* CUERPO */
+/*columnas del pdf*/
+#contenedor {
+	margin: 50px 10px 10px 10px;
+	font-size: 0.7em;
+}
+
+#contenedor table {
+	width: 100%;
+}
+
+#contenedor th {
+	word-wrap: break-word;
+	text-align: center;
+}
+
+.txt-vertical {
+	width: 3px;
+}
 
 #col1, #col2 {
 	height: 100%;
