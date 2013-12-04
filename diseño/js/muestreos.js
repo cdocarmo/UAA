@@ -224,6 +224,15 @@ function reBind() {
 	
 	//PESTAÑA "MUESTREOS PENDIENTES"
 	
+	//llama a la pagina previsualizacion de planilla para imprimir
+	$('.imprimir-pedido').on('click', function() {
+		var id_pedido = $(this).attr('id').split('_')[1];
+		// armar la url con el id del pedido para llenar de datos la vista
+		var url = 'la url';
+		//llama a la url en cuestion
+		document.location.href= url;
+	});
+	
 	$('.dtp-muestreo').on('changeDate', function(e){
 		//TODO: aca hacer una llamada ajax para modificar la fecha en la bd
 		//variable fecha contiene este formato: dd/mm/yyyy
